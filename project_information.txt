@@ -1,0 +1,89 @@
+Project: CSCIE32 Assignment 2: Shuffling Pines
+Author(s): Philip Regan
+Source Code Copyright: Copyright (c) 2015 Philip Regan All Rights Reserved.
+Additional Copyright: None
+Source: New source only; no adaptations.
+Requirements: None
+Notes:
+*
+
+Bugs:
+*
+
+Roadmap:
+X .gitignore
+    X no node_modules directory in repository
+    X no bower_components directory in repository
+X install
+    X Jasmine
+        X @@$ npm install -g jasmine@@
+        X @@$ npm install jasmine@@
+        X @@$ jasmine init@@
+    X Karma
+        X @@$ npm install --save-dev karma@@ (karma already installed globally)
+        X @@$ npm install --save-dev karma-cli@@ (no global install required)
+        X @@$ npm install --save-dev karma-jasmine@@
+        X @@$ npm install --save-dev karma@@
+        X @@$ npm install --save-dev phantomjs@@
+        X @@$ npm install --save-dev karma-phantomjs@@
+        X @@$ npm install --save-dev karma-phantomjs-launcher@@
+        X @@$ npm install --save-dev karma karma-cli karma-jasmine karma phantomjs karma-phantomjs karma-phantomjs-launcher@@
+        X @@$ karma init@@
+    * JSHint
+    * concat
+    * uglify
+    * minify
+* Gulp
+    X Add distribution directory --> build/ already spec'd in .gitignore
+    * Build JS
+        * concat
+        * uglify
+        * Push to distro dir
+    * Build CSS
+        * concat (app + vendor)
+        * minify
+        * Push to distro dir
+    * Karma tests
+    * JSHint tests
+    * Live reload using gulp connect that watches all js and css and html changes
+* CRUD
+    * CRUD to localStorage as a service
+        * https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+    * CU: all fields submit and add to a JSON object
+    * Create
+        * Init prepopulation
+        * Push to list of all guests
+    * Retrieve
+    * Update
+        * Push to list of all guests
+        * Status
+            * "pick up" to "arrived"
+            * "drop off" to "arrived"
+            * "arrived" to "pick up"
+        * Display updates as updates are made
+        * Extra credit (20 pts): Inline editing
+    * Delete
+        * Confirmation Dialog
+        * Extra credit (10pts): soft delete with flag as mark
+* View
+    * List Display
+        * ng-repeat used to run through the data
+        * data comes from a service
+* Jasmine-Karma Tests
+    * All controllers and services need a test
+    * All controller tests should mock the DOM elements and services
+    * All CRUD operations need a test
+    * Test submit method
+    * In the assignment description, find all the spots where a "should" statement can be used to create a test
+        * CRUD operations
+* README.md contents
+    * build instructions
+    * everything someone needs to know to get it running from scratch
+* Requirements and Restrictions
+    * Do not use $scope or $rootScope to pass variables; only invoke native Angular methods
+
+Change History:
+    15_10_09_01_00_000: Started source
+    15_10_11_01_01_000: Added Karma
+
+    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Added Karma"; git push origin master; git status
