@@ -11,6 +11,7 @@ Bugs:
 *
 
 Roadmap:
+
 X .gitignore
     X no node_modules directory in repository
     X no bower_components directory in repository
@@ -22,10 +23,11 @@ X .gitignore
     X Karma
         X EXE: @@$ npm install --save-dev karma karma-jasmine karma phantomjs karma-phantomjs-launcher@@
         X EXE: @@$ karma init@@
-    * Set up Jasmine
-        * Probably need to point the html to node_modules/
-    * Set up Karma
-* Establish build process so far
+    > Set up Jasmine
+        X Probably need to point the html to node_modules/
+        * Create test stubs that do not require Angular
+    X Set up Karma
+X Establish build process so far
 X Gulp
     X Add distribution directory --> build/ already spec'd in .gitignore
     X install JSHint
@@ -33,6 +35,7 @@ X Gulp
     X install uglify
     X install minify
         X @@$ npm install --save-dev gulp gulp-concat gulp-jshint gulp-uglify jshint-stylish gulp-minify-css@@
+* Install Angular
 * Revisit gulp
     * Build JS
         * concat
@@ -86,5 +89,6 @@ Change History:
     15_10_11_01_01_000: Added Karma
     15_10_11_01_02_000: Added Gulp components
     15_10_11_02_00_000: Added Jasmine components
+    15_10_11_02_00_000: Added Jasmine test stubs to fix and check Jasmine errors
 
-    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Added Jasmine components"; git push origin master; git status
+    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Added Jasmine test stubs to fix and check Jasmine errors"; git push origin master; git status
