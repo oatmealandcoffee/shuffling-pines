@@ -25,7 +25,7 @@ X .gitignore
         X EXE: @@$ karma init@@
     > Set up Jasmine
         X Probably need to point the html to node_modules/
-        * Create test stubs that do not require Angular
+        X Create test stubs that do not require Angular
     X Set up Karma
 X Establish build process so far
 X Gulp
@@ -35,7 +35,7 @@ X Gulp
     X install uglify
     X install minify
         X @@$ npm install --save-dev gulp gulp-concat gulp-jshint gulp-uglify jshint-stylish gulp-minify-css@@
-* Install Angular
+X Connect Jasmine and Angular
 * Revisit gulp
     * Build JS
         * concat
@@ -90,5 +90,6 @@ Change History:
     15_10_11_01_02_000: Added Gulp components
     15_10_11_02_00_000: Added Jasmine components
     15_10_11_02_00_000: Added Jasmine test stubs to fix and check Jasmine errors
+    15_10_11_02_00_001: Updated Jasmine SpecRunner to include Angular
 
-    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Added Jasmine test stubs to fix and check Jasmine errors"; git push origin master; git status
+    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Updated Jasmine SpecRunner to include Angular"; git push origin master; git status
