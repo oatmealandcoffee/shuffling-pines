@@ -28,3 +28,11 @@ Install Karma
 N.B.: One component needs to be installed globally
 
     $ sudo npm install -g --save-dev karma-cli
+
+Install the Bower components
+
+Everything should install with the following:
+
+    $ bower install
+
+If not, then install Jquery, Bootstrap, and Angular

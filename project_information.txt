@@ -8,7 +8,10 @@ Notes:
 *
 
 Bugs:
-*
+* gulp build okay; karma okay
+* gulp test FAIL : Can't find variable: angular at /Users/philipr/cscie32/shuffling-pines/src/app.js:1
+* gulp connect FAIL : Error: listen EADDRINUSE :::8080
+    * going back to Week-7 fails here as well
 
 Roadmap:
 
@@ -36,18 +39,28 @@ X Gulp
     X install minify
         X @@$ npm install --save-dev gulp gulp-concat gulp-jshint gulp-uglify jshint-stylish gulp-minify-css@@
 X Connect Jasmine and Angular
-* Revisit gulp
-    * Build JS
-        * concat
-        * uglify
-        * Push to distro dir
-    * Build CSS
-        * concat (app + vendor)
-        * minify
-        * Push to distro dir
+* Revisit gulp // See Week-7 for gulpfile.js
+    / everything to build/
+        / index.html
+        / app.js for proprietary code
+        / vendors.js for external code
+        / styles.css for all CSS
+        // HTML will need to be updated these new paths
+    X Build JS
+        X concat
+        X uglify
+        X Push to dist/
+    X Build CSS
+        X concat (app + vendor)
+        X minify
+        X Push to dist/
     * Karma tests
     * JSHint tests
     * Live reload using gulp connect that watches all js and css and html changes
+* gulp server
+* Jasmine tests
+    * Mock local storage
+    * write "should" tests
 * CRUD
     * CRUD to localStorage as a service
         * https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
@@ -91,5 +104,6 @@ Change History:
     15_10_11_02_00_000: Added Jasmine components
     15_10_11_02_00_000: Added Jasmine test stubs to fix and check Jasmine errors
     15_10_11_02_00_001: Updated Jasmine SpecRunner to include Angular
+    15_10_11_03_00_000: Added gulp tasks
 
-    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Updated Jasmine SpecRunner to include Angular"; git push origin master; git status
+    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Added gulp tasks"; git push origin master; git status
