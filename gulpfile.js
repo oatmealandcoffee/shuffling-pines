@@ -11,7 +11,7 @@ var connect = require('gulp-connect');
 // app: proprietary code
 
 gulp.task('buildApp', function(){
-  return gulp.src('src/js/**/*.js')
+  return gulp.src('src/**/*.js')
     .pipe(concat('app.js'))
     .pipe(uglify())
     .pipe(gulp.dest('dist'))
@@ -33,8 +33,8 @@ gulp.task('buildVendor', function(){
 
 gulp.task('buildCSS', function(){
   return gulp.src([
-    'bower_components/bootstrap/dist/css/bootstrap.css',
-    'src/css/**/*.css'])
+    'bower_components/**/*.css'
+    ])
   .pipe(concat('styles.css'))
   .pipe(minifycss())
   .pipe(gulp.dest('dist'))
@@ -61,7 +61,7 @@ gulp.task('karma', function (done) {
 });
 
 gulp.task('jshint', function(){
-  return gulp.src(['src/js/**/*.js', 'src/tests/**/*.js'])
+  return gulp.src(['src/**/*.js', 'spec/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
@@ -78,8 +78,8 @@ gulp.task('connect', function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch('src/js/**/*.js', ['buildApp']);
-  gulp.watch('src/css/**/*.css', ['buildCSS']);
+  gulp.watch('src/**/*.js', ['buildApp']);
+  gulp.watch('src/**/*.css', ['buildCSS']);
   gulp.watch('src/**/*.html', ['moveHTML']);
 });
 

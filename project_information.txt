@@ -105,5 +105,6 @@ Change History:
     15_10_11_02_00_000: Added Jasmine test stubs to fix and check Jasmine errors
     15_10_11_02_00_001: Updated Jasmine SpecRunner to include Angular
     15_10_11_03_00_000: Added gulp tasks
+    15_10_11_03_00_001: Updated links and paths for gulp, karma, and html
 
     git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Added gulp tasks"; git push origin master; git status
