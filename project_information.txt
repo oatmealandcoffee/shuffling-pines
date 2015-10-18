@@ -39,7 +39,7 @@ X Gulp
     X install minify
         X @@$ npm install --save-dev gulp gulp-concat gulp-jshint gulp-uglify jshint-stylish gulp-minify-css@@
 X Connect Jasmine and Angular
-* Revisit gulp // See Week-7 for gulpfile.js
+> Revisit gulp // See Week-7 for gulpfile.js
     / everything to build/
         / index.html
         / app.js for proprietary code
@@ -54,17 +54,19 @@ X Connect Jasmine and Angular
         X concat (app + vendor)
         X minify
         X Push to dist/
-    * Karma tests
-    * JSHint tests
-    * Live reload using gulp connect that watches all js and css and html changes
-* gulp server
+    X Karma tests
+    X Live reload using gulp connect that watches all js and css and html changes
+    > JSHint tests
 * Jasmine tests
     * Mock local storage
     * write "should" tests
 * CRUD
-    * CRUD to localStorage as a service
-        * https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-    * CU: all fields submit and add to a JSON object
+    // CRUD to localStorage as a service
+        // https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+    // CU: all fields submit and add to a JSON object
+    * storage serialization
+        * JSON to string
+        * String to JSON
     * Create
         * Init prepopulation
         * Push to list of all guests
@@ -107,4 +109,4 @@ Change History:
     15_10_11_03_00_000: Added gulp tasks
     15_10_11_03_00_001: Updated links and paths for gulp, karma, and html
 
-    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Updated links and paths for gulp, karma, and html"; git push origin master; git status
+    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Updated project roadmap"; git push origin master; git status
