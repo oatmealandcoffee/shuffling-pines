@@ -1,3 +1,4 @@
+/* globals angular */
 var app = angular.module('shuffling', []);
 
 app.controller('FormController', [function(){

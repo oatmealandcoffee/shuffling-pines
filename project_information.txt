@@ -62,7 +62,9 @@ X Connect Jasmine and Angular
     * write "should" tests
 * CRUD
     // CRUD to localStorage as a service
-        // https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+        // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+        // localStorage.getItem('key');
+        // localStorage.setItem('key', 'value');
     // CU: all fields submit and add to a JSON object
     * storage serialization
         * JSON to string
@@ -107,6 +109,7 @@ Change History:
     15_10_11_02_00_000: Added Jasmine test stubs to fix and check Jasmine errors
     15_10_11_02_00_001: Updated Jasmine SpecRunner to include Angular
     15_10_11_03_00_000: Added gulp tasks
-    15_10_11_03_00_001: Updated links and paths for gulp, karma, and html
+    15_10_17_03_00_001: Updated links and paths for gulp, karma, and html
+    15_10_18_04_00_000: Added CRUD tests to Jasmine
 
-    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Updated project roadmap"; git push origin master; git status
+    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Added CRUD tests to Jasmine"; git push origin master; git status
