@@ -56,9 +56,14 @@ X Connect Jasmine and Angular
         X Push to dist/
     X Karma tests
     X Live reload using gulp connect that watches all js and css and html changes
-    > JSHint tests
-* Jasmine tests
-    * Mock local storage
+    X JSHint tests
+> Jasmine tests
+    > Mock local storage
+        X For Get use JSON.parse
+        X For Set use JSON.stringify
+        X Update store to string array;
+        X Update beforeEach to set JSON.stringify;
+        > Update the suites to use the JSON functions
     * write "should" tests
 * CRUD
     // CRUD to localStorage as a service
@@ -113,5 +118,6 @@ Change History:
     15_10_18_04_00_000: Added CRUD tests to Jasmine
     15_10_18_04_01_000: Added Create Test
     15_10_18_04_02_000: Added Retrieve Test
+    15_10_18_04_03_000: Updated specs to use JSON-based string array
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added Retrieve Test"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated specs to use JSON-based string array"; git push origin master; git status
