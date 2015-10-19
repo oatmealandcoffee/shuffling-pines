@@ -113,4 +113,4 @@ Change History:
     15_10_18_04_00_000: Added CRUD tests to Jasmine
     15_10_18_04_01_000: Added Create Test
 
-    git status; cd ~/cscie32/shuffling-pines; git commit -a -m "Added Create Test"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added Create Test"; git push origin master; git status
