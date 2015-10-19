@@ -27,7 +27,7 @@ describe("Shuffling Pines CRUD", function() {
     beforeEach(function() {
 
         // Create, Update
-        spyOn(localStorage, "setItem").and.callFake( function( key, value) {
+        spyOn(localStorage, "setItem").and.callFake( function( key, value ) {
             store[key] = value + '';
         });
 
@@ -62,7 +62,11 @@ describe("Shuffling Pines CRUD", function() {
     });
 
     describe("Retrieve Suite", function() {
-
+        it('should retrieve a person by key', function () {
+            var key = 0;
+            var person = localStorage.getItem(key);
+            expect( person.fname ).toBe( "Tyler" );
+        });
     });
 
     describe("Update Suite", function() {
