@@ -1,41 +1,32 @@
 describe("Shuffling Pines CRUD", function() {
 
+    var fname = 'Tyler';
+    var lname = 'Durden';
+    var id = lname+fname;
     var store;
 
     beforeEach(function() {
-        store = [];
+        store = {};
 
-        var player1 = {
-                fname:"Tyler",
-                lname:"Durden",
-                txdate:"2015/10/18",
-                status:"pick up",
-                loc:"Boston"
+
+        var txdate = '2015/10/18';
+        var status = 'pick up';
+        var loc = 'Boston';
+
+        var person = {
+                fname:fname,
+                lname:lname,
+                txdate:txdate,
+                status:status,
+                loc:loc,
+                id:id
             };
 
-        var player2 = {
-                fname:"Marla",
-                lname:"Singer",
-                txdate:"2015/10/18",
-                status:"arrived",
-                loc:"Boston"
-            };
-
-        var player3 = {
-                fname:"Robert",
-                lname:"Paulson",
-                txdate:"2015/10/18",
-                status:"drop off",
-                loc:"Boston"
-            };
-
-        store.push(JSON.stringify(player1));
-        store.push(JSON.stringify(player2));
-        store.push(JSON.stringify(player3));
+        store[id] = JSON.stringify(person);
 
         // Create, Update
         spyOn(localStorage, "setItem").and.callFake( function( key, value ) {
-            store[key] = value + '';
+            store[key] = value;
         });
 
         // Retrieve, Update
@@ -45,7 +36,7 @@ describe("Shuffling Pines CRUD", function() {
 
         // Delete
         spyOn(localStorage, "removeItem").and.callFake( function(key) {
-            store.splice(key, 1);
+            delete store[key];
         });
 
     });
@@ -53,43 +44,57 @@ describe("Shuffling Pines CRUD", function() {
     describe("Create Suite", function() {
         it('should add a new person', function () {
 
+            var fnewname = 'Marla';
+            var lnewname = 'Singer';
+            var txdate = '2015/10/19';
+            var status = 'pick up';
+            var loc = 'Boston';
+            var key = lnewname+fnewname;
+
             var person = {
-                fname:"Raymond",
-                lname:"Kessel",
-                txdate:"2015/10/18",
-                status:"drop off",
-                loc:"Boston"
-            };
-            var preLen = store.length;
-            localStorage.setItem(preLen, JSON.stringify(person));
-            var postLen = store.length;
-            expect( preLen ).toBeLessThan( postLen );
+                    fname:fnewname,
+                    lname:lnewname,
+                    txdate:txdate,
+                    status:status,
+                    loc:loc,
+                    id:key
+                };
+            localStorage.setItem(key, JSON.stringify(person));
+
+            var result = localStorage.getItem(key);
+            expect( result ).not.toBeNull();
 
             });
     });
 
     describe("Retrieve Suite", function() {
         it('should retrieve a person by key', function () {
-            var key = 0;
-            var person = JSON.parse(localStorage.getItem(key));
-            expect( person.fname ).toBe( "Tyler" );
+
+            var person = JSON.parse(localStorage.getItem(id));
+            expect( person.fname ).toBe( fname );
         });
     });
 
     describe("Update Suite", function() {
         it('should update a property', function () {
-            var key = 0;
-            var newName = "Bodsworth";
+
+            var newName = 'Bodsworth';
+            var target = JSON.parse(localStorage.getItem(id));
+            var oldName = target.fname;
+            target.fname = newName;
+            localStorage.setItem(id, JSON.stringify(target));
+            var update = JSON.parse(localStorage.getItem(id));
+            expect( update.fname ).toBe( newName );
         });
     });
 
     describe("Delete Suite", function() {
-
-    });
-
-    // stub test to obviate false failures
-    it('should do something', function(){
-      expect(true).toBe(true);
+        it( 'should delete a person by key', function () {
+        localStorage.removeItem(id);
+        var result = localStorage.getItem(id);
+        console.log(result);
+        expect( result ).toBe( "[]" );
+        });
     });
 
 });

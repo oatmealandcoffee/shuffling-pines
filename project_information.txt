@@ -63,7 +63,9 @@ X Connect Jasmine and Angular
         X For Set use JSON.stringify
         X Update store to string array;
         X Update beforeEach to set JSON.stringify;
-        > Update the suites to use the JSON functions
+        X Update the suites to use the JSON functions
+        > Create better key than index -> lname+fname+date || UUID
+        > Add 'key' property to object to maintain original key
     * write "should" tests
 * CRUD
     // CRUD to localStorage as a service
@@ -119,5 +121,8 @@ Change History:
     15_10_18_04_01_000: Added Create Test
     15_10_18_04_02_000: Added Retrieve Test
     15_10_18_04_03_000: Updated specs to use JSON-based string array
+    15_10_18_04_04_000: Added Update Test
+    15_10_20_04_05_000: Added Delete text; Updated certain variables to be global
+
 
     cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated specs to use JSON-based string array"; git push origin master; git status
