@@ -125,4 +125,4 @@ Change History:
     15_10_20_04_05_000: Added Delete text; Updated certain variables to be global
 
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated specs to use JSON-based string array"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added Delete text; Updated certain variables to be global"; git push origin master; git status
