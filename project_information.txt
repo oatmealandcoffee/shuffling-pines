@@ -39,7 +39,7 @@ X Gulp
     X install minify
         X @@$ npm install --save-dev gulp gulp-concat gulp-jshint gulp-uglify jshint-stylish gulp-minify-css@@
 X Connect Jasmine and Angular
-> Revisit gulp // See Week-7 for gulpfile.js
+X Revisit gulp // See Week-7 for gulpfile.js
     / everything to build/
         / index.html
         / app.js for proprietary code
@@ -58,24 +58,51 @@ X Connect Jasmine and Angular
     X Live reload using gulp connect that watches all js and css and html changes
     X JSHint tests
 > Jasmine tests
-    > Mock local storage
+    X Mock local storage
         X For Get use JSON.parse
         X For Set use JSON.stringify
         X Update store to string array;
         X Update beforeEach to set JSON.stringify;
         X Update the suites to use the JSON functions
-        > Create better key than index -> lname+fname+date || UUID
-        > Add 'key' property to object to maintain original key
-    * write "should" tests
+        X Create better key than index -> lname+fname+date || UUID
+        x Add 'key' property to object to maintain original key
+    > write "should" tests // see 'CRUD' section below for 'should' tests
+    * add person factory method
+    * add create method ( fname, lname, txdate, loc ) as boolean
+    * add update method ( id, key, value ) as boolean
+    * add retrieve method ( id ) as person object
+    * add delete method ( id ) as boolean
+    * add 'deleted' flag property
+    * shoulds
+        * Create
+            * should create a new person
+            * should create prepopulation on init
+            * should push to list tab containing all guests upon creation
+        * Retrieve
+            * should retrieve a person by key
+            * should retrieve only guests not marked as deleted
+        * Update
+            * should update fname
+            * should update lname
+            * should update txdate
+            * should update loc
+            * should update status from 'pick-up' to 'arrived'
+            * should update status from 'drop off' to 'arrived'
+            * should update status 'arrived' to 'pick up'
+            * should not update id
+        * Delete
+            * should show confirmation dialog before deleting
+            * should delete as a 'soft' delete with flag
+            * should push to list tab containing all guests upon deletion
 * CRUD
     // CRUD to localStorage as a service
         // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
         // localStorage.getItem('key');
         // localStorage.setItem('key', 'value');
     // CU: all fields submit and add to a JSON object
-    * storage serialization
-        * JSON to string
-        * String to JSON
+    X storage serialization
+        X JSON to string
+        X String to JSON
     * Create
         * Init prepopulation
         * Push to list of all guests
@@ -125,4 +152,4 @@ Change History:
     15_10_20_04_05_000: Added Delete text; Updated certain variables to be global
 
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added Delete text; Updated certain variables to be global"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated roadmap"; git push origin master; git status
