@@ -4,16 +4,18 @@
   <head>
     <meta charset="utf-8" />
     <title>Shuffling Pines</title>
+    <!--
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
 
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../bower_components/angular/angular.min.js"></script>
+    -->
 
     <!-- local build files -->
     <link rel="stylesheet" href="styles.css" />
-    <script src="app.js"></script>
     <script src="vendors.js"></script>
+    <script src="app.js"></script>
   </head>
 
   <body>
@@ -29,10 +31,11 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <!-- Tab pane 1 -->
-          <div role="tabpanel" class="tab-pane active" id="form">
+          <div role="tabpanel" class="tab-pane active" id="form" ng-controller="FormController as frmctl">
             <div>
 
               <form class="col-md-6 well">
+                  {{  frmctl.class }}
                 <div class="form-group">
                   <label for="guest-name">Guest Name</label>
                   <input type="text" class="form-control" id="guest-name" placeholder="">

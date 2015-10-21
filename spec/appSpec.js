@@ -5,9 +5,12 @@ describe("Shuffling Pines CRUD", function() {
     var id = lname+fname;
     var store;
 
+    function foo() {
+        return true;
+    }
+
     beforeEach(function() {
         store = {};
-
 
         var txdate = '2015/10/18';
         var status = 'pick up';
@@ -73,6 +76,10 @@ describe("Shuffling Pines CRUD", function() {
             var person = JSON.parse(localStorage.getItem(id));
             expect( person.fname ).toBe( fname );
         });
+
+        it('should be true', function() {
+            expect( foo() ).toBe( true );
+        });
     });
 
     describe("Update Suite", function() {
@@ -80,7 +87,6 @@ describe("Shuffling Pines CRUD", function() {
 
             var newName = 'Bodsworth';
             var target = JSON.parse(localStorage.getItem(id));
-            var oldName = target.fname;
             target.fname = newName;
             localStorage.setItem(id, JSON.stringify(target));
             var update = JSON.parse(localStorage.getItem(id));

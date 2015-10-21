@@ -11,7 +11,7 @@ var connect = require('gulp-connect');
 // app: proprietary code
 
 gulp.task('buildApp', function(){
-  return gulp.src('src/**/*.js')
+  return gulp.src('/src/app.js')
     .pipe(concat('app.js'))
     .pipe(uglify())
     .pipe(gulp.dest('dist'))
@@ -23,6 +23,7 @@ gulp.task('buildApp', function(){
 gulp.task('buildVendor', function(){
   return gulp.src([
     'bower_components/jquery/dist/jquery.min.js',
+    'bower_components/angular/angular.min.js',
     'bower_components/**/*.min.js'])
     .pipe(concat('vendors.js'))
     .pipe(uglify())

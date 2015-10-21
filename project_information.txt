@@ -8,10 +8,7 @@ Notes:
 *
 
 Bugs:
-* gulp build okay; karma okay
-* gulp test FAIL : Can't find variable: angular at /Users/philipr/cscie32/shuffling-pines/src/app.js:1
-* gulp connect FAIL : Error: listen EADDRINUSE :::8080
-    * going back to Week-7 fails here as well
+*
 
 Roadmap:
 
@@ -150,6 +147,6 @@ Change History:
     15_10_18_04_03_000: Updated specs to use JSON-based string array
     15_10_18_04_04_000: Added Update Test
     15_10_20_04_05_000: Added Delete text; Updated certain variables to be global
-
+    15_10_20_05_00_000: Updated html to include angular; minor fixes to dependency management
 
     cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated roadmap"; git push origin master; git status
