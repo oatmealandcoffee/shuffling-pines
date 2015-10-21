@@ -149,4 +149,4 @@ Change History:
     15_10_20_04_05_000: Added Delete text; Updated certain variables to be global
     15_10_20_05_00_000: Updated html to include angular; minor fixes to dependency management
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated roadmap"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated html to include angular; minor fixes to dependency management"; git push origin master; git status

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="shuffling">
+<html ng-app="shuffling" ng-cloak>
 
   <head>
     <meta charset="utf-8" />
@@ -31,11 +31,11 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <!-- Tab pane 1 -->
-          <div role="tabpanel" class="tab-pane active" id="form" ng-controller="FormController as frmctl">
+          <div role="tabpanel" class="tab-pane active" id="form" ng-controller="FormController as form">
             <div>
 
               <form class="col-md-6 well">
-                  {{  frmctl.class }}
+                  {{  form.class }}
                 <div class="form-group">
                   <label for="guest-name">Guest Name</label>
                   <input type="text" class="form-control" id="guest-name" placeholder="">
