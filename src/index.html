@@ -21,7 +21,7 @@
   <body>
     <h1>Shuffling Pines</h1>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" ng-controller="TabController as tc">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active"><a href="#form" aria-controls="form" role="tab" data-toggle="tab">Form</a></li>
@@ -31,11 +31,10 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <!-- Tab pane 1 -->
-          <div role="tabpanel" class="tab-pane active" id="form" ng-controller="FormController as form">
+          <div role="tabpanel" class="tab-pane active" id="form">
             <div>
 
-              <form class="col-md-6 well">
-                  {{  form.class }}
+              <form class="col-md-6 well" ng-controller="FormController as fc">
                 <div class="form-group">
                   <label for="guest-name">Guest Name</label>
                   <input type="text" class="form-control" id="guest-name" placeholder="">

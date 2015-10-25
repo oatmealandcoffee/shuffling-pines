@@ -64,12 +64,25 @@ X Revisit gulp // See Week-7 for gulpfile.js
         X Create better key than index -> lname+fname+date || UUID
         x Add 'key' property to object to maintain original key
     > write "should" tests // see 'CRUD' section below for 'should' tests
-    * add person factory method
-    * add create method ( fname, lname, txdate, loc ) as boolean
-    * add update method ( id, key, value ) as boolean
-    * add retrieve method ( id ) as person object
-    * add delete method ( id ) as boolean
-    * add 'deleted' flag property
+    X add create method ( fname, lname, txdate, loc ) as boolean
+    * Update tests to save all users as a single string and not just one user at a time
+    * Add Register Crud // localStorage
+        // names: Tyler Durden, Marla Singer, Robert Paulson, Raymond Hessel
+        * Create; figure out init point
+        * Retrieve
+        * Update
+    * Add Record CRUD // Form
+        * complete addNewRecord ∆ createRecord
+        * Create
+        * Retrieve
+            * Register cache
+        * Update
+        * Delete
+    * create model binding
+        * Controller
+        * model
+        * ng-model -> person cache
+    X add 'deleted' flag property
     * shoulds
         * Create
             * should create a new person
@@ -149,4 +162,4 @@ Change History:
     15_10_20_04_05_000: Added Delete text; Updated certain variables to be global
     15_10_20_05_00_000: Updated html to include angular; minor fixes to dependency management
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated html to include angular; minor fixes to dependency management"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated roadmap"; git push origin master; git status
