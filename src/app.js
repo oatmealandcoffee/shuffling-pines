@@ -84,6 +84,14 @@ app.controller('FormController', [function(){
 
     };
 
+    /*
+        TAB PANE 1 STACK: RECORD VIEW
+    */
+
+    /*
+        TAB PANE 2 STACK: REGISTER VIEW
+    */
+
 }]);
 
 app.controller('TabController', [function(){

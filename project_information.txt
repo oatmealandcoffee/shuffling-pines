@@ -82,6 +82,7 @@ X Revisit gulp // See Week-7 for gulpfile.js
         * Controller
         * model
         * ng-model -> person cache
+    * add register display ot second tab
     X add 'deleted' flag property
     * shoulds
         * Create
