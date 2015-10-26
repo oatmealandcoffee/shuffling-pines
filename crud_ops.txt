@@ -1,0 +1,8 @@
+createRecord        retrieveRegister    updateRegister
+retrieveRecord      retrieveRegister    ---
+updateRecord        retrieveRegister    updateRegister
+deleteRecord        retrieveRegister    updateRegister
+
+createRegister      retrieveRegister    updateRegister
+retrieveRegister    getItem             ---
+updateRegister      ---                 setItem
