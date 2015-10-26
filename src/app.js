@@ -4,84 +4,217 @@ var app = angular.module('shuffling', []);
 app.controller('FormController', [function(){
 
     var vm = this;
-    vm.localStorageKey = 'OCSHPN';
 
-    /* form cache; all Strings */
-    vm.fname = '';
-    vm.lname = '';
-    vm.txdate = '';
-    vm.loc = '';
+    // private, read-only key for localStorage
+    vm._lsKey = function() {
+        return 'OCSHPN';
+    };
+
+    /*
+        RECORD CACHE
+    */
+    // private
+    vm._recordCache = '';
+
+    // public
+    vm.fname = ''; // string
+    vm.lname = ''; // string
+    vm.txdate = ''; // string
+    vm.loc = ''; // string
+    vm.registerCache = ''; // array
 
     /*
         RECORD CRUD STACK
+
+        Record operations are handled as atomic tasks, with each interacting with
+        localStorage via the register CRUD functions. This is inefficient when
+        scaled, but good enough for this project.
+
+        Record operations only work with the actual array of records. All JSON
+        operations are handled in the register CRUD functions.
     */
 
     /*
     PURPOSE: adds a cached user's info to localStorage
     ARGUMENTS: void
     RETURN: void
-    POSSIBLE ERRORS: localStorage might not accept record but unlikely
     */
-    vm.addNewRecord () {
-        var record = vm.newRecord( fname, lname, txdate, loc );
-        // TODO: Get the manifest
-        // TODO: Push the new record to the manifest
-        // TODO: Save the manifest
-        // TODO: Clear the cache
+    vm.createRecord () {
+        var record = vm._newRecord( fname, lname, txdate, loc );
+        vm.registerCache = vm.retrieveRegister();
+        vm.registerCache.push( record );
+        vm.updateRegister( vm.registerCache );
+        vm._clearCache();
     };
 
     /*
-    PURPOSE: returns a person record based on passed values
-    ARGUMENTS: vales can be null
+    PURPOSE: gets the editable info for a record and posts to the cache
+    ARGUMENTS: record id as string
     RETURN: void
-    POSSIBLE ERRORS: record could be null but unlikely
     */
-    vm.newRecord = function ( fname, lname, txdate, loc ) {
+    vm.retrieveRecord ( id ) {
+        vm.registerCache = vm.retrieveRegister();
+        vm._recordCache = vm._getRecordByID( id );
+        if ( !vm._recordCache ) {
+            console.log('record ' + id + ' could not be found');
+            return;
+        }
+        // populate the cache with the record info
+        vm.fname = vm._recordCache['fname'];
+        vm.lname = vm._recordCache['lname'];
+        vm.txdate = vm._recordCache['txdate'];
+        vm.loc = vm._recordCache['loc'];
+    }
+
+    /*
+    PURPOSE: updates the editable info for a cached record
+    ARGUMENTS: record id as string
+    RETURN: void
+    */
+    vm.updateRecord ( id ) {
+        vm.registerCache = vm.retrieveRegister();
+        vm._recordCache = vm._getRecordByID( id );
+        if ( !vm._recordCache ) {
+            console.log('record ' + id + ' could not be found');
+            return;
+        }
+        vm._recordCache['fname'] = vm.fname;
+        vm._recordCache['lname'] = vm.lname;
+        vm._recordCache['txdate'] = vm.txdate;
+        vm._recordCache['loc'] = vm.loc;
+        var ubound = vm.registerCache.length;
+        // doing this search twice is bad
+        for (var i = 0; i < ubound; i++) {
+            var record = vm.registerCache[i];
+            if ( record.id === id ) {
+                vm.registerCache[i] = vm._recordCache;
+                vm.updateRegister( vm.registerCache );
+                vm._clearCache();
+            }
+        }
+    }
+
+    /*
+    PURPOSE: deletes a record from the register
+    ARGUMENTS: record id as string
+    RETURN: void
+    */
+    vm.deleteRecord ( id ) {
+        vm.registerCache = vm.retrieveRegister();
+        vm._recordCache = vm._getRecordByID( id );
+        if ( !vm._recordCache ) {
+            console.log('record ' + id + ' could not be found');
+            return;
+        }
+        record.deleted = true;
+        vm.updateRegister( vm.registerCache );
+    }
+
+    /* HELPER STACK */
+
+    /*
+    PURPOSE: returns a person record based on passed values
+    ARGUMENTS: values can be null
+    RETURN: void
+    */
+    vm._newRecord = function ( fname, lname, txdate, loc ) {
         // id as date; computationally cheap and good enough here
          var id = new Date();
          var record = {
-            fname:fname,
-            lname:lname,
-            txdate:txdate,
-            loc:loc,
-            id:id,
-            deleted:false
+            'fname':fname + '',
+            'lname':lname + '',
+            'txdate':txdate + '',
+            'loc':loc + '',
+            'id':id + '',
+            'deleted':false
         };
         return record;
     };
 
     /*
+    PURPOSE: clears the cache values
+    ARGUMENTS: void
+    RETURN: void
+    */
+    vm._clearCache = function () {
+        vm.fname = '';
+        vm.lname = '';
+        vm.txdate = '';
+        vm.loc = '';
+        vm._recordCache = '';
+    }
+
+    /*
+    PURPOSE:
+    ARGUMENTS: target register, target id
+    RETURN: integer or null if no value
+    */
+    vm._getRecordByID = function ( id ) {
+        var ubound = vm.registerCache.length;
+        for (var i = 0; i < ubound; i++) {
+            var record = vm.registerCache[i];
+            if ( record.id === id ) {
+                return record;
+            }
+        }
+        return null;
+    };
+
+    /*
         REGISTER CRUD STACK
+
+        This stack handles all JSON operations and localStorage. Functions only
+        accept and return the actual register array of records.
     */
 
     /*
     PURPOSE: prepopulates register if needed
     ARGUMENTS: void
     RETURN: array of json objects
-    POSSIBLE ERRORS: TODO
     */
     vm.createRegister = function() {
-
+        // check if the register is stored. If not, build and store a new one.
+        vm.registerCache = vm.retrieveRegister();
+        if ( !vm.registerCache ) {
+            vm.registerCache = [];
+            vm.registerCache.push( vm._newRecord( 'Tyler', 'Durden', new Date(), 'Boston') );
+            vm.registerCache.push( vm._newRecord( 'Marla', 'Singer', new Date(), 'New York') );
+            vm.registerCache.push( vm._newRecord( 'Rober', 'Paulson', new Date(), 'Chicago') );
+            vm.updateRegister( vm.registerCache );
+        }
     };
 
     /*
-    PURPOSE: pulls the register in localStorage
+    PURPOSE: pulls the register from localStorage
     ARGUMENTS: void
-    RETURN: array of json objects
-    POSSIBLE ERRORS: TODO
+    RETURN: array of json objects or null
     */
     vm.retrieveRegister = function() {
-
+        var str = localStorage.getItem( vm._lsKey );
+        if ( !str ) {
+            vm.registerCache = vm.createRegister();
+            return vm.registerCache;
+        }
+        // extract the array of records
+        var cache = JSON.parse( str );
+        var register = cache['register'];
+        return register;
     };
 
     /*
     PURPOSE: pushes the register to localStorage
-    ARGUMENTS: void
+    ARGUMENTS: array of JSON objects
     RETURN: void
-    POSSIBLE ERRORS: TODO
     */
-    vm.updateRegister = function( manifest ) {
-
+    vm.updateRegister = function( register ) {
+        // wrap the array of records in a JSON object
+        var cache = {
+            'register' : register
+        }
+        var str = JSON.stringify( cache );
+        localStorage.setItem( vm._lsKey, str );
+        // log output per project spec
+        console.log( str );
     };
 
     /*

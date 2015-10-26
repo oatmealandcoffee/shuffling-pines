@@ -5,9 +5,12 @@ describe("Shuffling Pines CRUD", function() {
     var id = lname+fname;
     var store;
 
-    function foo() {
-        return true;
-    }
+    var FormController;
+
+    beforeEach(angular.mock.module('shuffling'));
+    beforeEach(angular.mock.inject( function( $controller ) {
+        FormController = $controller('FormController');
+    } ));
 
     beforeEach(function() {
         store = {};
