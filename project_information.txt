@@ -89,6 +89,7 @@ X Revisit gulp // See Week-7 for gulpfile.js
     X add create method ( fname, lname, txdate, loc ) as boolean
     X abstract register CRUD to only getting and setting the records array
     X add 'deleted' flag property
+    // all calls to localStorage need to instead call FormController functions
     * Add Register Crud // localStorage
         // names: Tyler Durden, Marla Singer, Robert Paulson, Raymond Hessel
         * Create; figure out init point
@@ -193,4 +194,4 @@ Change History:
     15_10_28_06_00_001: Added Angular-mocks
     15_10_28_06_00_002: Fixed documentation gaps
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added Angular-mocks"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed documentation gaps"; git push origin master; git status

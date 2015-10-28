@@ -2,19 +2,21 @@
 
 describe("Shuffling Pines CRUD", function() {
 
+    /* record/register init values */
     var fname = 'Tyler';
     var lname = 'Durden';
     var id = lname+fname;
     var store;
 
+    /* INIT ANGULAR */
     var FormController;
-
     beforeEach(angular.mock.module('shuffling'));
     beforeEach(angular.mock.inject( function( $controller ) {
         FormController = $controller('FormController');
     } ));
 
     beforeEach(function() {
+        /* INIT REGISTER */
         store = {};
 
         var txdate = '2015/10/18';
@@ -32,6 +34,8 @@ describe("Shuffling Pines CRUD", function() {
 
         store[id] = JSON.stringify(person);
 
+        /* LOCALSTORAGE STACK */
+        
         // Create, Update
         spyOn(localStorage, "setItem").and.callFake( function( key, value ) {
             store[key] = value;
