@@ -58,7 +58,7 @@ app.controller('FormController', [function(){
     };
 
     /*
-    PURPOSE:
+    PURPOSE: examines the register cache for a record with the passed id
     ARGUMENTS: target register, target id
     RETURN: integer or null if no value
     */

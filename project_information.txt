@@ -37,7 +37,7 @@ Roadmap:
 X .gitignore
     X no node_modules directory in repository
     X no bower_components directory in repository
-> install
+X install
     X Jasmine
         X @@$ npm install -g jasmine@@
         X EXE: @@$ npm install --save-dev jasmine jasmine-core@@
@@ -45,7 +45,7 @@ X .gitignore
     X Karma
         X EXE: @@$ npm install --save-dev karma karma-jasmine karma phantomjs karma-phantomjs-launcher@@
         X EXE: @@$ karma init@@
-    > Set up Jasmine
+    X Set up Jasmine
         X Probably need to point the html to node_modules/
         X Create test stubs that do not require Angular
     X Set up Karma
@@ -98,16 +98,16 @@ X Revisit gulp // See Week-7 for gulpfile.js
         * complete addNewRecord ∆ createRecord
         * Create
         * Retrieve
-            * Register cache
+            - Register cache // don't remember what this was; need better notes, dude
         * Update
         * Delete
-    * create model binding
-        * Controller
-        * model
-        * ng-model -> person cache
     * Update tests to register-record context
     * View
         * add hooks to form to capture record
+            * create model binding
+                * Controller
+                * model
+                * ng-model -> person cache
         * add register display ot second tab
         * Add hooks to display register
     * shoulds
@@ -191,5 +191,6 @@ Change History:
     15_10_20_06_00_000: Updated app with record and register CRUD; started test writing
     15_10_28_06_00_001: Fixed jshint bugs
     15_10_28_06_00_001: Added Angular-mocks
+    15_10_28_06_00_002: Fixed documentation gaps
 
     cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added Angular-mocks"; git push origin master; git status
