@@ -23,7 +23,7 @@ gulp.task('buildApp', function(){
 gulp.task('buildVendor', function(){
   return gulp.src([
     'bower_components/jquery/dist/jquery.min.js',
-    'bower_components/angular/angular.min.js',
+    'bower_components/angular/angular.js',
     'bower_components/**/*.min.js'])
     .pipe(concat('vendors.js'))
     .pipe(uglify())

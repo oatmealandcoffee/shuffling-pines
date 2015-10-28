@@ -87,8 +87,8 @@ X Revisit gulp // See Week-7 for gulpfile.js
         x Add 'key' property to object to maintain original key
     > write "should" tests // see 'CRUD' section below for 'should' tests
     X add create method ( fname, lname, txdate, loc ) as boolean
-    * abstract register CRUD to only getting and setting the records array
-    * Update tests to save all users as a single string and not just one user at a time
+    X abstract register CRUD to only getting and setting the records array
+    X add 'deleted' flag property
     * Add Register Crud // localStorage
         // names: Tyler Durden, Marla Singer, Robert Paulson, Raymond Hessel
         * Create; figure out init point
@@ -105,8 +105,11 @@ X Revisit gulp // See Week-7 for gulpfile.js
         * Controller
         * model
         * ng-model -> person cache
-    * add register display ot second tab
-    X add 'deleted' flag property
+    * Update tests to register-record context
+    * View
+        * add hooks to form to capture record
+        * add register display ot second tab
+        * Add hooks to display register
     * shoulds
         * Create
             * should create a new person
@@ -187,4 +190,6 @@ Change History:
     15_10_20_05_00_000: Updated html to include angular; minor fixes to dependency management
     15_10_20_06_00_000: Updated app with record and register CRUD; started test writing
     15_10_28_06_00_001: Fixed jshint bugs
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated app with record and register CRUD; started test writing"; git push origin master; git status
+    15_10_28_06_00_001: Added Angular-mocks
+
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added Angular-mocks"; git push origin master; git status
