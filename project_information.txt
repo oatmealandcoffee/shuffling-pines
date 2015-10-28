@@ -186,4 +186,5 @@ Change History:
     15_10_20_04_05_000: Added Delete text; Updated certain variables to be global
     15_10_20_05_00_000: Updated html to include angular; minor fixes to dependency management
     15_10_20_06_00_000: Updated app with record and register CRUD; started test writing
+    15_10_28_06_00_001: Fixed jshint bugs
     cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated app with record and register CRUD; started test writing"; git push origin master; git status
