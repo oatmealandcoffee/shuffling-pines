@@ -34,144 +34,77 @@ Bugs:
 
 Roadmap:
 
-X .gitignore
-    X no node_modules directory in repository
-    X no bower_components directory in repository
-X install
-    X Jasmine
-        X @@$ npm install -g jasmine@@
-        X EXE: @@$ npm install --save-dev jasmine jasmine-core@@
-        X EXE: @@$ jasmine init@@
-    X Karma
-        X EXE: @@$ npm install --save-dev karma karma-jasmine karma phantomjs karma-phantomjs-launcher@@
-        X EXE: @@$ karma init@@
-    X Set up Jasmine
-        X Probably need to point the html to node_modules/
-        X Create test stubs that do not require Angular
-    X Set up Karma
-X Establish build process so far
-X Gulp
-    X Add distribution directory --> build/ already spec'd in .gitignore
-    X install JSHint
-    X install concat
-    X install uglify
-    X install minify
-        X @@$ npm install --save-dev gulp gulp-concat gulp-jshint gulp-uglify jshint-stylish gulp-minify-css@@
-X Connect Jasmine and Angular
-X Revisit gulp // See Week-7 for gulpfile.js
-    / everything to build/
-        / index.html
-        / app.js for proprietary code
-        / vendors.js for external code
-        / styles.css for all CSS
-        // HTML will need to be updated these new paths
-    X Build JS
-        X concat
-        X uglify
-        X Push to dist/
-    X Build CSS
-        X concat (app + vendor)
-        X minify
-        X Push to dist/
-    X Karma tests
-    X Live reload using gulp connect that watches all js and css and html changes
-    X JSHint tests
-> Jasmine tests
-    X Mock local storage
-        X For Get use JSON.parse
-        X For Set use JSON.stringify
-        X Update store to string array;
-        X Update beforeEach to set JSON.stringify;
-        X Update the suites to use the JSON functions
-        X Create better key than index -> lname+fname+date || UUID
-        x Add 'key' property to object to maintain original key
-    > write "should" tests // see 'CRUD' section below for 'should' tests
-    X add create method ( fname, lname, txdate, loc ) as boolean
-    X abstract register CRUD to only getting and setting the records array
-    X add 'deleted' flag property
-    // all calls to localStorage need to instead call FormController functions
-    * Add Register Crud // localStorage
-        // names: Tyler Durden, Marla Singer, Robert Paulson, Raymond Hessel
-        * Create; figure out init point
-        * Retrieve
-        * Update
-    * Add Record CRUD // Form
-        * complete addNewRecord ∆ createRecord
+* Register init
+* Register CRUD
+    * Create ; Record Create required
+    * Retrieve
+    * Update
+    * Delete
+* Record CRUD
+    * Create
+    * Retrieve
+    * Update
+    * Delete
+* Convert global variables into a Value Service
+* Convert Register CRUD operations into a Service Service
+* Jasmine-Karma
+    // All controllers and services need a test
+    // All controller tests should mock the DOM elements and services
+    // All CRUD operations need a test
+    // Test submit method
+    * Create
+        * should create prepopulation on init
+        * should create a new person
+        * should push to list tab containing all guests upon creation
+    * Retrieve
+        * should retrieve a person by key
+        * should retrieve only guests not marked as deleted
+    * Update
+        * should update fname
+        * should update lname
+        * should update txdate
+        * should update loc
+        * should update status from 'pick-up' to 'arrived'
+        * should update status from 'drop off' to 'arrived'
+        * should update status 'arrived' to 'pick up'
+        * should not update id
+    * Delete
+        * should show confirmation dialog before deleting
+        * should delete as a 'soft' delete with flag
+        * should push to list tab containing all guests upon deletion
+* View
+    * Tab 1: Record
         * Create
-        * Retrieve
-            - Register cache // don't remember what this was; need better notes, dude
-        * Update
-        * Delete
-    * Update tests to register-record context
-    * View
-        * add hooks to form to capture record
+        * Retrieve (display)
             * create model binding
                 * Controller
                 * model
                 * ng-model -> person cache
-        * add register display ot second tab
-        * Add hooks to display register
-    * shoulds
-        * Create
-            * should create a new person
-            * should create prepopulation on init
-            * should push to list tab containing all guests upon creation
-        * Retrieve
-            * should retrieve a person by key
-            * should retrieve only guests not marked as deleted
         * Update
-            * should update fname
-            * should update lname
-            * should update txdate
-            * should update loc
-            * should update status from 'pick-up' to 'arrived'
-            * should update status from 'drop off' to 'arrived'
-            * should update status 'arrived' to 'pick up'
-            * should not update id
+            * Status
+                * "pick up" to "arrived"
+                * "drop off" to "arrived"
+                * "arrived" to "pick up"
         * Delete
-            * should show confirmation dialog before deleting
-            * should delete as a 'soft' delete with flag
-            * should push to list tab containing all guests upon deletion
-* CRUD
-    // CRUD to localStorage as a service
-        // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
-        // localStorage.getItem('key');
-        // localStorage.setItem('key', 'value');
-    // CU: all fields submit and add to a JSON object
-    X storage serialization
-        X JSON to string
-        X String to JSON
-    * Create
-        * Init prepopulation
-        * Push to list of all guests
-    * Retrieve
-    * Update
-        * Push to list of all guests
-        * Status
-            * "pick up" to "arrived"
-            * "drop off" to "arrived"
-            * "arrived" to "pick up"
+            * confirmation dialog
+    * Tab 2: Register
+        * List Display
+            * ng-repeat used to run through the data
+            * data comes from a service
         * Display updates as updates are made
         * Extra credit (20 pts): Inline editing
-    * Delete
-        * Confirmation Dialog
-        * Extra credit (10pts): soft delete with flag as mark
-* View
-    * List Display
-        * ng-repeat used to run through the data
-        * data comes from a service
-* Jasmine-Karma Tests
-    * All controllers and services need a test
-    * All controller tests should mock the DOM elements and services
-    * All CRUD operations need a test
-    * Test submit method
-    * In the assignment description, find all the spots where a "should" statement can be used to create a test
-        * CRUD operations
-* README.md contents
-    * build instructions
-    * everything someone needs to know to get it running from scratch
-* Requirements and Restrictions
-    * Do not use $scope or $rootScope to pass variables; only invoke native Angular methods
+        * Extra credit (10 pts): soft delete with flag as mark
+* Prep for submission
+    * Check install instructions
+        * npm install
+        * bower install
+        * gulp
+* Spec
+    * README.md contents
+        * build instructions
+        * everything someone needs to know to get it running from scratch
+    * Requirements and Restrictions
+        * Do not use $scope or $rootScope to pass variables; only invoke native Angular methods
 
 Change History:
     15_10_09_01_00_000: Started source
@@ -194,4 +127,4 @@ Change History:
     15_10_28_06_00_001: Added Angular-mocks
     15_10_28_06_00_002: Fixed documentation gaps
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed documentation gaps"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated roadmap"; git push origin master; git status

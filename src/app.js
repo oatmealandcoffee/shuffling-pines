@@ -5,10 +5,8 @@ app.controller('FormController', [function(){
 
     var vm = this;
 
-    // private, read-only key for localStorage
-    vm._lsKey = function() {
-        return 'OCSHPN';
-    };
+    // private key for localStorage
+    vm._lsKey = 'OCSHPN';
 
     /*
         RECORD CACHE
@@ -31,6 +29,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm._newRecord = function ( fname, lname, txdate, loc ) {
+        console.log('_newRecord: ' + fname );
         // id as date; computationally cheap and good enough here
          var id = new Date();
          var record = {
@@ -50,6 +49,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm._clearCache = function () {
+        console.log('_clearCache');
         vm.fname = '';
         vm.lname = '';
         vm.txdate = '';
@@ -63,6 +63,7 @@ app.controller('FormController', [function(){
     RETURN: integer or null if no value
     */
     vm._getRecordByID = function ( id ) {
+        console.log('_getRecordByID');
         var ubound = vm.registerCache.length;
         for (var i = 0; i < ubound; i++) {
             var record = vm.registerCache[i];
@@ -103,6 +104,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.retrieveRecord = function ( id ) {
+        console.log('retrieveRecord');
         vm.registerCache = vm.retrieveRegister();
         vm._recordCache = vm._getRecordByID( id );
         if ( !vm._recordCache ) {
@@ -122,6 +124,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.updateRecord = function ( id ) {
+        console.log('updateRecord');
         vm.registerCache = vm.retrieveRegister();
         vm._recordCache = vm._getRecordByID( id );
         if ( !vm._recordCache ) {
@@ -150,6 +153,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.deleteRecord = function ( id ) {
+        console.log('deleteRecord');
         vm.registerCache = vm.retrieveRegister();
         vm._recordCache = vm._getRecordByID( id );
         if ( !vm._recordCache ) {
@@ -175,15 +179,22 @@ app.controller('FormController', [function(){
     RETURN: array of json objects
     */
     vm.createRegister = function() {
-        // check if the register is stored. If not, build and store a new one.
-        vm.registerCache = vm.retrieveRegister();
-        if ( !vm.registerCache ) {
-            vm.registerCache = [];
-            vm.registerCache.push( vm._newRecord( 'Tyler', 'Durden', new Date(), 'Boston') );
-            vm.registerCache.push( vm._newRecord( 'Marla', 'Singer', new Date(), 'New York') );
-            vm.registerCache.push( vm._newRecord( 'Rober', 'Paulson', new Date(), 'Chicago') );
-            vm.updateRegister( vm.registerCache );
-        }
+        console.log('createRegister');
+        // init the store
+        vm.registerCache = [];
+        vm.updateRegister( vm.registerCache );
+        // prepopulate with dummy values
+        vm.fname = 'Tyler';
+        vm.lname = 'Durden';
+        vm.txdate = new Date();
+        vm.loc = 'Boston';
+        vm.createRecord();
+
+        vm.fname = 'Robert';
+        vm.lname = 'Paulson';
+        vm.txdate = new Date();
+        vm.loc = 'Chicago';
+        vm.createRecord();
     };
 
     /*
@@ -192,11 +203,13 @@ app.controller('FormController', [function(){
     RETURN: array of json objects or null
     */
     vm.retrieveRegister = function() {
+        console.log('retrieveRegister');
         var str = localStorage.getItem( vm._lsKey );
-        if ( !str ) {
-            vm.registerCache = vm.createRegister();
-            return vm.registerCache;
-        }
+        // if ( !str || str === '[]' ) {
+        //     vm.registerCache = vm.createRegister();
+        //     vm.updateRegister( vm.registerCache );
+        //     return vm.registerCache;
+        // }
         // extract the array of records
         var cache = JSON.parse( str );
         var register = cache.register;
@@ -209,6 +222,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.updateRegister = function( register ) {
+        console.log('updateRegister:arg register: ' + register);
         // wrap the array of records in a JSON object
         var cache = {
             'register' : register
@@ -216,7 +230,7 @@ app.controller('FormController', [function(){
         var str = JSON.stringify( cache );
         localStorage.setItem( vm._lsKey, str );
         // log output per project spec
-        console.log( str );
+        console.log( 'updateRegister:' + str );
     };
 
     /*
@@ -226,6 +240,8 @@ app.controller('FormController', [function(){
     /*
         TAB PANE 2 STACK: REGISTER VIEW
     */
+
+    vm.registerCache = vm.createRegister();
 
 }]);
 
