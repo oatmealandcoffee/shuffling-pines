@@ -127,5 +127,6 @@ Change History:
     15_10_28_06_00_001: Added Angular-mocks
     15_10_28_06_00_002: Fixed documentation gaps
     15_10_28_07_00_000: Updated project by moving all problematic code to *_old.txt files
+    15_10_28_07_00_000: Added code and test for init new people; Added add new person
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated roadmap"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated project by moving all problematic code to *_old.txt files"; git push origin master; git status

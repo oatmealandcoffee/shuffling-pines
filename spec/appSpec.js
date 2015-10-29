@@ -9,57 +9,54 @@ describe("Shuffling Pines CRUD", function() {
         FormController = $controller('FormController');
     } ));
 
+    beforeEach(function() {
+        localStorage.clear();
+    });
+
     afterEach(function() {
         localStorage.clear();
     });
 
 
     describe("Create Suite", function() {
-        it('should add a new person', function () {
 
+        it('should init new people', function () {
+
+            expect( FormController.registerCache.length ).toBeGreaterThan( 0 );
+
+        });
+
+        it('should add a new person', function () {
+            console.log('should add a new person');
             var newfname = 'Marla';
             var newlname = 'Singer';
             var newtxdate = new Date();
             var newloc = 'Boston';
-            
+
+            FormController.fname = newfname;
+            FormController.lname = newlname;
+            FormController.txdate = newtxdate;
+            FormController.loc = newloc;
+
+            var oldRegisterLength = FormController.registerCache.length;
+
+            //FormController.createRecord();
+
+            expect( FormController.registerCache.length ).toBeGreaterThan( oldRegisterLength );
+            console.log('should add a new person');
         });
     });
 
-    describe("Retrieve Suite", function() {
-        it('should retrieve a person by key', function () {
-            /*
-            var person = JSON.parse(localStorage.getItem(id));
-            expect( person.fname ).toBe( fname );
-            */
-        });
+    xdescribe("Retrieve Suite", function() {
 
-        it('should be true', function() {
-            //expect( foo() ).toBe( true );
-        });
     });
 
-    describe("Update Suite", function() {
-        it('should update a property', function () {
-            /*
-            var newName = 'Bodsworth';
-            var target = JSON.parse(localStorage.getItem(id));
-            target.fname = newName;
-            localStorage.setItem(id, JSON.stringify(target));
-            var update = JSON.parse(localStorage.getItem(id));
-            expect( update.fname ).toBe( newName );
-            */
-        });
+    xdescribe("Update Suite", function() {
+
     });
 
-    describe("Delete Suite", function() {
-        it( 'should delete a person by key', function () {
-            /*
-            localStorage.removeItem(id);
-            var result = localStorage.getItem(id);
-            console.log(result);
-            expect( result ).toBe( "[]" );
-            */
-        });
+    xdescribe("Delete Suite", function() {
+
     });
 
 });

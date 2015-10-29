@@ -41,9 +41,9 @@ app.controller('FormController', [function(){
     */
     vm.createRecord = function () {
         var record = vm._newRecord( vm.fname, vm.lname, vm.txdate, vm.loc );
-        vm.registerCache = vm.retrieveRegister();
+        vm.retrieveRegister();
         vm.registerCache.push( record );
-        vm.updateRegister( vm.registerCache );
+        vm.updateRegister();
         vm._clearRecordCache();
     };
 
@@ -134,16 +134,9 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.createRegister = function() {
-        /*
-        console.log('createRegister');
-
-        if ( vm.retrieveRegister() ) {
-            console.log('createRegister: register already exists');
-            return;
-        }
         // init the store
         vm.registerCache = [];
-        vm.updateRegister( vm.registerCache );
+        vm.updateRegister();
         // prepopulate with dummy values
         vm.fname = 'Tyler';
         vm.lname = 'Durden';
@@ -156,23 +149,19 @@ app.controller('FormController', [function(){
         vm.txdate = new Date();
         vm.loc = 'Chicago';
         vm.createRecord();
-        */
     };
 
     /*
     PURPOSE: pulls the register from localStorage
     ARGUMENTS: void
-    RETURN: array of json objects or null
+    RETURN: void
     */
     vm.retrieveRegister = function() {
-        /*
-        console.log('retrieveRegister');
         var str = localStorage.getItem( vm._lsKey );
         // extract the array of records
         var cache = JSON.parse( str );
-        var register = cache.register;
-        return register;
-        */
+        console.log('retrieveRegister.str = ' + str);
+        vm.registerCache = cache.register;
     };
 
     /*
@@ -181,18 +170,18 @@ app.controller('FormController', [function(){
     RETURN: void
     */
 
-    vm.updateRegister = function( register ) {
-        /*
-        console.log('updateRegister:arg register: ' + register);
+    vm.updateRegister = function() {
+
         // wrap the array of records in a JSON object
         var cache = {
-            'register' : register
+            'register' : vm.registerCache
         };
         var str = JSON.stringify( cache );
         localStorage.setItem( vm._lsKey, str );
         // log output per project spec
-        console.log( 'updateRegister:' + str );
-        */
+        //console.log( 'register:' + vm.registerCache );
+        //console.log( 'json:' + str );
+
     };
 
     /* CRUD STACK */
@@ -204,7 +193,6 @@ app.controller('FormController', [function(){
     */
 
     vm._newRecord = function ( fname, lname, txdate, loc ) {
-        console.log('_newRecord: ' + fname );
         // id as date; computationally cheap and good enough here
          var id = new Date();
          var record = {
@@ -224,7 +212,6 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm._clearRecordCache = function () {
-        console.log('_clearRecordCache');
         vm.fname = '';
         vm.lname = '';
         vm.txdate = '';
@@ -238,7 +225,6 @@ app.controller('FormController', [function(){
     RETURN: integer or null if no value
     */
     vm._getRecordByID = function ( arr, id ) {
-        console.log('_getRecordByID');
         var ubound = arr.length;
         for (var i = 0; i < ubound; i++) {
             var record = arr[i];
@@ -263,7 +249,7 @@ app.controller('FormController', [function(){
     */
 
     // init the register
-    //vm.createRegister();
+    vm.createRegister();
 
 }]);
 
