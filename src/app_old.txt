@@ -21,7 +21,58 @@ app.controller('FormController', [function(){
     vm.loc = ''; // string
     vm.registerCache = ''; // array
 
+    /* HELPER STACK */
 
+    /*
+    PURPOSE: returns a person record based on passed values
+    ARGUMENTS: values can be null
+    RETURN: void
+    */
+    vm._newRecord = function ( fname, lname, txdate, loc ) {
+        console.log('_newRecord: ' + fname );
+        // id as date; computationally cheap and good enough here
+         var id = new Date();
+         var record = {
+            'fname':fname + '',
+            'lname':lname + '',
+            'txdate':txdate + '',
+            'loc':loc + '',
+            'id':id + '',
+            'deleted':false
+        };
+        return record;
+    };
+
+    /*
+    PURPOSE: clears the cache values
+    ARGUMENTS: void
+    RETURN: void
+    */
+    vm._clearCache = function () {
+        console.log('_clearCache');
+        vm.fname = '';
+        vm.lname = '';
+        vm.txdate = '';
+        vm.loc = '';
+        vm._recordCache = '';
+    };
+
+    /*
+    PURPOSE: examines the register cache for a record with the passed id
+    ARGUMENTS: target register, target id
+    RETURN: integer or null if no value
+    */
+    vm._getRecordByID = function ( id ) {
+        console.log('_getRecordByID');
+        var ubound = vm.registerCache.length;
+        for (var i = 0; i < ubound; i++) {
+            var record = vm.registerCache[i];
+            if ( record.id === id ) {
+                return record;
+            }
+        }
+        return null;
+    };
 
     /*
         RECORD CRUD STACK
@@ -44,7 +95,7 @@ app.controller('FormController', [function(){
         vm.registerCache = vm.retrieveRegister();
         vm.registerCache.push( record );
         vm.updateRegister( vm.registerCache );
-        vm._clearRecordCache();
+        vm._clearCache();
     };
 
     /*
@@ -53,7 +104,6 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.retrieveRecord = function ( id ) {
-        /*
         console.log('retrieveRecord');
         vm.registerCache = vm.retrieveRegister();
         vm._recordCache = vm._getRecordByID( id );
@@ -66,7 +116,6 @@ app.controller('FormController', [function(){
         vm.lname = vm._recordCache.lname;
         vm.txdate = vm._recordCache.txdate;
         vm.loc = vm._recordCache.loc;
-        */
     };
 
     /*
@@ -75,7 +124,6 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.updateRecord = function ( id ) {
-        /*
         console.log('updateRecord');
         vm.registerCache = vm.retrieveRegister();
         vm._recordCache = vm._getRecordByID( id );
@@ -94,10 +142,9 @@ app.controller('FormController', [function(){
             if ( record.id === id ) {
                 vm.registerCache[i] = vm._recordCache;
                 vm.updateRegister( vm.registerCache );
-                vm._clearRecordCache();
+                vm._clearCache();
             }
         }
-        */
     };
 
     /*
@@ -106,7 +153,6 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.deleteRecord = function ( id ) {
-        /*
         console.log('deleteRecord');
         vm.registerCache = vm.retrieveRegister();
         vm._recordCache = vm._getRecordByID( id );
@@ -116,7 +162,6 @@ app.controller('FormController', [function(){
         }
         vm._recordCache.deleted = true;
         vm.updateRegister( vm.registerCache );
-        */
     };
 
 
@@ -131,16 +176,10 @@ app.controller('FormController', [function(){
     /*
     PURPOSE: prepopulates register if needed
     ARGUMENTS: void
-    RETURN: void
+    RETURN: array of json objects
     */
     vm.createRegister = function() {
-        /*
         console.log('createRegister');
-
-        if ( vm.retrieveRegister() ) {
-            console.log('createRegister: register already exists');
-            return;
-        }
         // init the store
         vm.registerCache = [];
         vm.updateRegister( vm.registerCache );
@@ -156,7 +195,6 @@ app.controller('FormController', [function(){
         vm.txdate = new Date();
         vm.loc = 'Chicago';
         vm.createRecord();
-        */
     };
 
     /*
@@ -165,14 +203,17 @@ app.controller('FormController', [function(){
     RETURN: array of json objects or null
     */
     vm.retrieveRegister = function() {
-        /*
         console.log('retrieveRegister');
         var str = localStorage.getItem( vm._lsKey );
+        // if ( !str || str === '[]' ) {
+        //     vm.registerCache = vm.createRegister();
+        //     vm.updateRegister( vm.registerCache );
+        //     return vm.registerCache;
+        // }
         // extract the array of records
         var cache = JSON.parse( str );
         var register = cache.register;
         return register;
-        */
     };
 
     /*
@@ -180,9 +221,7 @@ app.controller('FormController', [function(){
     ARGUMENTS: array of JSON objects
     RETURN: void
     */
-
     vm.updateRegister = function( register ) {
-        /*
         console.log('updateRegister:arg register: ' + register);
         // wrap the array of records in a JSON object
         var cache = {
@@ -192,67 +231,7 @@ app.controller('FormController', [function(){
         localStorage.setItem( vm._lsKey, str );
         // log output per project spec
         console.log( 'updateRegister:' + str );
-        */
     };
-
-    /* CRUD STACK */
-
-    /*
-    PURPOSE: returns a person record based on passed values
-    ARGUMENTS: values can be null
-    RETURN: void
-    */
-
-    vm._newRecord = function ( fname, lname, txdate, loc ) {
-        console.log('_newRecord: ' + fname );
-        // id as date; computationally cheap and good enough here
-         var id = new Date();
-         var record = {
-            'fname':fname + '',
-            'lname':lname + '',
-            'txdate':txdate + '',
-            'loc':loc + '',
-            'id':id + '',
-            'deleted':false
-        };
-        return record;
-    };
-
-    /*
-    PURPOSE: clears the cache values
-    ARGUMENTS: void
-    RETURN: void
-    */
-    vm._clearRecordCache = function () {
-        console.log('_clearRecordCache');
-        vm.fname = '';
-        vm.lname = '';
-        vm.txdate = '';
-        vm.loc = '';
-        vm._recordCache = '';
-    };
-
-    /*
-    PURPOSE: returns the index of an item in an array based on the id
-    ARGUMENTS: target register, target id
-    RETURN: integer or null if no value
-    */
-    vm._getRecordByID = function ( arr, id ) {
-        console.log('_getRecordByID');
-        var ubound = arr.length;
-        for (var i = 0; i < ubound; i++) {
-            var record = arr[i];
-            if ( record.id === id ) {
-                return i;
-            }
-        }
-        return null;
-    };
-
-    /*
-        VIEW STACK
-        Manages the exchange of data between the view and the model
-    */
 
     /*
         TAB PANE 1 STACK: RECORD VIEW
@@ -262,8 +241,7 @@ app.controller('FormController', [function(){
         TAB PANE 2 STACK: REGISTER VIEW
     */
 
-    // init the register
-    //vm.createRegister();
+    vm.registerCache = vm.createRegister();
 
 }]);
 

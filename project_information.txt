@@ -33,7 +33,7 @@ Bugs:
 *
 
 Roadmap:
-
+* Build as straight controllers first, then move to services as needed
 * Register init
 * Register CRUD
     * Create ; Record Create required
@@ -126,5 +126,6 @@ Change History:
     15_10_28_06_00_001: Fixed jshint bugs
     15_10_28_06_00_001: Added Angular-mocks
     15_10_28_06_00_002: Fixed documentation gaps
+    15_10_28_07_00_000: Updated project by moving all problematic code to *_old.txt files
 
     cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated roadmap"; git push origin master; git status

@@ -2,6 +2,12 @@
 
 describe("Shuffling Pines CRUD", function() {
 
+    /* record/register init values */
+    var fname = 'Tyler';
+    var lname = 'Durden';
+    var id = lname+fname;
+    var store;
+
     /* INIT ANGULAR */
     var FormController;
     beforeEach(angular.mock.module('shuffling'));
@@ -9,10 +15,45 @@ describe("Shuffling Pines CRUD", function() {
         FormController = $controller('FormController');
     } ));
 
-    afterEach(function() {
-        localStorage.clear();
-    });
+    beforeEach(function() {
+        /* INIT REGISTER */
+        store = {};
 
+        var txdate = '2015/10/18';
+        var status = 'pick up';
+        var loc = 'Boston';
+
+        var person = {
+                fname:fname,
+                lname:lname,
+                txdate:txdate,
+                status:status,
+                loc:loc,
+                id:id
+            };
+
+        store[id] = JSON.stringify(person);
+
+        /* LOCALSTORAGE STACK */
+
+        /*
+        // Create, Update
+        spyOn(localStorage, "setItem").and.callFake( function( key, value ) {
+            store[key] = value;
+        });
+
+        // Retrieve, Update
+        spyOn(localStorage, "getItem").and.callFake( function(key) {
+            return store[key] || '[]';
+        });
+
+        // Delete
+        spyOn(localStorage, "removeItem").and.callFake( function(key) {
+            delete store[key];
+        });
+        */
+
+    });
 
     describe("Create Suite", function() {
         it('should add a new person', function () {
@@ -21,7 +62,15 @@ describe("Shuffling Pines CRUD", function() {
             var newlname = 'Singer';
             var newtxdate = new Date();
             var newloc = 'Boston';
-            
+
+            FormController.fname = newfname;
+            FormController.lname = newlname;
+            FormController.txdate = newtxdate;
+            FormController.loc = newloc;
+
+            FormController.createRecord();
+            expect( true ).toBe( true );
+
         });
     });
 
