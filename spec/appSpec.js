@@ -10,7 +10,28 @@ describe("Shuffling Pines CRUD", function() {
     } ));
 
     beforeEach(function() {
-        localStorage.clear();
+        /* LOCALSTORAGE STACK */
+
+        var store = {};
+
+        // Create, Update
+        spyOn(localStorage, "setItem").and.callFake( function( key, value ) {
+            store[key] = value;
+        });
+
+        // Retrieve, Update
+        spyOn(localStorage, "getItem").and.callFake( function( key ) {
+            return store[key];
+        });
+
+        // Delete
+        spyOn(localStorage, "removeItem").and.callFake( function( key ) {
+            delete store[key];
+        });
+
+        spyOn( localStorage, "clear").and.callFake( function () {
+            store = {};
+        });
     });
 
     afterEach(function() {
@@ -20,7 +41,7 @@ describe("Shuffling Pines CRUD", function() {
 
     describe("Create Suite", function() {
 
-        it('should init new people', function () {
+        xit('should init new people', function () {
 
             expect( FormController.registerCache.length ).toBeGreaterThan( 0 );
 
@@ -28,21 +49,27 @@ describe("Shuffling Pines CRUD", function() {
 
         it('should add a new person', function () {
             console.log('should add a new person');
-            var newfname = 'Marla';
-            var newlname = 'Singer';
-            var newtxdate = new Date();
-            var newloc = 'Boston';
 
-            FormController.fname = newfname;
-            FormController.lname = newlname;
-            FormController.txdate = newtxdate;
-            FormController.loc = newloc;
+            /*
+            vm.fname = 'Tyler';
+            vm.lname = 'Durden';
+            vm.txdate = new Date();
+            vm.loc = 'Boston';
+            vm.createRecord();
+            */
+
+            FormController.fname = 'Marla';
+            FormController.lname = 'Singer';
+            FormController.txdate = new Date();
+            FormController.loc = 'New York';
 
             var oldRegisterLength = FormController.registerCache.length;
+            console.log( oldRegisterLength );
 
-            //FormController.createRecord();
+            FormController.createRecord();
 
             expect( FormController.registerCache.length ).toBeGreaterThan( oldRegisterLength );
+
             console.log('should add a new person');
         });
     });

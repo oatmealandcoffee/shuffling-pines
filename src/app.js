@@ -5,9 +5,6 @@ app.controller('FormController', [function(){
 
     var vm = this;
 
-    // private key for localStorage
-    vm._lsKey = 'OCSHPN';
-
     /*
         RECORD CACHE
     */
@@ -41,7 +38,7 @@ app.controller('FormController', [function(){
     */
     vm.createRecord = function () {
         var record = vm._newRecord( vm.fname, vm.lname, vm.txdate, vm.loc );
-        vm.retrieveRegister();
+        //vm.retrieveRegister();
         vm.registerCache.push( record );
         vm.updateRegister();
         vm._clearRecordCache();
@@ -134,8 +131,10 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.createRegister = function() {
+        console.log("createRegister");
         // init the store
         vm.registerCache = [];
+        // init the register
         vm.updateRegister();
         // prepopulate with dummy values
         vm.fname = 'Tyler';
@@ -143,12 +142,13 @@ app.controller('FormController', [function(){
         vm.txdate = new Date();
         vm.loc = 'Boston';
         vm.createRecord();
-
+        /*
         vm.fname = 'Robert';
         vm.lname = 'Paulson';
         vm.txdate = new Date();
         vm.loc = 'Chicago';
         vm.createRecord();
+        */
     };
 
     /*
@@ -157,11 +157,15 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.retrieveRegister = function() {
-        var str = localStorage.getItem( vm._lsKey );
-        // extract the array of records
-        var cache = JSON.parse( str );
+        var str = localStorage.getItem( 'OCSHPN' );
         console.log('retrieveRegister.str = ' + str);
-        vm.registerCache = cache.register;
+        // extract the array of records
+        var json = JSON.parse( str );
+        console.log('retrieveRegister.json = ' + String(json));
+
+        vm.registerCache = json.register;
+        console.log( 'retrieveRegister.registerCache: ' + vm.registerCache );
+
     };
 
     /*
@@ -172,15 +176,23 @@ app.controller('FormController', [function(){
 
     vm.updateRegister = function() {
 
+        if ( vm.registerCache === 'undefined' ) {
+            console.log( 'updateRegister.registerCache: ' + '<empty>' );
+        } else {
+            console.log( 'updateRegister.registerCache: ' + String( vm.registerCache ) );
+        }
+
         // wrap the array of records in a JSON object
-        var cache = {
-            'register' : vm.registerCache
-        };
-        var str = JSON.stringify( cache );
-        localStorage.setItem( vm._lsKey, str );
+        var json = {};
+        json['register'] = vm.registerCache;
+
+        console.log( 'updateRegister.json:' + String(json) );
+
+        var str = JSON.stringify( json );
+        console.log( 'updateRegister.str:' + str );
+
+        localStorage.setItem( 'OCSHPN' , str );
         // log output per project spec
-        //console.log( 'register:' + vm.registerCache );
-        //console.log( 'json:' + str );
 
     };
 
