@@ -108,7 +108,7 @@ describe("Shuffling Pines CRUD", function() {
 
         });
 
-        it('should not update id or deleted', function () {
+        xit('should not update id or deleted', function () {
             // put the record in the cache
             var id = testrecord.id;
             var testvalue = '__BAD_VALUE__';
@@ -129,7 +129,39 @@ describe("Shuffling Pines CRUD", function() {
         });
 
         xit('should update status according to status map', function () {
-            expect( FormController.registerCache[0] ).not.toBeNull();
+            // put the record in the cache
+            var id = testrecord.id;
+            var currentStatus = testrecord.status;
+            var nextStatus = FormController.statusMap[currentStatus];
+
+            // update the values
+            FormController.updateRecord( id , 'status', nextStatus );
+
+            // get the record again once saved
+            var len = FormController.registerCache.length;
+            var idx = len - 1;
+            testrecord = FormController.registerCache[idx];
+
+            // test the update
+            expect( testrecord.status ).toBe( nextStatus );
+        });
+
+        it('should not update status to anything not aligned with the status map', function () {
+            // put the record in the cache
+            var id = testrecord.id;
+            var currentStatus = testrecord.status;
+            var badStatus = '__BAD_VALUE__';
+
+            // update the values
+            FormController.updateRecord( id , 'status', badStatus );
+
+            // get the record again once saved
+            var len = FormController.registerCache.length;
+            var idx = len - 1;
+            testrecord = FormController.registerCache[idx];
+
+            // test the update
+            expect( testrecord.status ).not.toBe( badStatus );
         });
 
     });

@@ -90,23 +90,16 @@ app.controller('FormController', [function(){
         // check the key before making the update because certain properties have
         // particular rules that apply
 
-        /*
-        var record = {
-           'fname':fname + '',
-           'lname':lname + '',
-           'txdate':txdate + '',
-           'status': 'arrived',
-           'loc':loc + '',
-           'id':id() + '',
-           'deleted':false
-        };
-        */
-
         if ( key === 'id' || key === 'deleted' ) {
             // id is immutable
             // deleted should be handled via deleteRecord only
         } else if ( key === 'status' ) {
-            // check to be sure update follows the map
+            // check to be sure that the passed value aligns with the map
+            var currentStatus = vm._recordCache[key];
+            var expectedStatus = vm.statusMap[currentStatus];
+            if ( value === expectedStatus ) {
+                vm._recordCache[key] = value;
+            }
         } else {
             vm._recordCache[key] = value;
         }
@@ -222,7 +215,7 @@ app.controller('FormController', [function(){
             'lname':lname + '',
             'txdate':txdate + '',
             'loc':loc + '',
-            'status': 'arrived',
+            'status': vm.statusMap['Arrived'],
             'id':id() + '',
             'deleted':false
         };
@@ -253,8 +246,6 @@ app.controller('FormController', [function(){
         for (var i = 0; i < ubound; i++) {
             var record = vm.registerCache[i];
             if ( record.id === id ) {
-                console.log( record.id );
-                console.log( id );
                 return i;
             }
         }

@@ -65,11 +65,11 @@ Roadmap:
         X should update lname
         - should update txdate // dates are too hard to test with such a fast framework, and coded delays smell funny.
         X should update loc
-        * should update status from 'pick-up' to 'arrived'
-        * should update status from 'drop off' to 'arrived'
-        * should update status 'arrived' to 'pick up'
-            * add topography
-        * should not update id
+        X should update status from 'pick-up' to 'arrived'
+        X should update status from 'drop off' to 'arrived'
+        X should update status 'arrived' to 'pick up'
+            X add topography
+        X should not update id
     > Delete
         X should delete as a 'soft' delete with flag
         > should return only active (deleted:false) records
@@ -141,5 +141,6 @@ Change History:
     15_10_29_07_05_000: Added status to record object; Updated updateRecord to key-value updates
     15_10_29_07_06_000: Added update for fname, lname, and loc
     15_10_29_07_06_001: Added test for immutability of id and deleted via updateRecord
+    15_10_29_07_07_000: Added tests for alignment of status updates to map
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added update for fname, lname, and loc"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added tests for alignment of status updates to map"; git push origin master; git status
