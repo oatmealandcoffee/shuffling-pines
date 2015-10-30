@@ -161,11 +161,13 @@ app.controller('FormController', [ function(){
         // prepopulate with dummy values
         vm.guestname = 'Tyler Durden';
         vm.txdate = new Date();
+        vm.status = vm.statusMap.Arrived;
         vm.loc = 'Boston';
         vm.createRecord();
 
         vm.guestname = 'Robert Paulson';
         vm.txdate = new Date();
+        vm.status = vm.statusMap.Arrived;
         vm.loc = 'Chicago';
         vm.createRecord();
 
@@ -210,8 +212,8 @@ app.controller('FormController', [ function(){
     */
 
     vm._newRecord = function ( guestname, txdate, status, loc ) {
-        // create a uuid; not computationally cheap but needed here as Date isn't
-        // granular enough
+        // create a uuid; not computationally cheap but needed here as the project's
+        // data points aren't granular enough with the speed of testing
         // citation: http://jsfiddle.net/briguy37/2mvfd/
          var id = function generateUUID() {
             var d = new Date().getTime();
@@ -225,8 +227,8 @@ app.controller('FormController', [ function(){
          var record = {
             'guestname':guestname + '',
             'txdate':txdate + '',
-            'loc':loc + '',
             'status': status,
+            'loc':loc + '',
             'id':id() + '',
             'deleted':false
         };

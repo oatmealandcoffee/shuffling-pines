@@ -37,27 +37,32 @@
                 <div class="form-group">
                   <label for="guest-name">Guest Name</label>
                   <input type="text" class="form-control" id="guest-name" placeholder="Marla Singer" ng-model="fc.guestname" required>
+                  <br/>{{ fc.guestname }}<br/>
                 </div>
                 <div class="form-group">
                   <label for="transition-date">Transition Date</label>
                   <input type="date" class="form-control" id="transition-date" placeholder="" ng-model="fc.txdate" required>
+                  <br/>{{ fc.txdate }}<br/>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pickup-dropoff" id="pickup" value="Pick-up" checked  ng-model="fc.status" required>
+                      <!-- 'checked' is not firing here because this stuff is magic until it isn't -->
+                    <input type="radio" name="pickup-dropoff" id="pickup" value="Pick-up"  ng-model="fc.status" checked required>
                     Pick-up
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pickup-dropoff" id="dropoff" value="Drop-off" ng-model="fc.status" >
+                    <input type="radio" name="pickup-dropoff" id="dropoff" value="Drop-off" ng-model="fc.status">
                     Drop-off
                   </label>
+                  <br/>{{ fc.status }}<br/>
                 </div>
                 <div class="form-group">
                   <label for="location">Location</label>
                   <textarea class="form-control" id="location" ng-model="fc.loc" required></textarea>
                 </div>
+                <br/>{{ fc.loc }}<br/>
                 <button type="submit" class="btn" >Submit</button>
               </form>
 
@@ -90,7 +95,11 @@
               <li ng-repeat="record in fc.registerCache">
                   <span ng-hide="record.deleted">
                   <div class="well">
-                    {{ record.guestname }}
+                    <strong>Guest Name:</strong> {{ record.guestname }}<br/>
+                    <strong>Transition Date:</strong> {{ record.txdate }}<br/>
+                    <strong>Status:</strong> {{ record.status }}<br/>
+                    <strong>Location:</strong> {{ record.loc }}<br/>
+                    <strong>ID#:</strong> <tt>{{ record.id }}</tt><br/>
                     <button class="btn" ng-click="fc.deleteRecord( record.id )">Delete</button>
                   </div>
                     </span>

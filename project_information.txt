@@ -81,7 +81,7 @@ X Align controller to view
     X Delete
         X should delete as a 'soft' delete with flag
         X should return only active (deleted:false) records
-* View
+X View
     X Tab 1: Record
         X Create
         X Retrieve (display)
@@ -89,12 +89,12 @@ X Align controller to view
                 X Controller
                 X model
                 X ng-model -> person cache
-            * Display updates as updates are made
-                    * Add {{}} hooks to each form element
-    * Tab 2: Register
+            X Display updates as updates are made
+                    X Add {{}} hooks to each form element
+    > Tab 2: Register
         X List Display
             X ng-repeat used to run through the data
-            * update status inline per status map
+            > update status inline per status map
                 * "pick up" to "arrived"
                 * "drop off" to "arrived"
                 * "arrived" to "pick up"
@@ -162,5 +162,7 @@ Change History:
     15_10_29_09_01_000: Updated guests to soft-delete records
     15_10_29_09_02_000: Updated guests to hide soft-deleted records
     15_10_29_09_03_000: Updated createRecord to include status
+    15_10_29_09_03_000: Updated form to show updates as they are made
+    15_10_29_09_04_000: Updated guests to show all data
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated guests to hide soft-deleted records"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated guests to show all data"; git push origin master; git status
