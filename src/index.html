@@ -29,7 +29,7 @@
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content"  ng-controller="FormController as fc">
+        <div class="tab-content" ng-controller="FormController as fc">
           <!-- Tab pane 1 -->
           <div role="tabpanel" class="tab-pane active" id="form">
             <div>
@@ -88,7 +88,12 @@
           <div role="tabpanel" class="tab-pane" id="guests">
             <ul class="list-unstyled">
               <li ng-repeat="record in fc.registerCache">
-                  <span ng-hide="record.deleted">{{ record.guestname }} <button class="btn" ng-click="fc.deleteRecord( record.id )">Delete</button></span>
+                  <span ng-hide="record.deleted">
+                  <div class="well">
+                    {{ record.guestname }}
+                    <button class="btn" ng-click="fc.deleteRecord( record.id )">Delete</button>
+                  </div>
+                    </span>
               </li>
             </ul>
           </div>

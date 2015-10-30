@@ -1,7 +1,7 @@
 /* globals angular */
 var app = angular.module('shuffling', []);
 
-app.controller('FormController', [function(){
+app.controller('FormController', [ function(){
 
     var vm = this;
 
@@ -47,12 +47,12 @@ app.controller('FormController', [function(){
     */
     vm.createRecord = function () {
 
-        var record = vm._newRecord( vm.guestname, vm.txdate, vm.loc );
+        var record = vm._newRecord( vm.guestname, vm.txdate, vm.status, vm.loc );
         vm.retrieveRegister();
         vm.registerCache.push( record );
         vm.updateRegister();
         vm._clearRecordCache();
-
+        // TODO: switch to guests tab
     };
 
     /*
@@ -209,7 +209,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
 
-    vm._newRecord = function ( guestname, txdate, loc ) {
+    vm._newRecord = function ( guestname, txdate, status, loc ) {
         // create a uuid; not computationally cheap but needed here as Date isn't
         // granular enough
         // citation: http://jsfiddle.net/briguy37/2mvfd/
@@ -226,7 +226,7 @@ app.controller('FormController', [function(){
             'guestname':guestname + '',
             'txdate':txdate + '',
             'loc':loc + '',
-            'status': vm.statusMap.Arrived,
+            'status': status,
             'id':id() + '',
             'deleted':false
         };
@@ -285,5 +285,11 @@ app.controller('FormController', [function(){
 }]);
 
 app.controller('TabController', [function(){
+    var vm = this;
+
+    vm.formTab = 1;
+    vm.guestsTab = 2;
+
+    vm.currentTab = vm.formTab;
 
 }]);

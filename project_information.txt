@@ -45,18 +45,14 @@ X Record CRUD
     X Retrieve
     X Update
     X Delete
-> Align controller to view
+X Align controller to view
     X update record from fname+lname to 'name'
-    * Show all guests in Guests tab
-    * Add delete function to Guests list
-        * ng-hide based on deleted value
-        * Add button
-        * Add confirmation
-    * Link form to FormController fields
-    * Update status based on entry
-* Convert Controllers to Services
-    * Convert global variables into a Value Service
-    * Convert Register CRUD operations into a Service Service
+    X Show all guests in Guests tab
+    X Add delete function to Guests list
+        X ng-hide based on deleted value
+        X Add button
+        X Add confirmation
+    X Link form to FormController fields
 * Jasmine-Karma
     // All controllers and services need a test
     // All controller tests should mock the DOM elements and services
@@ -84,31 +80,31 @@ X Record CRUD
         X should not update id
     X Delete
         X should delete as a 'soft' delete with flag
-        > should return only active (deleted:false) records
-        * View only: should show confirmation dialog before deleting
-        * View only should push to list tab containing all guests upon deletion
+        X should return only active (deleted:false) records
 * View
-    * Tab 1: Record
-        * Create
-        * Retrieve (display)
-            * create model binding
-                * Controller
-                * model
-                * ng-model -> person cache
-        * Update
-            * Status
+    X Tab 1: Record
+        X Create
+        X Retrieve (display)
+            X create model binding
+                X Controller
+                X model
+                X ng-model -> person cache
+            * Display updates as updates are made
+                    * Add {{}} hooks to each form element
+    * Tab 2: Register
+        X List Display
+            X ng-repeat used to run through the data
+            * update status inline per status map
                 * "pick up" to "arrived"
                 * "drop off" to "arrived"
                 * "arrived" to "pick up"
-        * Delete
-            * confirmation dialog
-    * Tab 2: Register
-        * List Display
-            * ng-repeat used to run through the data
-            * data comes from a service
-        * Display updates as updates are made
+            * Delete
+                * confirmation dialog
         * Extra credit (20 pts): Inline editing
-        * Extra credit (10 pts): soft delete with flag as mark
+        X Extra credit (10 pts): soft delete with flag as mark
+* Convert Controllers to Services
+    * Convert global variables into a Value Service
+    * Convert Register CRUD operations into a Service Service
 * Prep for submission
     * Check install instructions
         * npm install
@@ -165,5 +161,6 @@ Change History:
     15_10_29_09_00_000: Updated form to submit new guests
     15_10_29_09_01_000: Updated guests to soft-delete records
     15_10_29_09_02_000: Updated guests to hide soft-deleted records
+    15_10_29_09_03_000: Updated createRecord to include status
 
     cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated guests to hide soft-deleted records"; git push origin master; git status
