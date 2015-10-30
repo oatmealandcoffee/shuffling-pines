@@ -18,6 +18,7 @@ app.controller('FormController', [function(){
     vm.guestname = '';
     vm.txdate = '';
     vm.loc = '';
+    vm.status = '';
     vm.registerCache = [];
 
     // used to ensure that status updates go in the correct order
@@ -71,6 +72,7 @@ app.controller('FormController', [function(){
         vm._recordCache = vm.registerCache[index];
         vm.guestname = vm._recordCache.guestname;
         vm.txdate = vm._recordCache.txdate;
+        vm.status = vm._recordCache.status;
         vm.loc = vm._recordCache.loc;
 
     };
@@ -150,6 +152,11 @@ app.controller('FormController', [function(){
 
         // init the register
         vm.updateRegister();
+        // get the register to see if anything already exists
+        vm.retrieveRegister();
+        if ( vm.registerCache.length > 0 ) {
+            return;
+        }
 
         // prepopulate with dummy values
         vm.guestname = 'Tyler Durden';
@@ -235,6 +242,7 @@ app.controller('FormController', [function(){
 
         vm.guestname = '';
         vm.txdate = '';
+        vm.status = '';
         vm.loc = '';
         vm._recordCache = '';
 

@@ -33,30 +33,30 @@
           <!-- Tab pane 1 -->
           <div role="tabpanel" class="tab-pane active" id="form">
             <div>
-              <form class="col-md-6 well" ng-submit="fc.createRegister()">
+              <form class="col-md-6 well" ng-submit="fc.createRecord()">
                 <div class="form-group">
                   <label for="guest-name">Guest Name</label>
-                  <input type="text" class="form-control" id="guest-name" placeholder="">
+                  <input type="text" class="form-control" id="guest-name" placeholder="Marla Singer" ng-model="fc.guestname" required>
                 </div>
                 <div class="form-group">
                   <label for="transition-date">Transition Date</label>
-                  <input type="date" class="form-control" id="transition-date" placeholder="">
+                  <input type="date" class="form-control" id="transition-date" placeholder="" ng-model="fc.txdate" required>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pickup-dropoff" id="pickup" value="pickup" checked>
+                    <input type="radio" name="pickup-dropoff" id="pickup" value="Pick-up" checked  ng-model="fc.status" required>
                     Pick-up
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pickup-dropoff" id="dropoff" value="dropoff">
+                    <input type="radio" name="pickup-dropoff" id="dropoff" value="Drop-off" ng-model="fc.status" >
                     Drop-off
                   </label>
                 </div>
                 <div class="form-group">
                   <label for="location">Location</label>
-                  <textarea class="form-control" id="location"></textarea>
+                  <textarea class="form-control" id="location" ng-model="fc.loc" required></textarea>
                 </div>
                 <button type="submit" class="btn" >Submit</button>
               </form>
@@ -88,7 +88,7 @@
           <div role="tabpanel" class="tab-pane" id="guests">
             <ul class="list-unstyled">
               <li ng-repeat="record in fc.registerCache">
-                  {{ record.guestname }} <button class="btn" ng-click="vm.deleteRecord( record.id )">delete</button>
+                  {{ record.guestname }} <button class="btn" ng-click="vm.deleteRecord( record.id )">Delete</button>
               </li>
             </ul>
           </div>

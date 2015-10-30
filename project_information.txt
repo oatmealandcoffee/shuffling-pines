@@ -162,5 +162,6 @@ Change History:
     15_10_29_08_01_000: Updated record to use single name field per the form
     15_10_29_08_01_001: Fixed bugs in gulpfile.js that prevented from app.js from being built
     15_10_29_08_01_002: Fixed one more bug in gulpfile; Updated html to remove test cruft
+    15_10_29_09_00_000: Updated form to submit new guests
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed one more bug in gulpfile; Updated html to remove test cruft"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated form to submit new guests"; git push origin master; git status
