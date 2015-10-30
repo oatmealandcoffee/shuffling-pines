@@ -9,15 +9,22 @@ app.controller('FormController', [function(){
         RECORD CACHE
     */
     // private
-    vm._recordCache = '';
+    vm._recordCache = {};
 
     // public
-    vm.fname = ''; // string
-    vm.lname = ''; // string
-    vm.txdate = ''; // string
-    vm.loc = ''; // string
-    vm.registerCache = ''; // array
+    vm.fname = '';
+    vm.lname = '';
+    vm.txdate = '';
+    vm.loc = '';
+    vm.registerCache = [];
+    vm.recordsCache = [];
 
+    // status map; used to ensure that status updates go in the correct order
+    vm.statusMap = {
+        'Pick-up': 'Arrived',
+        'Drop-off': 'Arrived',
+        'Arrived': 'Pick-up'
+    };
 
 
     /*
@@ -50,7 +57,6 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.retrieveRecord = function ( id ) {
-        console.log('retrieveRecord');
         vm.retrieveRegister();
         var index = vm._getIndexByID( id );
         if ( index === null ) {
@@ -70,8 +76,8 @@ app.controller('FormController', [function(){
     ARGUMENTS: record id as string
     RETURN: void
     */
-    vm.updateRecord = function ( id ) {
-        /*
+    vm.updateRecord = function ( id, key, value ) {
+
         console.log('updateRecord');
         vm.retrieveRegister();
         vm._recordCache = vm._getRecordByID( id );
@@ -93,7 +99,7 @@ app.controller('FormController', [function(){
                 vm._clearRecordCache();
             }
         }
-        */
+
     };
 
     /*
@@ -131,8 +137,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.createRegister = function() {
-        // init the store
-        vm.registerCache = [];
+
         // init the register
         vm.updateRegister();
 

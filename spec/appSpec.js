@@ -9,6 +9,21 @@ describe("Shuffling Pines CRUD", function() {
         FormController = $controller('FormController');
     } ));
 
+    /* INIT COMMON VALUES */
+
+    var testfname = 'Marla';
+    var testlname = 'Singer';
+    var testtxdate = new Date();
+    var testloc = 'Detroit';
+
+    var testrecord;
+
+    beforeEach(function() {
+        var len = FormController.registerCache.length;
+        var idx = len - 1;
+        testrecord = FormController.registerCache[idx];
+    });
+
     /*
         The tests use PhantomJS, so we'll play liberally with localStorage there
     */
@@ -29,10 +44,10 @@ describe("Shuffling Pines CRUD", function() {
 
             var oldRegisterLength = FormController.registerCache.length;
 
-            FormController.fname = 'Marla';
-            FormController.lname = 'Singer';
-            FormController.txdate = new Date();
-            FormController.loc = 'Detroit';
+            FormController.fname = testfname;
+            FormController.lname = testlname;
+            FormController.txdate = testtxdate;
+            FormController.loc = testloc;
             FormController.createRecord();
 
             expect( FormController.registerCache.length ).toBeGreaterThan( oldRegisterLength );
@@ -47,10 +62,10 @@ describe("Shuffling Pines CRUD", function() {
 
         xit('should retrieve a person by key', function () {
 
-            FormController.fname = 'Marla';
-            FormController.lname = 'Singer';
-            FormController.txdate = new Date();
-            FormController.loc = 'Detroit';
+            FormController.fname = testfname;
+            FormController.lname = testlname;
+            FormController.txdate = testtxdate;
+            FormController.loc = testloc;
             FormController.createRecord();
 
             // get the id of last record made
@@ -65,30 +80,40 @@ describe("Shuffling Pines CRUD", function() {
 
     xdescribe("Update Suite", function() {
 
+        it('should update fname, lname, txdate, and loc', function () {
+
+        });
+
+        it('should update status from pick-up to arrived', function () {
+            expect( FormController.registerCache[0] ).not.toBeNull();
+        });
+
+        it('should update status from drop off to arrived', function () {
+            expect( FormController.registerCache[0] ).not.toBeNull();
+        });
+
+        it('should update status from arrived to pickup', function () {
+            expect( FormController.registerCache[0] ).not.toBeNull();
+        });
+
+        it('should not update user id', function () {
+            expect( FormController.registerCache[0] ).not.toBeNull();
+        });
+
     });
 
     describe("Delete Suite", function() {
         it('should soft-delete records', function () {
-            // get the id of last record made
-            var len = FormController.registerCache.length;
-            var idx = len - 1;
-            var record = FormController.registerCache[idx];
-            var id = record.id;
+
+            var id = testrecord.id;
             FormController.retrieveRecord( id );
 
             // delete a record
             FormController.deleteRecord( id );
 
             // check the record
-            expect( record.deleted ).toBe( false );
+            expect( testrecord.deleted ).toBe( false );
 
-        });
-
-        xit('should get list of only active records', function () {
-            // get a record
-            // delete a record
-            // get all the records
-            // for each record, if all are active return true
         });
 
         xit('should be successful', function () {

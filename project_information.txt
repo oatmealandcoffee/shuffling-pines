@@ -58,8 +58,9 @@ Roadmap:
         * should push to list tab containing all guests upon creation
     X Retrieve
         X should retrieve a person by key
-        X should retrieve only guests not marked as deleted
-    * Update
+        - should retrieve only guests not marked as deleted
+            // records will be hidden in the view based on the value of the deleted field
+    > Update
         * should update fname
         * should update lname
         * should update txdate
@@ -67,12 +68,13 @@ Roadmap:
         * should update status from 'pick-up' to 'arrived'
         * should update status from 'drop off' to 'arrived'
         * should update status 'arrived' to 'pick up'
+            * add topography
         * should not update id
     > Delete
         X should delete as a 'soft' delete with flag
         > should return only active (deleted:false) records
-        * should show confirmation dialog before deleting
-        * should push to list tab containing all guests upon deletion
+        * View only: should show confirmation dialog before deleting
+        * View only should push to list tab containing all guests upon deletion
 * View
     * Tab 1: Record
         * Create
@@ -134,5 +136,6 @@ Change History:
     15_10_29_07_01_000: Added test for retrieve person by key
     15_10_29_07_02_000: Added delete suite non-view test todos
     15_10_29_07_03_000: Added soft-deletion test and code
+    15_10_29_07_04_000: Added status map; Updated tests to make DRY common values
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added soft-deletion test and code"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added status map; Updated tests to make DRY common values"; git push origin master; git status
