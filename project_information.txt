@@ -146,5 +146,6 @@ Change History:
     15_10_29_07_06_001: Added test for immutability of id and deleted via updateRecord
     15_10_29_07_07_000: Added tests for alignment of status updates to map
     15_10_29_07_08_000: Updated everything with some code clean up
+    15_10_29_07_08_001: Updated per Gulp/JSHint
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added tests for alignment of status updates to map"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated per Gulp/JSHint"; git push origin master; git status

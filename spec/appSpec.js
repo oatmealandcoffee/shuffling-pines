@@ -149,7 +149,6 @@ describe("Shuffling Pines CRUD", function() {
         it('should not update status to anything not aligned with the status map', function () {
             // put the record in the cache
             var id = testrecord.id;
-            var currentStatus = testrecord.status;
 
             // update the values
             FormController.updateRecord( id , 'status', badValue );

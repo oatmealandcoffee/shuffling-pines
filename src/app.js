@@ -178,7 +178,7 @@ app.controller('FormController', [function(){
         var str = localStorage.getItem( 'OCSHPN' );
         // extract the array of records
         var json = JSON.parse( str );
-        vm.registerCache = json['register'];
+        vm.registerCache = json.register;
     };
 
     /*
@@ -190,7 +190,7 @@ app.controller('FormController', [function(){
 
         // wrap the array of records in a JSON object
         var json = {};
-        json['register'] = vm.registerCache;
+        json.register = vm.registerCache;
         var str = JSON.stringify( json );
         localStorage.setItem( 'OCSHPN' , str );
         // log output per project spec
@@ -215,7 +215,7 @@ app.controller('FormController', [function(){
             var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
                 var r = (d + Math.random()*16)%16 | 0;
                 d = Math.floor(d/16);
-                return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+                return (c==='x' ? r : (r&0x3|0x8)).toString(16);
             });
             return uuid;
             };
@@ -224,7 +224,7 @@ app.controller('FormController', [function(){
             'lname':lname + '',
             'txdate':txdate + '',
             'loc':loc + '',
-            'status': vm.statusMap['Arrived'],
+            'status': vm.statusMap.Arrived,
             'id':id() + '',
             'deleted':false
         };
