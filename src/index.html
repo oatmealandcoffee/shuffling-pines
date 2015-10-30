@@ -97,10 +97,10 @@
                   <div class="well">
                     <strong>Guest Name:</strong> {{ record.guestname }}<br/>
                     <strong>Transition Date:</strong> {{ record.txdate }}<br/>
-                    <strong>Status:</strong> {{ record.status }}<br/>
+                    <div ng-model="record.status"><strong>Status:</strong> {{ record.status }} <button class="btn btn-xs" ng-click="fc.updateRecord( record.id, 'status', record.status )">Update</button></div><br/>
                     <strong>Location:</strong> {{ record.loc }}<br/>
                     <strong>ID#:</strong> <tt>{{ record.id }}</tt><br/>
-                    <button class="btn" ng-click="fc.deleteRecord( record.id )">Delete</button>
+                    <button class="btn btn-xs" ng-click="fc.deleteRecord( record.id )">Delete</button>
                   </div>
                     </span>
               </li>

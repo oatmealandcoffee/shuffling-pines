@@ -164,5 +164,6 @@ Change History:
     15_10_29_09_03_000: Updated createRecord to include status
     15_10_29_09_03_000: Updated form to show updates as they are made
     15_10_29_09_04_000: Updated guests to show all data
+    15_10_29_09_05_000: Updated guests to update status
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated guests to show all data"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated guests to update status"; git push origin master; git status

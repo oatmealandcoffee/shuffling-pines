@@ -101,10 +101,7 @@ app.controller('FormController', [ function(){
         } else if ( key === 'status' ) {
             // check to be sure that the passed value aligns with the map
             var currentStatus = vm._recordCache[key];
-            var expectedStatus = vm.statusMap[currentStatus];
-            if ( value === expectedStatus ) {
-                vm._recordCache[key] = value;
-            }
+            vm._recordCache[key] = vm.statusMap[currentStatus];
         } else {
             vm._recordCache[key] = value;
         }
