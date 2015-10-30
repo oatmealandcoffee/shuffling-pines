@@ -6,7 +6,10 @@ app.controller('FormController', [function(){
     var vm = this;
 
     /*
-        RECORD CACHE
+        CACHES
+        All CRUD operations point to these caches. There is only one record held
+        in the Record cache. Records are pulled from the Registry cache, which is
+        always pulled from and pushed to localStorage on each operation.
     */
     // private
     vm._recordCache = {};
@@ -17,9 +20,8 @@ app.controller('FormController', [function(){
     vm.txdate = '';
     vm.loc = '';
     vm.registerCache = [];
-    vm.recordsCache = [];
 
-    // status map; used to ensure that status updates go in the correct order
+    // used to ensure that status updates go in the correct order
     vm.statusMap = {
         'Pick-up': 'Arrived',
         'Drop-off': 'Arrived',
@@ -44,11 +46,13 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.createRecord = function () {
+
         var record = vm._newRecord( vm.fname, vm.lname, vm.txdate, vm.loc );
         vm.retrieveRegister();
         vm.registerCache.push( record );
         vm.updateRegister();
         vm._clearRecordCache();
+
     };
 
     /*
@@ -57,6 +61,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.retrieveRecord = function ( id ) {
+
         vm.retrieveRegister();
         var index = vm._getIndexByID( id );
         if ( index === null ) {
@@ -69,6 +74,7 @@ app.controller('FormController', [function(){
         vm.lname = vm._recordCache.lname;
         vm.txdate = vm._recordCache.txdate;
         vm.loc = vm._recordCache.loc;
+
     };
 
     /*
@@ -78,7 +84,6 @@ app.controller('FormController', [function(){
     */
     vm.updateRecord = function ( id, key, value ) {
 
-        console.log('updateRecord');
         vm.retrieveRegister();
         var idx = vm._getIndexByID( id );
         vm._recordCache = vm.registerCache[idx];
@@ -103,19 +108,20 @@ app.controller('FormController', [function(){
         } else {
             vm._recordCache[key] = value;
         }
-
+        // note the day and time, and then save
+        vm._recordCache.txdate = new Date();
         vm.updateRegister();
 
     };
 
     /*
-    PURPOSE: deletes a record from the register
+    PURPOSE: deletes a record from the register. This is the canonical way to delete
+    a record; do not use updateRecord(id, 'deleted', true) as it will block you
     ARGUMENTS: record id as string
     RETURN: void
     */
     vm.deleteRecord = function ( id ) {
 
-        console.log('deleteRecord');
         vm.retrieveRegister();
         var index = vm._getIndexByID( id );
         vm._recordCache = vm.registerCache[ index ];
@@ -168,6 +174,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.retrieveRegister = function() {
+
         var str = localStorage.getItem( 'OCSHPN' );
         // extract the array of records
         var json = JSON.parse( str );
@@ -180,6 +187,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.updateRegister = function() {
+
         // wrap the array of records in a JSON object
         var json = {};
         json['register'] = vm.registerCache;
@@ -187,6 +195,7 @@ app.controller('FormController', [function(){
         localStorage.setItem( 'OCSHPN' , str );
         // log output per project spec
         console.log( str );
+
     };
 
     /* CRUD HELPER STACK */
@@ -228,11 +237,13 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm._clearRecordCache = function () {
+
         vm.fname = '';
         vm.lname = '';
         vm.txdate = '';
         vm.loc = '';
         vm._recordCache = '';
+
     };
 
     /*
@@ -241,7 +252,7 @@ app.controller('FormController', [function(){
     RETURN: integer or null if no value
     */
     vm._getIndexByID = function ( id ) {
-        console.log( '_getIndexByID:' + JSON.stringify(vm.registerCache) );
+
         var ubound = vm.registerCache.length;
         for (var i = 0; i < ubound; i++) {
             var record = vm.registerCache[i];
@@ -250,6 +261,7 @@ app.controller('FormController', [function(){
             }
         }
         return null;
+
     };
 
     /*

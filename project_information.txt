@@ -33,44 +33,47 @@ Bugs:
 *
 
 Roadmap:
-* Build as straight controllers first, then move to services as needed
-* Register init
-* Register CRUD
-    * Create ; Record Create required
-    * Retrieve
-    * Update
-    * Delete
-* Record CRUD
-    * Create
-    * Retrieve
-    * Update
-    * Delete
-* Convert global variables into a Value Service
-* Convert Register CRUD operations into a Service Service
+
+X Register init
+X Register CRUD
+    X Create ; Record Create required
+    X Retrieve
+    X Update
+    X Delete
+X Record CRUD
+    X Create
+    X Retrieve
+    X Update
+    X Delete
+* Convert Controllers to Services
+    * Convert global variables into a Value Service
+    * Convert Register CRUD operations into a Service Service
 * Jasmine-Karma
     // All controllers and services need a test
     // All controller tests should mock the DOM elements and services
     // All CRUD operations need a test
     // Test submit method
-    > Create
+    X Create
         X should create prepopulation on init
         X should create a new person
-        * should push to list tab containing all guests upon creation
+        - should push to list tab containing all guests upon creation
+            // ng-repeat to registerCache
     X Retrieve
         X should retrieve a person by key
         - should retrieve only guests not marked as deleted
             // records will be hidden in the view based on the value of the deleted field
-    > Update
+    X Update
         X should update fname
         X should update lname
-        - should update txdate // dates are too hard to test with such a fast framework, and coded delays smell funny.
+        - should update txdate
+            // dates are too hard to test with such a fast framework, and coded delays smell funny.
         X should update loc
         X should update status from 'pick-up' to 'arrived'
         X should update status from 'drop off' to 'arrived'
         X should update status 'arrived' to 'pick up'
             X add topography
         X should not update id
-    > Delete
+    X Delete
         X should delete as a 'soft' delete with flag
         > should return only active (deleted:false) records
         * View only: should show confirmation dialog before deleting
@@ -142,5 +145,6 @@ Change History:
     15_10_29_07_06_000: Added update for fname, lname, and loc
     15_10_29_07_06_001: Added test for immutability of id and deleted via updateRecord
     15_10_29_07_07_000: Added tests for alignment of status updates to map
+    15_10_29_07_08_000: Updated everything with some code clean up
 
     cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added tests for alignment of status updates to map"; git push origin master; git status

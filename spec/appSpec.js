@@ -15,6 +15,7 @@ describe("Shuffling Pines CRUD", function() {
     var testlname = 'Singer';
     var testtxdate = new Date();
     var testloc = 'Detroit';
+    var badValue = '¯\\_(ツ)_/¯';
 
     var testrecord;
 
@@ -33,15 +34,15 @@ describe("Shuffling Pines CRUD", function() {
     });
 
 
-    xdescribe("Create Suite", function() {
+    describe("Create Suite", function() {
 
-        xit('should init new people', function () {
+        it('should init new people', function () {
 
             expect( FormController.registerCache.length ).toBeGreaterThan( 0 );
 
         });
 
-        xit('should add a new person', function () {
+        it('should add a new person', function () {
 
             var oldRegisterLength = FormController.registerCache.length;
 
@@ -56,12 +57,12 @@ describe("Shuffling Pines CRUD", function() {
         });
     });
 
-    xdescribe("Retrieve Suite", function() {
-        xit('should retrieve a person by index', function () {
+    describe("Retrieve Suite", function() {
+        it('should retrieve a person by index', function () {
             expect( FormController.registerCache[0] ).not.toBeNull();
         });
 
-        xit('should retrieve a person by key', function () {
+        it('should retrieve a person by key', function () {
 
             FormController.fname = testfname;
             FormController.lname = testlname;
@@ -85,7 +86,7 @@ describe("Shuffling Pines CRUD", function() {
             N.B. We're not testing dates here because the date values aren't
             granular enough to be of use here, and hard-coded delays smell bad
         */
-        xit('should update fname, lname, loc', function () {
+        it('should update fname, lname, loc', function () {
 
             // put the record in the cache
             var id = testrecord.id;
@@ -108,14 +109,13 @@ describe("Shuffling Pines CRUD", function() {
 
         });
 
-        xit('should not update id or deleted', function () {
+        it('should not update id or deleted', function () {
             // put the record in the cache
             var id = testrecord.id;
-            var testvalue = '__BAD_VALUE__';
 
             // update the values
-            FormController.updateRecord( id , 'id', testvalue );
-            FormController.updateRecord( id , 'deleted', testvalue );
+            FormController.updateRecord( id , 'id', badValue );
+            FormController.updateRecord( id , 'deleted', badValue );
 
             // get the record again once saved
             var len = FormController.registerCache.length;
@@ -123,12 +123,12 @@ describe("Shuffling Pines CRUD", function() {
             testrecord = FormController.registerCache[idx];
 
             // test the update
-            expect( testrecord.id ).not.toBe( testvalue );
-            expect( testrecord.deleted ).not.toBe( testvalue );
+            expect( testrecord.id ).not.toBe( badValue );
+            expect( testrecord.deleted ).not.toBe( badValue );
 
         });
 
-        xit('should update status according to status map', function () {
+        it('should update status according to status map', function () {
             // put the record in the cache
             var id = testrecord.id;
             var currentStatus = testrecord.status;
@@ -150,10 +150,9 @@ describe("Shuffling Pines CRUD", function() {
             // put the record in the cache
             var id = testrecord.id;
             var currentStatus = testrecord.status;
-            var badStatus = '__BAD_VALUE__';
 
             // update the values
-            FormController.updateRecord( id , 'status', badStatus );
+            FormController.updateRecord( id , 'status', badValue );
 
             // get the record again once saved
             var len = FormController.registerCache.length;
@@ -161,13 +160,13 @@ describe("Shuffling Pines CRUD", function() {
             testrecord = FormController.registerCache[idx];
 
             // test the update
-            expect( testrecord.status ).not.toBe( badStatus );
+            expect( testrecord.status ).not.toBe( badValue );
         });
 
     });
 
     describe("Delete Suite", function() {
-        xit('should soft-delete records', function () {
+        it('should soft-delete records', function () {
             var id = testrecord.id;
             FormController.retrieveRecord( id );
 
@@ -184,9 +183,6 @@ describe("Shuffling Pines CRUD", function() {
 
         });
 
-        xit('should be successful', function () {
-            expect(true).toBe(true);
-        });
     });
 
 });
