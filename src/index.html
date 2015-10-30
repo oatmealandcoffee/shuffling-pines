@@ -88,7 +88,7 @@
           <div role="tabpanel" class="tab-pane" id="guests">
             <ul class="list-unstyled">
               <li ng-repeat="record in fc.registerCache">
-                  {{ record.guestname }} <button class="btn" ng-click="fc.deleteRecord( record.id )">Delete</button>
+                  <span ng-hide="record.deleted">{{ record.guestname }} <button class="btn" ng-click="fc.deleteRecord( record.id )">Delete</button></span>
               </li>
             </ul>
           </div>
