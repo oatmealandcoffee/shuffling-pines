@@ -140,5 +140,6 @@ Change History:
     15_10_29_07_04_001: Fixed bug in testrecord management and associated tests
     15_10_29_07_05_000: Added status to record object; Updated updateRecord to key-value updates
     15_10_29_07_06_000: Added update for fname, lname, and loc
+    15_10_29_07_06_001: Added test for immutability of id and deleted via updateRecord
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed bug in testrecord management and associated tests"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added update for fname, lname, and loc"; git push origin master; git status

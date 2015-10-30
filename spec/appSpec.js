@@ -85,11 +85,12 @@ describe("Shuffling Pines CRUD", function() {
             N.B. We're not testing dates here because the date values aren't
             granular enough to be of use here, and hard-coded delays smell bad
         */
-        it('should update fname, lname, loc', function () {
+        xit('should update fname, lname, loc', function () {
 
             // put the record in the cache
             var id = testrecord.id;
 
+            // update the values
             FormController.updateRecord( id , 'fname', testfname );
             FormController.updateRecord( id , 'lname', testlname );
             FormController.updateRecord( id , 'loc', testloc );
@@ -107,23 +108,27 @@ describe("Shuffling Pines CRUD", function() {
 
         });
 
-        xit('should not update id or deleted', function () {
-            expect( FormController.registerCache[0] ).not.toBeNull();
+        it('should not update id or deleted', function () {
+            // put the record in the cache
+            var id = testrecord.id;
+            var testvalue = '__BAD_VALUE__';
+
+            // update the values
+            FormController.updateRecord( id , 'id', testvalue );
+            FormController.updateRecord( id , 'deleted', testvalue );
+
+            // get the record again once saved
+            var len = FormController.registerCache.length;
+            var idx = len - 1;
+            testrecord = FormController.registerCache[idx];
+
+            // test the update
+            expect( testrecord.id ).not.toBe( testvalue );
+            expect( testrecord.deleted ).not.toBe( testvalue );
+
         });
 
-        xit('should update status from pick-up to arrived', function () {
-            expect( FormController.registerCache[0] ).not.toBeNull();
-        });
-
-        xit('should update status from drop off to arrived', function () {
-            expect( FormController.registerCache[0] ).not.toBeNull();
-        });
-
-        xit('should update status from arrived to pickup', function () {
-            expect( FormController.registerCache[0] ).not.toBeNull();
-        });
-
-        xit('should not update user id', function () {
+        xit('should update status according to status map', function () {
             expect( FormController.registerCache[0] ).not.toBeNull();
         });
 
