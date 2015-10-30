@@ -81,7 +81,7 @@ gulp.task('connect', function(){
 gulp.task('watch', function(){
   gulp.watch('src/**/*.js', ['buildApp']);
   gulp.watch('src/**/*.css', ['buildCSS']);
-  gulp.watch('src/**/*.html', ['buildVendor']);
+  gulp.watch('src/**/*.html', ['moveHTML']);
 });
 
 /* DEFAULT */
