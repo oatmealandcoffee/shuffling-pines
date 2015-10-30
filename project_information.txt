@@ -68,9 +68,10 @@ Roadmap:
         * should update status from 'drop off' to 'arrived'
         * should update status 'arrived' to 'pick up'
         * should not update id
-    * Delete
+    > Delete
+        X should delete as a 'soft' delete with flag
+        > should return only active (deleted:false) records
         * should show confirmation dialog before deleting
-        * should delete as a 'soft' delete with flag
         * should push to list tab containing all guests upon deletion
 * View
     * Tab 1: Record
