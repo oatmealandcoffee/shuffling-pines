@@ -11,8 +11,7 @@ describe("Shuffling Pines CRUD", function() {
 
     /* INIT COMMON VALUES */
 
-    var testfname = 'Marla';
-    var testlname = 'Singer';
+    var testguestname = 'Marla Singer';
     var testtxdate = new Date();
     var testloc = 'Detroit';
     var badValue = '¯\\_(ツ)_/¯';
@@ -46,8 +45,7 @@ describe("Shuffling Pines CRUD", function() {
 
             var oldRegisterLength = FormController.registerCache.length;
 
-            FormController.fname = testfname;
-            FormController.lname = testlname;
+            FormController.guestname = testguestname;
             FormController.txdate = testtxdate;
             FormController.loc = testloc;
             FormController.createRecord();
@@ -62,10 +60,9 @@ describe("Shuffling Pines CRUD", function() {
             expect( FormController.registerCache[0] ).not.toBeNull();
         });
 
-        it('should retrieve a person by key', function () {
+        it('should retrieve a person by id', function () {
 
-            FormController.fname = testfname;
-            FormController.lname = testlname;
+            FormController.guestname = testguestname;
             FormController.txdate = testtxdate;
             FormController.loc = testloc;
             FormController.createRecord();
@@ -76,7 +73,7 @@ describe("Shuffling Pines CRUD", function() {
             var record = FormController.registerCache[idx];
             var id = record.id;
             FormController.retrieveRecord( id );
-            expect( FormController.fname ).toBe( 'Marla' );
+            expect( FormController.guestname ).toBe( testguestname );
         });
     });
 
@@ -86,14 +83,13 @@ describe("Shuffling Pines CRUD", function() {
             N.B. We're not testing dates here because the date values aren't
             granular enough to be of use here, and hard-coded delays smell bad
         */
-        it('should update fname, lname, loc', function () {
+        it('should update guestname, loc', function () {
 
             // put the record in the cache
             var id = testrecord.id;
 
             // update the values
-            FormController.updateRecord( id , 'fname', testfname );
-            FormController.updateRecord( id , 'lname', testlname );
+            FormController.updateRecord( id , 'guestname', testguestname );
             FormController.updateRecord( id , 'loc', testloc );
 
             // get the record again once saved
@@ -102,8 +98,7 @@ describe("Shuffling Pines CRUD", function() {
             testrecord = FormController.registerCache[idx];
 
             // test the update
-            expect( testrecord.fname ).toBe( testfname );
-            expect( testrecord.lname ).toBe( testlname );
+            expect( testrecord.guestname ).toBe( testguestname );
             expect( testrecord.loc ).toBe( testloc );
 
 

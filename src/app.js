@@ -15,8 +15,7 @@ app.controller('FormController', [function(){
     vm._recordCache = {};
 
     // public
-    vm.fname = '';
-    vm.lname = '';
+    vm.guestname = '';
     vm.txdate = '';
     vm.loc = '';
     vm.registerCache = [];
@@ -47,7 +46,7 @@ app.controller('FormController', [function(){
     */
     vm.createRecord = function () {
 
-        var record = vm._newRecord( vm.fname, vm.lname, vm.txdate, vm.loc );
+        var record = vm._newRecord( vm.guestname, vm.txdate, vm.loc );
         vm.retrieveRegister();
         vm.registerCache.push( record );
         vm.updateRegister();
@@ -70,8 +69,7 @@ app.controller('FormController', [function(){
         }
         // populate the cache with the record info
         vm._recordCache = vm.registerCache[index];
-        vm.fname = vm._recordCache.fname;
-        vm.lname = vm._recordCache.lname;
+        vm.guestname = vm._recordCache.guestname;
         vm.txdate = vm._recordCache.txdate;
         vm.loc = vm._recordCache.loc;
 
@@ -154,14 +152,12 @@ app.controller('FormController', [function(){
         vm.updateRegister();
 
         // prepopulate with dummy values
-        vm.fname = 'Tyler';
-        vm.lname = 'Durden';
+        vm.guestname = 'Tyler Durden';
         vm.txdate = new Date();
         vm.loc = 'Boston';
         vm.createRecord();
 
-        vm.fname = 'Robert';
-        vm.lname = 'Paulson';
+        vm.guestname = 'Robert Paulson';
         vm.txdate = new Date();
         vm.loc = 'Chicago';
         vm.createRecord();
@@ -206,7 +202,7 @@ app.controller('FormController', [function(){
     RETURN: void
     */
 
-    vm._newRecord = function ( fname, lname, txdate, loc ) {
+    vm._newRecord = function ( guestname, txdate, loc ) {
         // create a uuid; not computationally cheap but needed here as Date isn't
         // granular enough
         // citation: http://jsfiddle.net/briguy37/2mvfd/
@@ -220,8 +216,7 @@ app.controller('FormController', [function(){
             return uuid;
             };
          var record = {
-            'fname':fname + '',
-            'lname':lname + '',
+            'guestname':guestname + '',
             'txdate':txdate + '',
             'loc':loc + '',
             'status': vm.statusMap.Arrived,
@@ -238,8 +233,7 @@ app.controller('FormController', [function(){
     */
     vm._clearRecordCache = function () {
 
-        vm.fname = '';
-        vm.lname = '';
+        vm.guestname = '';
         vm.txdate = '';
         vm.loc = '';
         vm._recordCache = '';

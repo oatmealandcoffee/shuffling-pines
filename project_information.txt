@@ -45,6 +45,15 @@ X Record CRUD
     X Retrieve
     X Update
     X Delete
+> Align controller to view
+    X update record from fname+lname to 'name'
+    * Show all guests in Guests tab
+    * Add delete function to Guests list
+        * ng-hide based on deleted value
+        * Add button
+        * Add confirmation
+    * Link form to FormController fields
+    * Update status based on entry
 * Convert Controllers to Services
     * Convert global variables into a Value Service
     * Convert Register CRUD operations into a Service Service
@@ -147,5 +156,9 @@ Change History:
     15_10_29_07_07_000: Added tests for alignment of status updates to map
     15_10_29_07_08_000: Updated everything with some code clean up
     15_10_29_07_08_001: Updated per Gulp/JSHint
+
+    /* CRUD API COMPLETE; BEGIN LINKING TO VIEW */
+
+    15_10_29_08_01_000: Updated record to use single name field per the form
 
     cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated per Gulp/JSHint"; git push origin master; git status
