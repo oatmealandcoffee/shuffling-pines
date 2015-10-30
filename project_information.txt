@@ -130,4 +130,4 @@ Change History:
     15_10_28_07_00_000: Added code and test for init new people; Added add new person
     15_10_28_07_00_000: Updated to pass second test, found location of bug in retrieveRegister
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added code and test for init new people; Added add new person"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated to pass second test, found location of bug in retrieveRegister"; git push origin master; git status

@@ -44,12 +44,12 @@ describe("Shuffling Pines CRUD", function() {
 
         // Retrieve, Update
         spyOn(localStorage, "getItem").and.callFake( function(key) {
-            return store[key] || '[]';
+
         });
 
         // Delete
         spyOn(localStorage, "removeItem").and.callFake( function(key) {
-            delete store[key];
+            
         });
         */
 
