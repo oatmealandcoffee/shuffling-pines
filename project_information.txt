@@ -137,5 +137,6 @@ Change History:
     15_10_29_07_02_000: Added delete suite non-view test todos
     15_10_29_07_03_000: Added soft-deletion test and code
     15_10_29_07_04_000: Added status map; Updated tests to make DRY common values
+    15_10_29_07_04_001: Fixed bug in testrecord management and associated tests
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added status map; Updated tests to make DRY common values"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed bug in testrecord management and associated tests"; git push origin master; git status
