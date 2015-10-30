@@ -80,7 +80,6 @@ describe("Shuffling Pines CRUD", function() {
             FormController.deleteRecord( id );
 
             // check the record
-            var index = FormController._getIndexByID( id );
             expect( record.deleted ).toBe( false );
 
         });
