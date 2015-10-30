@@ -27,14 +27,6 @@ describe("Shuffling Pines CRUD", function() {
 
         xit('should add a new person', function () {
 
-            /*
-            // from the app
-            vm.fname = 'Tyler';
-            vm.lname = 'Durden';
-            vm.txdate = new Date();
-            vm.loc = 'Boston';
-            vm.createRecord();
-            */
             var oldRegisterLength = FormController.registerCache.length;
 
             FormController.fname = 'Marla';
@@ -48,12 +40,12 @@ describe("Shuffling Pines CRUD", function() {
         });
     });
 
-    describe("Retrieve Suite", function() {
+    xdescribe("Retrieve Suite", function() {
         xit('should retrieve a person by index', function () {
             expect( FormController.registerCache[0] ).not.toBeNull();
         });
 
-        it('should retrieve a person by key', function () {
+        xit('should retrieve a person by key', function () {
 
             FormController.fname = 'Marla';
             FormController.lname = 'Singer';
@@ -75,8 +67,21 @@ describe("Shuffling Pines CRUD", function() {
 
     });
 
-    xdescribe("Delete Suite", function() {
+    describe("Delete Suite", function() {
+        xit('should soft-delete records', function () {
+            // delete a record
+            // check the record
+        });
 
+        xit('should get list of only active records', function () {
+            // delete a record
+            // get all the records
+            // for each record, if all are active return true
+        });
+
+        xit('should be successful', function () {
+            expect(true).toBe(true);
+        });
     });
 
 });

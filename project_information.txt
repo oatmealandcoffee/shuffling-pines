@@ -131,5 +131,6 @@ Change History:
     15_10_28_07_00_000: Updated to pass second test, found location of bug in retrieveRegister
     15_10_29_07_00_001: Fixed bug in testing that was causing the wrong context to be used for retrieving the register
     15_10_29_07_01_000: Added test for retrieve person by key
+    15_10_29_07_02_000: Added delete suite non-view test todos
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added test for retrieve person by key"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added delete suite non-view test todos"; git push origin master; git status
