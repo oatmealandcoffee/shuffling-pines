@@ -56,9 +56,9 @@ Roadmap:
         X should create prepopulation on init
         X should create a new person
         * should push to list tab containing all guests upon creation
-    * Retrieve
-        * should retrieve a person by key
-        * should retrieve only guests not marked as deleted
+    X Retrieve
+        X should retrieve a person by key
+        X should retrieve only guests not marked as deleted
     * Update
         * should update fname
         * should update lname
@@ -132,4 +132,4 @@ Change History:
     15_10_29_07_00_001: Fixed bug in testing that was causing the wrong context to be used for retrieving the register
     15_10_29_07_01_000: Added test for retrieve person by key
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed bug in testing that was causing the wrong context to be used for retrieving the register"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added test for retrieve person by key"; git push origin master; git status
