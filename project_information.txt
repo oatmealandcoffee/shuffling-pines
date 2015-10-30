@@ -94,17 +94,18 @@ X View
     > Tab 2: Register
         X List Display
             X ng-repeat used to run through the data
-            > update status inline per status map
-                * "pick up" to "arrived"
-                * "drop off" to "arrived"
-                * "arrived" to "pick up"
-            * Delete
-                * confirmation dialog
-        * Extra credit (20 pts): Inline editing
+            X update status inline per status map
+                X "pick up" to "arrived"
+                X "drop off" to "arrived"
+                X "arrived" to "pick up"
+        > Delete
+            > confirmation dialog
         X Extra credit (10 pts): soft delete with flag as mark
+* Add explicit tests for status map values
 * Convert Controllers to Services
     * Convert global variables into a Value Service
     * Convert Register CRUD operations into a Service Service
+* Extra credit (20 pts): Inline editing on guests
 * Prep for submission
     * Check install instructions
         * npm install
@@ -112,10 +113,35 @@ X View
         * gulp
 * Spec
     * README.md contents
+        * Name + description
         * build instructions
-        * everything someone needs to know to get it running from scratch
+            * everything someone needs to know to get it running from scratch
     * Requirements and Restrictions
         * Do not use $scope or $rootScope to pass variables; only invoke native Angular methods
+* Rubric
+    * Application Functions
+        * Any use of $scope will be deducted from this. 5pts per use.
+    * Readme.md
+        * build instructions
+        // everything someone needs to know to get it running from scratch
+    * Form
+        X all fields submit and add to a json object
+        X test submit method
+    * List Display
+        X ng-repeat used to run through the data
+        * data comes from a service
+    * Change Status
+        * Drop off to arrive method (with test)
+        * Pick up to arrive method (with test)
+        * Arrive to pick up method (with test)
+        X updates in display
+    * Build
+        * using the instructions in the README, the application builds and runs
+        X no node_modules directory in repository
+        X no bower_components directory in repository
+    * Extra credit
+        * inline editable (20pts)
+        X soft delete (10pts)
 
 Change History:
     15_10_09_01_00_000: Started source
@@ -165,5 +191,6 @@ Change History:
     15_10_29_09_03_000: Updated form to show updates as they are made
     15_10_29_09_04_000: Updated guests to show all data
     15_10_29_09_05_000: Updated guests to update status
+    15_10_29_09_06_000: Updated guests to link all fields to model
 
     cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated guests to update status"; git push origin master; git status

@@ -95,12 +95,12 @@
               <li ng-repeat="record in fc.registerCache">
                   <span ng-hide="record.deleted">
                   <div class="well">
-                    <strong>Guest Name:</strong> {{ record.guestname }}<br/>
-                    <strong>Transition Date:</strong> {{ record.txdate }}<br/>
-                    <div ng-model="record.status"><strong>Status:</strong> {{ record.status }} <button class="btn btn-xs" ng-click="fc.updateRecord( record.id, 'status', record.status )">Update</button></div><br/>
-                    <strong>Location:</strong> {{ record.loc }}<br/>
-                    <strong>ID#:</strong> <tt>{{ record.id }}</tt><br/>
-                    <button class="btn btn-xs" ng-click="fc.deleteRecord( record.id )">Delete</button>
+                    <div ng-model="record.guestname"><strong>Guest Name:</strong> {{ record.guestname }}</div><br/>
+                    <div ng-model="record.txdate"><strong>Transition Date:</strong> {{ record.txdate }}</div><br/>
+                    <div ng-model="record.status"><strong>Status:</strong> {{ record.status }}</div><button class="btn btn-warning btn-xs" ng-click="fc.updateRecord( record.id, 'status', record.status )">Update</button><br/>
+                    <div ng-model="record.loc"><strong>Location:</strong> {{ record.loc }}</div><br/>
+                    <div ng-model="record.id"><strong>ID#:</strong> <tt>{{ record.id }}</tt></div><br/>
+                    <button class="btn btn-danger btn-xs" ng-click="fc.deleteRecord( record.id )">Delete</button>
                   </div>
                     </span>
               </li>
