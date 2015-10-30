@@ -193,4 +193,4 @@ Change History:
     15_10_29_09_05_000: Updated guests to update status
     15_10_29_09_06_000: Updated guests to link all fields to model
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated guests to update status"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated guests to link all fields to model"; git push origin master; git status
