@@ -29,12 +29,16 @@
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content">
+        <div class="tab-content"  ng-controller="FormController as fc">
           <!-- Tab pane 1 -->
           <div role="tabpanel" class="tab-pane active" id="form">
             <div>
-
-              <form class="col-md-6 well" ng-controller="FormController as fc">
+                <ul class="list-unstyled">
+                  <li ng-repeat="record in fc.registerCache">
+                      {{ record.guestname }} <button class="btn" ng-click="vm.delete( record.id )">delete</button>
+                  </li>
+                </ul>
+              <form class="col-md-6 well" ng-submit="fc.createRegister()">
                 <div class="form-group">
                   <label for="guest-name">Guest Name</label>
                   <input type="text" class="form-control" id="guest-name" placeholder="">
@@ -59,7 +63,7 @@
                   <label for="location">Location</label>
                   <textarea class="form-control" id="location"></textarea>
                 </div>
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn" >Submit</button>
               </form>
 
               <!-- bound display -->
@@ -88,8 +92,8 @@
           <!-- Tab pane 2 -->
           <div role="tabpanel" class="tab-pane" id="guests">
             <ul class="list-unstyled">
-              <li>
-
+              <li ng-repeat="record in fc.registerCache">
+                  {{ record.guestname }} <button class="btn" ng-click="vm.delete( record.id )">delete</button>
               </li>
             </ul>
           </div>

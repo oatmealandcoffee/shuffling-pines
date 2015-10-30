@@ -11,11 +11,11 @@ var connect = require('gulp-connect');
 // app: proprietary code
 
 gulp.task('buildApp', function(){
-  return gulp.src('/src/app.js')
-    .pipe(concat('app.js'))
-    .pipe(uglify())
+
+  return gulp.src('src/**/*.js')
     .pipe(gulp.dest('dist'))
     .pipe(connect.reload());
+
 });
 
 // vendors: project code
@@ -81,9 +81,9 @@ gulp.task('connect', function(){
 gulp.task('watch', function(){
   gulp.watch('src/**/*.js', ['buildApp']);
   gulp.watch('src/**/*.css', ['buildCSS']);
-  gulp.watch('src/**/*.html', ['moveHTML']);
+  gulp.watch('src/**/*.html', ['buildVendor']);
 });
 
 /* DEFAULT */
 
-gulp.task('default', ['build', 'test', 'watch', 'connect']);
+gulp.task('default', ['build', 'watch', 'connect']);
