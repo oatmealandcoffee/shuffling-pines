@@ -102,17 +102,18 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.deleteRecord = function ( id ) {
-        /*
+
         console.log('deleteRecord');
         vm.retrieveRegister();
-        vm._recordCache = vm._getRecordByID( id );
+        var index = vm._getIndexByID( id );
+        vm._recordCache = vm.registerCache[ index ];
         if ( !vm._recordCache ) {
-            console.log('record ' + id + ' could not be found');
+            console.log('record ' + index + ' could not be found');
             return;
         }
         vm._recordCache.deleted = true;
-        vm.updateRegister( vm.registerCache );
-        */
+        vm.updateRegister();
+
     };
 
 

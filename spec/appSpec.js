@@ -68,12 +68,25 @@ describe("Shuffling Pines CRUD", function() {
     });
 
     describe("Delete Suite", function() {
-        xit('should soft-delete records', function () {
+        it('should soft-delete records', function () {
+            // get the id of last record made
+            var len = FormController.registerCache.length;
+            var idx = len - 1;
+            var record = FormController.registerCache[idx];
+            var id = record.id;
+            FormController.retrieveRecord( id );
+
             // delete a record
+            FormController.deleteRecord( id );
+
             // check the record
+            var index = FormController._getIndexByID( id );
+            expect( record.deleted ).toBe( false );
+
         });
 
         xit('should get list of only active records', function () {
+            // get a record
             // delete a record
             // get all the records
             // for each record, if all are active return true
