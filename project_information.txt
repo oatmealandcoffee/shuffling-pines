@@ -61,10 +61,10 @@ Roadmap:
         - should retrieve only guests not marked as deleted
             // records will be hidden in the view based on the value of the deleted field
     > Update
-        * should update fname
-        * should update lname
-        * should update txdate
-        * should update loc
+        X should update fname
+        X should update lname
+        - should update txdate // dates are too hard to test with such a fast framework, and coded delays smell funny.
+        X should update loc
         * should update status from 'pick-up' to 'arrived'
         * should update status from 'drop off' to 'arrived'
         * should update status 'arrived' to 'pick up'
@@ -138,5 +138,7 @@ Change History:
     15_10_29_07_03_000: Added soft-deletion test and code
     15_10_29_07_04_000: Added status map; Updated tests to make DRY common values
     15_10_29_07_04_001: Fixed bug in testrecord management and associated tests
+    15_10_29_07_05_000: Added status to record object; Updated updateRecord to key-value updates
+    15_10_29_07_06_000: Added update for fname, lname, and loc
 
     cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed bug in testrecord management and associated tests"; git push origin master; git status

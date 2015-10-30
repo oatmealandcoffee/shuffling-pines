@@ -73,32 +73,45 @@ app.controller('FormController', [function(){
 
     /*
     PURPOSE: updates the editable info for a cached record
-    ARGUMENTS: record id as string
+    ARGUMENTS: record id as string, key-value pair as discrete strings
     RETURN: void
     */
     vm.updateRecord = function ( id, key, value ) {
 
         console.log('updateRecord');
         vm.retrieveRegister();
-        vm._recordCache = vm._getRecordByID( id );
+        var idx = vm._getIndexByID( id );
+        vm._recordCache = vm.registerCache[idx];
         if ( !vm._recordCache ) {
             console.log('record ' + id + ' could not be found');
             return;
         }
-        vm._recordCache.fname = vm.fname;
-        vm._recordCache.lname = vm.lname;
-        vm._recordCache.txdate = vm.txdate;
-        vm._recordCache.loc = vm.loc;
-        var ubound = vm.registerCache.length;
-        // doing this search twice is bad
-        for (var i = 0; i < ubound; i++) {
-            var record = vm.registerCache[i];
-            if ( record.id === id ) {
-                vm.registerCache[i] = vm._recordCache;
-                vm.updateRegister( vm.registerCache );
-                vm._clearRecordCache();
-            }
+
+        // check the key before making the update because certain properties have
+        // particular rules that apply
+
+        /*
+        var record = {
+           'fname':fname + '',
+           'lname':lname + '',
+           'txdate':txdate + '',
+           'status': 'arrived',
+           'loc':loc + '',
+           'id':id() + '',
+           'deleted':false
+        };
+        */
+
+        if ( key === 'id' || key === 'deleted' ) {
+            // id is immutable
+            // deleted should be handled via deleteRecord only
+        } else if ( key === 'status' ) {
+            // check to be sure update follows the map
+        } else {
+            vm._recordCache[key] = value;
         }
+
+        vm.updateRegister();
 
     };
 
@@ -209,6 +222,7 @@ app.controller('FormController', [function(){
             'lname':lname + '',
             'txdate':txdate + '',
             'loc':loc + '',
+            'status': 'arrived',
             'id':id() + '',
             'deleted':false
         };

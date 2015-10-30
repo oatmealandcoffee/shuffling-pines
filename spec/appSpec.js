@@ -19,6 +19,7 @@ describe("Shuffling Pines CRUD", function() {
     var testrecord;
 
     beforeEach(function() {
+        // pull the last record from the cache to bang on
         var len = FormController.registerCache.length;
         var idx = len - 1;
         testrecord = FormController.registerCache[idx];
@@ -78,25 +79,51 @@ describe("Shuffling Pines CRUD", function() {
         });
     });
 
-    xdescribe("Update Suite", function() {
+    describe("Update Suite", function() {
 
-        it('should update fname, lname, txdate, and loc', function () {
+        /*
+            N.B. We're not testing dates here because the date values aren't
+            granular enough to be of use here, and hard-coded delays smell bad
+        */
+        it('should update fname, lname, loc', function () {
+
+            // put the record in the cache
+            var id = testrecord.id;
+
+            FormController.updateRecord( id , 'fname', testfname );
+            FormController.updateRecord( id , 'lname', testlname );
+            FormController.updateRecord( id , 'loc', testloc );
+
+            // get the record again once saved
+            var len = FormController.registerCache.length;
+            var idx = len - 1;
+            testrecord = FormController.registerCache[idx];
+
+            // test the update
+            expect( testrecord.fname ).toBe( testfname );
+            expect( testrecord.lname ).toBe( testlname );
+            expect( testrecord.loc ).toBe( testloc );
+
 
         });
 
-        it('should update status from pick-up to arrived', function () {
+        xit('should not update id or deleted', function () {
             expect( FormController.registerCache[0] ).not.toBeNull();
         });
 
-        it('should update status from drop off to arrived', function () {
+        xit('should update status from pick-up to arrived', function () {
             expect( FormController.registerCache[0] ).not.toBeNull();
         });
 
-        it('should update status from arrived to pickup', function () {
+        xit('should update status from drop off to arrived', function () {
             expect( FormController.registerCache[0] ).not.toBeNull();
         });
 
-        it('should not update user id', function () {
+        xit('should update status from arrived to pickup', function () {
+            expect( FormController.registerCache[0] ).not.toBeNull();
+        });
+
+        xit('should not update user id', function () {
             expect( FormController.registerCache[0] ).not.toBeNull();
         });
 
@@ -104,7 +131,6 @@ describe("Shuffling Pines CRUD", function() {
 
     describe("Delete Suite", function() {
         xit('should soft-delete records', function () {
-
             var id = testrecord.id;
             FormController.retrieveRecord( id );
 
