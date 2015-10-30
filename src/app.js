@@ -50,20 +50,19 @@ app.controller('FormController', [function(){
     RETURN: void
     */
     vm.retrieveRecord = function ( id ) {
-        /*
         console.log('retrieveRecord');
-        vm.registerCache = vm.retrieveRegister();
-        vm._recordCache = vm._getRecordByID( id );
-        if ( !vm._recordCache ) {
-            console.log('record ' + id + ' could not be found');
+        vm.retrieveRegister();
+        var index = vm._getIndexByID( id );
+        if ( index === null ) {
+            console.log('record ' + index + ' could not be found');
             return;
         }
         // populate the cache with the record info
+        vm._recordCache = vm.registerCache[index];
         vm.fname = vm._recordCache.fname;
         vm.lname = vm._recordCache.lname;
         vm.txdate = vm._recordCache.txdate;
         vm.loc = vm._recordCache.loc;
-        */
     };
 
     /*
@@ -74,7 +73,7 @@ app.controller('FormController', [function(){
     vm.updateRecord = function ( id ) {
         /*
         console.log('updateRecord');
-        vm.registerCache = vm.retrieveRegister();
+        vm.retrieveRegister();
         vm._recordCache = vm._getRecordByID( id );
         if ( !vm._recordCache ) {
             console.log('record ' + id + ' could not be found');
@@ -105,7 +104,7 @@ app.controller('FormController', [function(){
     vm.deleteRecord = function ( id ) {
         /*
         console.log('deleteRecord');
-        vm.registerCache = vm.retrieveRegister();
+        vm.retrieveRegister();
         vm._recordCache = vm._getRecordByID( id );
         if ( !vm._recordCache ) {
             console.log('record ' + id + ' could not be found');
@@ -178,7 +177,7 @@ app.controller('FormController', [function(){
         console.log( str );
     };
 
-    /* CRUD STACK */
+    /* CRUD HELPER STACK */
 
     /*
     PURPOSE: returns a person record based on passed values
@@ -187,14 +186,24 @@ app.controller('FormController', [function(){
     */
 
     vm._newRecord = function ( fname, lname, txdate, loc ) {
-        // id as date; computationally cheap and good enough here
-         var id = new Date();
+        // create a uuid; not computationally cheap but needed here as Date isn't
+        // granular enough
+        // citation: http://jsfiddle.net/briguy37/2mvfd/
+         var id = function generateUUID() {
+            var d = new Date().getTime();
+            var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = (d + Math.random()*16)%16 | 0;
+                d = Math.floor(d/16);
+                return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+            });
+            return uuid;
+            };
          var record = {
             'fname':fname + '',
             'lname':lname + '',
             'txdate':txdate + '',
             'loc':loc + '',
-            'id':id + '',
+            'id':id() + '',
             'deleted':false
         };
         return record;
@@ -218,11 +227,14 @@ app.controller('FormController', [function(){
     ARGUMENTS: target register, target id
     RETURN: integer or null if no value
     */
-    vm._getRecordByID = function ( arr, id ) {
-        var ubound = arr.length;
+    vm._getIndexByID = function ( id ) {
+        console.log( '_getIndexByID:' + JSON.stringify(vm.registerCache) );
+        var ubound = vm.registerCache.length;
         for (var i = 0; i < ubound; i++) {
-            var record = arr[i];
+            var record = vm.registerCache[i];
             if ( record.id === id ) {
+                console.log( record.id );
+                console.log( id );
                 return i;
             }
         }

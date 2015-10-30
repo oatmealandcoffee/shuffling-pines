@@ -17,15 +17,15 @@ describe("Shuffling Pines CRUD", function() {
     });
 
 
-    describe("Create Suite", function() {
+    xdescribe("Create Suite", function() {
 
-        it('should init new people', function () {
+        xit('should init new people', function () {
 
             expect( FormController.registerCache.length ).toBeGreaterThan( 0 );
 
         });
 
-        it('should add a new person', function () {
+        xit('should add a new person', function () {
 
             /*
             // from the app
@@ -40,7 +40,7 @@ describe("Shuffling Pines CRUD", function() {
             FormController.fname = 'Marla';
             FormController.lname = 'Singer';
             FormController.txdate = new Date();
-            FormController.loc = 'New York';
+            FormController.loc = 'Detroit';
             FormController.createRecord();
 
             expect( FormController.registerCache.length ).toBeGreaterThan( oldRegisterLength );
@@ -48,8 +48,27 @@ describe("Shuffling Pines CRUD", function() {
         });
     });
 
-    xdescribe("Retrieve Suite", function() {
+    describe("Retrieve Suite", function() {
+        xit('should retrieve a person by index', function () {
+            expect( FormController.registerCache[0] ).not.toBeNull();
+        });
 
+        it('should retrieve a person by key', function () {
+
+            FormController.fname = 'Marla';
+            FormController.lname = 'Singer';
+            FormController.txdate = new Date();
+            FormController.loc = 'Detroit';
+            FormController.createRecord();
+
+            // get the id of last record made
+            var len = FormController.registerCache.length;
+            var idx = len - 1;
+            var record = FormController.registerCache[idx];
+            var id = record.id;
+            FormController.retrieveRecord( id );
+            expect( FormController.fname ).toBe( 'Marla' );
+        });
     });
 
     xdescribe("Update Suite", function() {

@@ -52,9 +52,9 @@ Roadmap:
     // All controller tests should mock the DOM elements and services
     // All CRUD operations need a test
     // Test submit method
-    * Create
-        * should create prepopulation on init
-        * should create a new person
+    > Create
+        X should create prepopulation on init
+        X should create a new person
         * should push to list tab containing all guests upon creation
     * Retrieve
         * should retrieve a person by key
@@ -129,5 +129,7 @@ Change History:
     15_10_28_07_00_000: Updated project by moving all problematic code to *_old.txt files
     15_10_28_07_00_000: Added code and test for init new people; Added add new person
     15_10_28_07_00_000: Updated to pass second test, found location of bug in retrieveRegister
+    15_10_29_07_00_001: Fixed bug in testing that was causing the wrong context to be used for retrieving the register
+    15_10_29_07_01_000: Added test for retrieve person by key
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated to pass second test, found location of bug in retrieveRegister"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed bug in testing that was causing the wrong context to be used for retrieving the register"; git push origin master; git status
