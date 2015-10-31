@@ -45,14 +45,15 @@ app.factory('RegisterFactory', [function(){
     /*
     PURPOSE: adds a cached guest's info to localStorage
     ARGUMENTS: void
-    RETURN: void
+    RETURN: Register Array
     */
-    var _createRecord = function () {
-        var record = _newRecord( _guestname, _txdate, _status, _loc );
+    var _createRecord = function ( guestname, txdate, status, loc ) {
+        var record = _newRecord( guestname, txdate, status, loc );
         _retrieveRegister();
         _registerCache.push( record );
-        _updateRegister();
         _clearRecordCache();
+        _updateRegister();
+        return _registerCache;
     };
 
     var _retrieveRecord = function () {
@@ -81,7 +82,7 @@ app.factory('RegisterFactory', [function(){
     /*
     PURPOSE: prepopulates register if needed
     ARGUMENTS: void
-    RETURN: void
+    RETURN: Register Array
     */
     var _createRegister = function() {
         // init the register
@@ -104,18 +105,20 @@ app.factory('RegisterFactory', [function(){
         _status = _statusMap.Arrived;
         _loc = 'Chicago';
         _createRecord();
+        return _registerCache;
     };
 
     /*
     PURPOSE: pulls the register from localStorage
     ARGUMENTS: void
-    RETURN: void
+    RETURN: Register Array
     */
     var _retrieveRegister = function() {
         var str = localStorage.getItem( 'OCSHPN' );
         // extract the array of records
         var json = JSON.parse( str );
         _registerCache = json.register;
+        return _registerCache;
     };
 
     /*
@@ -199,10 +202,6 @@ app.factory('RegisterFactory', [function(){
     };
 
     return {
-        guestname : _guestname,
-        txdate : _txdate,
-        loc : _loc,
-        status : _status,
         registerCache : _registerCache,
         createRecord : _createRecord,
         retrieveRecord : _retrieveRecord,
@@ -228,6 +227,7 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
     vm.txdate = '';
     vm.loc = '';
     vm.status = '';
+    vm.registerCache = [];
 
     /*
         RECORD CRUD STACK
@@ -247,11 +247,7 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
     */
     vm.createRecord = function () {
 
-        RegisterFactory.guestname = vm.guestname;
-        RegisterFactory.txdate = vm.txdate;
-        RegisterFactory.loc = vm.loc;
-        RegisterFactory.status = vm.status;
-        RegisterFactory.createRecord();
+        vm.registerCache = RegisterFactory.createRecord( vm.guestname,  vm.txdate, vm.loc, vm.status );
         // TODO: switch to guests tab
     };
 
@@ -269,7 +265,7 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
     */
     vm.createRegister = function() {
 
-        RegisterFactory.createRegister();
+        vm.registerCache = RegisterFactory.createRegister();
 
     };
 

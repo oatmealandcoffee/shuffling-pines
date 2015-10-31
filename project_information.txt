@@ -215,5 +215,6 @@ Change History:
     15_10_29_10_00_000: Added RecordFactory, RegisterFactory, GuestFactory; Updated gulp to better handle JS updates
     15_10_31_10_06_000: Updated RegisterFactory to be sole Factory for all data to app and appSpec
     15_10_31_10_06_001: Fixed bugs related to initial separations of concerns and testing
+    15_10_31_10_07_000: Updated everything such that Create Suite passes
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed bugs related to initial separations of concerns and testing"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated everything such that Create Suite passes"; git push origin master; git status

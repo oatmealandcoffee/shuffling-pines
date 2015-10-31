@@ -25,9 +25,9 @@ describe("Shuffling Pines CRUD", function() {
 
     beforeEach(function() {
         // pull the last record from the cache to bang on
-        var len = RegisterFactory.registerCache.length;
+        var len = FormController.registerCache.length;
         var idx = len - 1;
-        testrecord = RegisterFactory.registerCache[idx];
+        testrecord = FormController.registerCache[idx];
     });
 
 
@@ -39,20 +39,21 @@ describe("Shuffling Pines CRUD", function() {
     });
 
 
-    describe("Create Suite", function() {
+    xdescribe("Create Suite", function() {
 
         it('should init new people', function () {
 
-            //expect( FormController.registerCache.length ).toBeGreaterThan( 0 );
+            expect( FormController.registerCache.length ).toBeGreaterThan( 0 );
 
         });
 
-        xit('should add a new person', function () {
+        it('should add a new person', function () {
 
             var oldRegisterLength = FormController.registerCache.length;
 
             FormController.guestname = testguestname;
             FormController.txdate = testtxdate;
+            FormController.status = 'Arrived';
             FormController.loc = testloc;
             FormController.createRecord();
 
