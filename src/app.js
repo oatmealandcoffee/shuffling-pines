@@ -1,7 +1,49 @@
 /* globals angular */
 var app = angular.module('shuffling', []);
 
-app.controller('FormController', [ function(){
+/*
+    Record creation helper
+*/
+app.factory('RecordFactory', [function(){
+    var _createRecord = function(index){
+        console.log(index);
+    };
+  return {
+    createRecord: _createRecord
+  };
+}]);
+
+/*
+    RegisterFactory handles all low-level localStorage transactions.
+    Data caches are held in GuestFactory
+*/
+app.factory('RegisterFactory', ['RecordFactory', function( RecordFactory ){
+    var _foo = function () {
+        return true
+    };
+    return {
+        foo: _foo
+    }
+}]);
+/*
+    GuestFactory handles the interactions between the FormController and the RegisterFactory.
+    Holds cache for the Registry (complete collection of Records).
+    Creates public Guest list (Records that have not been soft-deleted)
+*/
+app.factory('GuestFactory', ['RegisterFactory', 'RecordFactory', function( RegisterFactory, RecordFactory ){
+    var _foo = function () {
+        return true
+    };
+    return {
+        foo: _foo
+    }
+}]);
+
+/*
+    FormController manages the interactions betwen the View and the GuestFactory
+    Holds cache for a Record being created in the Form tab
+*/
+app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( RegisterFactory, GuestFactory ){
 
     var vm = this;
 

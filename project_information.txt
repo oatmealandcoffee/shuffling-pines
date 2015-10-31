@@ -62,7 +62,6 @@ X Align controller to view
         X should create prepopulation on init
         X should create a new person
         - should push to list tab containing all guests upon creation
-            // ng-repeat to registerCache
     X Retrieve
         X should retrieve a person by key
         - should retrieve only guests not marked as deleted
@@ -103,8 +102,31 @@ X View
         X Extra credit (10 pts): soft delete with flag as mark
 * Add explicit tests for status map values
 * Convert Controllers to Services
-    * Convert global variables into a Value Service
-    * Convert Register CRUD operations into a Service Service
+    * RegisterService // localStorage
+        * public
+            * Array registry // for RecordService
+            * function retrieveRegister() // for RecordService
+            * function updateRegister() // for RecordService
+        * private
+            * function createRegister()
+                * init the same way?
+    * FormController, RecordService // works between the view and storage
+        * public
+            * Object recordCache // for the form tab
+            * String {record fields} // for the formTab
+            * Array function guests() // register minus soft-deleted records; for the guests tab
+            * function createRecord() // for RegisterService, form tab
+            * function updateRecord() // for the guests tab
+        * private
+            * Array registerCache
+            * function _newRecord
+            * function _clearRecordCache
+            * function _getIndexByID
+        * Requires RegisterService
+            * retrieveRegister()
+            * updateRegister()
+
+
 * Extra credit (20 pts): Inline editing on guests
 * Prep for submission
     * Check install instructions
@@ -117,6 +139,7 @@ X View
         * build instructions
             * everything someone needs to know to get it running from scratch
     * Requirements and Restrictions
+        * All localStorage and data methods should be done in a service.``
         * Do not use $scope or $rootScope to pass variables; only invoke native Angular methods
 * Rubric
     * Application Functions
@@ -193,4 +216,8 @@ Change History:
     15_10_29_09_05_000: Updated guests to update status
     15_10_29_09_06_000: Updated guests to link all fields to model
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated guests to link all fields to model"; git push origin master; git status
+    /* MOST LINKING TO VIEW COMPLETED; BEGIN MIGRATION TO SERVICES */
+
+    15_10_29_10_00_000: Added RecordFactory, RegisterFactory, GuestFactory; Updated gulp to better handle JS updates
+
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added RecordFactory, RegisterFactory, GuestFactory; Updated gulp to better handle JS updates"; git push origin master; git status
