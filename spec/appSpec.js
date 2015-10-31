@@ -10,7 +10,7 @@ describe("Shuffling Pines CRUD", function() {
         FormController = $controller('FormController');
     } ));
     beforeEach(angular.mock.inject( function( $injector ) {
-        RegisterFactory = $controller('RegisterFactory');
+        RegisterFactory = $injector.get('RegisterFactory');
     } ));
 
     /* INIT COMMON VALUES */
@@ -22,12 +22,14 @@ describe("Shuffling Pines CRUD", function() {
 
     var testrecord;
 
+
     beforeEach(function() {
         // pull the last record from the cache to bang on
-        var len = FormController.registerCache.length;
+        var len = RegisterFactory.registerCache.length;
         var idx = len - 1;
-        testrecord = FormController.registerCache[idx];
+        testrecord = RegisterFactory.registerCache[idx];
     });
+
 
     /*
         The tests use PhantomJS, so we'll play liberally with localStorage there
@@ -39,9 +41,9 @@ describe("Shuffling Pines CRUD", function() {
 
     describe("Create Suite", function() {
 
-        xit('should init new people', function () {
+        it('should init new people', function () {
 
-            expect( FormController.registerCache.length ).toBeGreaterThan( 0 );
+            //expect( FormController.registerCache.length ).toBeGreaterThan( 0 );
 
         });
 
