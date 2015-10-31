@@ -90,8 +90,7 @@ app.factory('RegisterFactory', [function(){
         // particular rules that apply
 
         if ( key === 'id' || key === 'deleted' ) {
-            // id is immutable
-            // deleted should be handled via deleteRecord only
+            return _registerCache;
         } else if ( key === 'status' ) {
             // check to be sure that the passed value aligns with the map
             var currentStatus = _recordCache[key];
@@ -305,7 +304,7 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
     */
     vm.createRecord = function () {
 
-        vm.registerCache = RegisterFactory.createRecord( vm.guestname,  vm.txdate, vm.loc, vm.status );
+        vm.registerCache = RegisterFactory.createRecord( vm.guestname,  vm.txdate, vm.status, vm.loc );
         // TODO: switch to guests tab
     };
 
@@ -375,6 +374,6 @@ app.controller('TabController', [function(){
     vm.formTab = 1;
     vm.guestsTab = 2;
 
-    vm.currentTab = _formTab;
+    vm.currentTab = vm.formTab;
 
 }]);
