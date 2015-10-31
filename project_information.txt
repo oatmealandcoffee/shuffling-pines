@@ -217,5 +217,5 @@ Change History:
     15_10_31_10_06_001: Fixed bugs related to initial separations of concerns and testing
     15_10_31_10_07_000: Updated everything such that Create Suite passes
     15_10_31_10_07_000: Updated RegisterFactory.createRegister() to new interface
-
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated RegisterFactory.createRegister() to new interface"; git push origin master; git status
+    15_10_31_10_08_000: Updated to include retrieveRecord functions
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated to include retrieveRecord functions"; git push origin master; git status

@@ -56,8 +56,14 @@ app.factory('RegisterFactory', [function(){
         return _registerCache;
     };
 
-    var _retrieveRecord = function () {
-
+    var _retrieveRecord = function ( id ) {
+        _retrieveRegister();
+        var index = _getIndexByID( id );
+        if ( index === null ) {
+            console.log('record ' + index + ' could not be found');
+            return;
+        }
+        return _registerCache[index];
     };
 
     var _updateRecord = function () {
@@ -241,6 +247,21 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
 
         vm.registerCache = RegisterFactory.createRecord( vm.guestname,  vm.txdate, vm.loc, vm.status );
         // TODO: switch to guests tab
+    };
+
+    /*
+    PURPOSE: gets the editable info for a record and posts to the cache
+    ARGUMENTS: record id as string
+    RETURN: void
+    */
+    vm.retrieveRecord = function ( id ) {
+
+        vm._recordCache = RegisterFactory.retrieveRecord( id );
+        vm.guestname = vm._recordCache.guestname;
+        vm.txdate = vm._recordCache.txdate;
+        vm.loc = vm._recordCache.loc;
+        vm.status = vm._recordCache.status;
+
     };
 
     /*
