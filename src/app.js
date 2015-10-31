@@ -56,6 +56,11 @@ app.factory('RegisterFactory', [function(){
         return _registerCache;
     };
 
+    /*
+    PURPOSE: gets the editable info for a record and posts to the cache
+    ARGUMENTS: record id as string
+    RETURN: Record
+    */
     var _retrieveRecord = function ( id ) {
         _retrieveRegister();
         var index = _getIndexByID( id );
@@ -66,8 +71,38 @@ app.factory('RegisterFactory', [function(){
         return _registerCache[index];
     };
 
-    var _updateRecord = function () {
+    /*
+    PURPOSE: updates the editable info for a cached record
+    ARGUMENTS: record id as string, key-value pair as discrete strings
+    RETURN: Register Object
+    */
+    var _updateRecord = function ( id, key, value ) {
 
+        _retrieveRegister();
+        var index = _getIndexByID( id );
+        if ( index === null ) {
+            console.log('record ' + index + ' could not be found');
+            return;
+        }
+        _recordCache = _registerCache[index];
+
+        // check the key before making the update because certain properties have
+        // particular rules that apply
+
+        if ( key === 'id' || key === 'deleted' ) {
+            // id is immutable
+            // deleted should be handled via deleteRecord only
+        } else if ( key === 'status' ) {
+            // check to be sure that the passed value aligns with the map
+            var currentStatus = _recordCache[key];
+            _recordCache[key] = _statusMap[currentStatus];
+        } else {
+            _recordCache[key] = value;
+        }
+        // note the day and time, and then save
+        _recordCache.txdate = new Date();
+        _updateRegister();
+        return _registerCache;
     };
 
     var _deleteRecord = function () {
@@ -203,6 +238,7 @@ app.factory('RegisterFactory', [function(){
         registerCache : _registerCache,
         createRecord : _createRecord,
         retrieveRecord : _retrieveRecord,
+        updateRecord : _updateRecord,
         deleteRecord : _deleteRecord,
         guests : _guests,
         createRegister : _createRegister
@@ -261,6 +297,17 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
         vm.txdate = vm._recordCache.txdate;
         vm.loc = vm._recordCache.loc;
         vm.status = vm._recordCache.status;
+
+    };
+
+    /*
+    PURPOSE: updates the editable info for a cached record
+    ARGUMENTS: record id as string, key-value pair as discrete strings
+    RETURN: void
+    */
+    vm.updateRecord = function ( id, key, value ) {
+
+        vm.registerCache = RegisterFactory.updateRecord( id, key, value );
 
     };
 

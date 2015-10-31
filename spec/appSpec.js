@@ -62,13 +62,13 @@ describe("Shuffling Pines CRUD", function() {
         });
     });
 
-    describe("Retrieve Suite", function() {
+    xdescribe("Retrieve Suite", function() {
 
-        xit('should retrieve a person by index', function () {
+        it('should retrieve a person by index', function () {
             expect( FormController.registerCache[0] ).not.toBeNull();
         });
 
-        xit('should retrieve a person by id', function () {
+        it('should retrieve a person by id', function () {
 
             FormController.guestname = testguestname;
             FormController.txdate = testtxdate;
@@ -85,11 +85,12 @@ describe("Shuffling Pines CRUD", function() {
         });
     });
 
-    xdescribe("Update Suite", function() {
+    describe("Update Suite", function() {
 
         /*
             N.B. We're not testing dates here because the date values aren't
-            granular enough to be of use here, and hard-coded delays smell bad
+            granular enough to be of use here, and hard-coded delays always smell
+            bad
         */
         it('should update guestname, loc', function () {
 
@@ -112,7 +113,7 @@ describe("Shuffling Pines CRUD", function() {
 
         });
 
-        it('should not update id or deleted', function () {
+        xit('should not update id or deleted', function () {
             // put the record in the cache
             var id = testrecord.id;
 
@@ -131,7 +132,7 @@ describe("Shuffling Pines CRUD", function() {
 
         });
 
-        it('should update status according to status map', function () {
+        xit('should update status according to status map', function () {
             // put the record in the cache
             var id = testrecord.id;
             var currentStatus = testrecord.status;
@@ -149,7 +150,7 @@ describe("Shuffling Pines CRUD", function() {
             expect( testrecord.status ).toBe( nextStatus );
         });
 
-        it('should not update status to anything not aligned with the status map', function () {
+        xit('should not update status to anything not aligned with the status map', function () {
             // put the record in the cache
             var id = testrecord.id;
 
