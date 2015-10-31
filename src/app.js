@@ -105,7 +105,25 @@ app.factory('RegisterFactory', [function(){
         return _registerCache;
     };
 
-    var _deleteRecord = function () {
+    /*
+    PURPOSE: deletes a record from the register. This is the canonical way to delete
+    a record; do not use updateRecord(id, 'deleted', true) as it will block you
+    ARGUMENTS: record id as string
+    RETURN: Register Array
+    */
+    var _deleteRecord = function ( id ) {
+
+        _retrieveRegister();
+        var index = _getIndexByID( id );
+        if ( index === null ) {
+            console.log('record ' + index + ' could not be found');
+            return;
+        }
+        _recordCache = _registerCache[index];
+
+        _recordCache.deleted = true;
+        _updateRegister();
+        return _registerCache;
 
     };
 
@@ -314,6 +332,18 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
     vm.updateRecord = function ( id, key, value ) {
 
         vm.registerCache = RegisterFactory.updateRecord( id, key, value );
+
+    };
+
+    /*
+    PURPOSE: deletes a record from the register. This is the canonical way to delete
+    a record; do not use updateRecord(id, 'deleted', true) as it will block you
+    ARGUMENTS: record id as string
+    RETURN: void
+    */
+    vm.deleteRecord = function ( id ) {
+
+        vm.registerCache = RegisterFactory.deleteRecord( id );
 
     };
 

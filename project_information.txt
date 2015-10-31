@@ -220,5 +220,6 @@ Change History:
     15_10_31_10_08_000: Updated to include retrieveRecord functions
     15_10_31_10_09_000: Updated to include updateRecord functions
     15_10_31_10_09_000: Updated to pass remaining update tests
+    15_10_31_10_10_000: Updated to include deleteRecord functions and pass delete tests
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated to pass remaining update tests"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated to include deleteRecord functions and pass delete tests"; git push origin master; git status

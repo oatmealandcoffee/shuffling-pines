@@ -168,7 +168,7 @@ describe("Shuffling Pines CRUD", function() {
 
     });
 
-    xdescribe("Delete Suite", function() {
+    describe("Delete Suite", function() {
         it('should soft-delete records', function () {
             var id = testrecord.id;
             FormController.retrieveRecord( id );
