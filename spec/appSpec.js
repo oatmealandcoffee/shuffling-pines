@@ -4,9 +4,13 @@ describe("Shuffling Pines CRUD", function() {
 
     /* INIT ANGULAR */
     var FormController;
+    var RegisterFactory;
     beforeEach(angular.mock.module('shuffling'));
     beforeEach(angular.mock.inject( function( $controller ) {
         FormController = $controller('FormController');
+    } ));
+    beforeEach(angular.mock.inject( function( $injector ) {
+        RegisterFactory = $controller('RegisterFactory');
     } ));
 
     /* INIT COMMON VALUES */
@@ -35,13 +39,13 @@ describe("Shuffling Pines CRUD", function() {
 
     describe("Create Suite", function() {
 
-        it('should init new people', function () {
+        xit('should init new people', function () {
 
             expect( FormController.registerCache.length ).toBeGreaterThan( 0 );
 
         });
 
-        it('should add a new person', function () {
+        xit('should add a new person', function () {
 
             var oldRegisterLength = FormController.registerCache.length;
 
@@ -55,12 +59,15 @@ describe("Shuffling Pines CRUD", function() {
         });
     });
 
-    describe("Retrieve Suite", function() {
-        it('should retrieve a person by index', function () {
+    xdescribe("Retrieve Suite", function() {
+        it('should be true', function() {
+            expect(true).toBe(true);
+        });
+        xit('should retrieve a person by index', function () {
             expect( FormController.registerCache[0] ).not.toBeNull();
         });
 
-        it('should retrieve a person by id', function () {
+        xit('should retrieve a person by id', function () {
 
             FormController.guestname = testguestname;
             FormController.txdate = testtxdate;
@@ -77,7 +84,7 @@ describe("Shuffling Pines CRUD", function() {
         });
     });
 
-    describe("Update Suite", function() {
+    xdescribe("Update Suite", function() {
 
         /*
             N.B. We're not testing dates here because the date values aren't
@@ -159,7 +166,7 @@ describe("Shuffling Pines CRUD", function() {
 
     });
 
-    describe("Delete Suite", function() {
+    xdescribe("Delete Suite", function() {
         it('should soft-delete records', function () {
             var id = testrecord.id;
             FormController.retrieveRecord( id );

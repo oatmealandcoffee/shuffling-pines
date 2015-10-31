@@ -80,7 +80,7 @@ X Align controller to view
     X Delete
         X should delete as a 'soft' delete with flag
         X should return only active (deleted:false) records
-X View
+> View
     X Tab 1: Record
         X Create
         X Retrieve (display)
@@ -99,34 +99,28 @@ X View
                 X "arrived" to "pick up"
         > Delete
             > confirmation dialog
+                * Window.confirm() // https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
+                * BootBox.js // http://bootboxjs.com
         X Extra credit (10 pts): soft delete with flag as mark
 * Add explicit tests for status map values
 * Convert Controllers to Services
-    * RegisterService // localStorage
+    * RegisterFactory
         * public
-            * Array registry // for RecordService
-            * function retrieveRegister() // for RecordService
-            * function updateRegister() // for RecordService
+            * createRecord()
+            * updateRecord() // accepts Record
+            * deleteRecord()
+            * guests() // returns all non-soft-deleted Records
         * private
-            * function createRegister()
-                * init the same way?
-    * FormController, RecordService // works between the view and storage
-        * public
-            * Object recordCache // for the form tab
-            * String {record fields} // for the formTab
-            * Array function guests() // register minus soft-deleted records; for the guests tab
-            * function createRecord() // for RegisterService, form tab
-            * function updateRecord() // for the guests tab
-        * private
-            * Array registerCache
-            * function _newRecord
-            * function _clearRecordCache
-            * function _getIndexByID
-        * Requires RegisterService
+            * retrieveRecord()
+            * createRegister()
             * retrieveRegister()
             * updateRegister()
-
-
+    * FormController
+        * public
+            * createRecord()
+            * updateRecord()
+            * deleteRecord()
+            * guests()
 * Extra credit (20 pts): Inline editing on guests
 * Prep for submission
     * Check install instructions
@@ -190,34 +184,36 @@ Change History:
     15_10_28_07_00_000: Added code and test for init new people; Added add new person
     15_10_28_07_00_000: Updated to pass second test, found location of bug in retrieveRegister
     15_10_29_07_00_001: Fixed bug in testing that was causing the wrong context to be used for retrieving the register
-    15_10_29_07_01_000: Added test for retrieve person by key
-    15_10_29_07_02_000: Added delete suite non-view test todos
-    15_10_29_07_03_000: Added soft-deletion test and code
-    15_10_29_07_04_000: Added status map; Updated tests to make DRY common values
-    15_10_29_07_04_001: Fixed bug in testrecord management and associated tests
-    15_10_29_07_05_000: Added status to record object; Updated updateRecord to key-value updates
-    15_10_29_07_06_000: Added update for fname, lname, and loc
-    15_10_29_07_06_001: Added test for immutability of id and deleted via updateRecord
-    15_10_29_07_07_000: Added tests for alignment of status updates to map
-    15_10_29_07_08_000: Updated everything with some code clean up
-    15_10_29_07_08_001: Updated per Gulp/JSHint
+    15_10_30_07_01_000: Added test for retrieve person by key
+    15_10_30_07_02_000: Added delete suite non-view test todos
+    15_10_30_07_03_000: Added soft-deletion test and code
+    15_10_30_07_04_000: Added status map; Updated tests to make DRY common values
+    15_10_30_07_04_001: Fixed bug in testrecord management and associated tests
+    15_10_30_07_05_000: Added status to record object; Updated updateRecord to key-value updates
+    15_10_30_07_06_000: Added update for fname, lname, and loc
+    15_10_30_07_06_001: Added test for immutability of id and deleted via updateRecord
+    15_10_30_07_07_000: Added tests for alignment of status updates to map
+    15_10_30_07_08_000: Updated everything with some code clean up
+    15_10_30_07_08_001: Updated per Gulp/JSHint
 
     /* CRUD API COMPLETE; BEGIN LINKING TO VIEW */
 
-    15_10_29_08_01_000: Updated record to use single name field per the form
-    15_10_29_08_01_001: Fixed bugs in gulpfile.js that prevented from app.js from being built
-    15_10_29_08_01_002: Fixed one more bug in gulpfile; Updated html to remove test cruft
-    15_10_29_09_00_000: Updated form to submit new guests
-    15_10_29_09_01_000: Updated guests to soft-delete records
-    15_10_29_09_02_000: Updated guests to hide soft-deleted records
-    15_10_29_09_03_000: Updated createRecord to include status
-    15_10_29_09_03_000: Updated form to show updates as they are made
-    15_10_29_09_04_000: Updated guests to show all data
-    15_10_29_09_05_000: Updated guests to update status
-    15_10_29_09_06_000: Updated guests to link all fields to model
+    15_10_30_08_01_000: Updated record to use single name field per the form
+    15_10_30_08_01_001: Fixed bugs in gulpfile.js that prevented from app.js from being built
+    15_10_30_08_01_002: Fixed one more bug in gulpfile; Updated html to remove test cruft
+    15_10_30_09_00_000: Updated form to submit new guests
+    15_10_30_09_01_000: Updated guests to soft-delete records
+    15_10_30_09_02_000: Updated guests to hide soft-deleted records
+    15_10_30_09_03_000: Updated createRecord to include status
+    15_10_30_09_03_000: Updated form to show updates as they are made
+    15_10_30_09_04_000: Updated guests to show all data
+    15_10_30_09_05_000: Updated guests to update status
+    15_10_30_09_06_000: Updated guests to link all fields to model
 
     /* MOST LINKING TO VIEW COMPLETED; BEGIN MIGRATION TO SERVICES */
 
     15_10_29_10_00_000: Added RecordFactory, RegisterFactory, GuestFactory; Updated gulp to better handle JS updates
+    15_10_31_10_06_000: Updated RegisterFactory to be sole Factory for all data to app and appSpec
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added RecordFactory, RegisterFactory, GuestFactory; Updated gulp to better handle JS updates"; git push origin master; git status
+
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated RegisterFactory to be sole Factory for all data to app and appSpec"; git push origin master; git status

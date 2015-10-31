@@ -2,57 +2,13 @@
 var app = angular.module('shuffling', []);
 
 /*
-    Record creation helper
-*/
-app.factory('RecordFactory', [function(){
-    var _createRecord = function(index){
-        console.log(index);
-    };
-  return {
-    createRecord: _createRecord
-  };
-}]);
-
-/*
-    RegisterFactory handles all low-level localStorage transactions.
-    Data caches are held in GuestFactory
-*/
-app.factory('RegisterFactory', ['RecordFactory', function( RecordFactory ){
-    var _foo = function () {
-        return true
-    };
-    return {
-        foo: _foo
-    }
-}]);
-/*
-    GuestFactory handles the interactions between the FormController and the RegisterFactory.
-    Holds cache for the Registry (complete collection of Records).
-    Creates public Guest list (Records that have not been soft-deleted)
-*/
-app.factory('GuestFactory', ['RegisterFactory', 'RecordFactory', function( RegisterFactory, RecordFactory ){
-    var _foo = function () {
-        return true
-    };
-    return {
-        foo: _foo
-    }
-}]);
-
-/*
-    FormController manages the interactions betwen the View and the GuestFactory
+    FormController manages the interactions betwen the View and the RegisterFactory
     Holds cache for a Record being created in the Form tab
 */
-app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( RegisterFactory, GuestFactory ){
+app.controller('FormController', ['RegisterFactory', function( RegisterFactory ){
 
     var vm = this;
 
-    /*
-        CACHES
-        All CRUD operations point to these caches. There is only one record held
-        in the Record cache. Records are pulled from the Registry cache, which is
-        always pulled from and pushed to localStorage on each operation.
-    */
     // private
     vm._recordCache = {};
 
@@ -61,15 +17,6 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     vm.txdate = '';
     vm.loc = '';
     vm.status = '';
-    vm.registerCache = [];
-
-    // used to ensure that status updates go in the correct order
-    vm.statusMap = {
-        'Pick-up': 'Arrived',
-        'Drop-off': 'Arrived',
-        'Arrived': 'Pick-up'
-    };
-
 
     /*
         RECORD CRUD STACK
@@ -83,17 +30,17 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     */
 
     /*
-    PURPOSE: adds a cached user's info to localStorage
+    PURPOSE: pushes a cached user's info to RegisterFactory
     ARGUMENTS: void
     RETURN: void
     */
-    vm.createRecord = function () {
+    _createRecord = function () {
 
-        var record = vm._newRecord( vm.guestname, vm.txdate, vm.status, vm.loc );
-        vm.retrieveRegister();
-        vm.registerCache.push( record );
-        vm.updateRegister();
-        vm._clearRecordCache();
+        RegisterFactory.guestname = _guestname;
+        RegisterFactory.txdate = _txdate;
+        RegisterFactory.loc = _loc;
+        RegisterFactory.status = _status;
+        RegisterFactory.createRecord();
         // TODO: switch to guests tab
     };
 
@@ -102,20 +49,20 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     ARGUMENTS: record id as string
     RETURN: void
     */
-    vm.retrieveRecord = function ( id ) {
+    _retrieveRecord = function ( id ) {
 
-        vm.retrieveRegister();
-        var index = vm._getIndexByID( id );
+        _retrieveRegister();
+        var index = __getIndexByID( id );
         if ( index === null ) {
             console.log('record ' + index + ' could not be found');
             return;
         }
         // populate the cache with the record info
-        vm._recordCache = vm.registerCache[index];
-        vm.guestname = vm._recordCache.guestname;
-        vm.txdate = vm._recordCache.txdate;
-        vm.status = vm._recordCache.status;
-        vm.loc = vm._recordCache.loc;
+        __recordCache = _registerCache[index];
+        _guestname = __recordCache.guestname;
+        _txdate = __recordCache.txdate;
+        _status = __recordCache.status;
+        _loc = __recordCache.loc;
 
     };
 
@@ -124,12 +71,12 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     ARGUMENTS: record id as string, key-value pair as discrete strings
     RETURN: void
     */
-    vm.updateRecord = function ( id, key, value ) {
+    _updateRecord = function ( id, key, value ) {
 
-        vm.retrieveRegister();
-        var idx = vm._getIndexByID( id );
-        vm._recordCache = vm.registerCache[idx];
-        if ( !vm._recordCache ) {
+        _retrieveRegister();
+        var idx = __getIndexByID( id );
+        __recordCache = _registerCache[idx];
+        if ( !__recordCache ) {
             console.log('record ' + id + ' could not be found');
             return;
         }
@@ -142,14 +89,14 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
             // deleted should be handled via deleteRecord only
         } else if ( key === 'status' ) {
             // check to be sure that the passed value aligns with the map
-            var currentStatus = vm._recordCache[key];
-            vm._recordCache[key] = vm.statusMap[currentStatus];
+            var currentStatus = __recordCache[key];
+            __recordCache[key] = _statusMap[currentStatus];
         } else {
-            vm._recordCache[key] = value;
+            __recordCache[key] = value;
         }
         // note the day and time, and then save
-        vm._recordCache.txdate = new Date();
-        vm.updateRegister();
+        __recordCache.txdate = new Date();
+        _updateRegister();
 
     };
 
@@ -159,17 +106,17 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     ARGUMENTS: record id as string
     RETURN: void
     */
-    vm.deleteRecord = function ( id ) {
+    _deleteRecord = function ( id ) {
 
-        vm.retrieveRegister();
-        var index = vm._getIndexByID( id );
-        vm._recordCache = vm.registerCache[ index ];
-        if ( !vm._recordCache ) {
+        _retrieveRegister();
+        var index = __getIndexByID( id );
+        __recordCache = _registerCache[ index ];
+        if ( !__recordCache ) {
             console.log('record ' + index + ' could not be found');
             return;
         }
-        vm._recordCache.deleted = true;
-        vm.updateRegister();
+        __recordCache.deleted = true;
+        _updateRegister();
 
     };
 
@@ -187,28 +134,28 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     ARGUMENTS: void
     RETURN: void
     */
-    vm.createRegister = function() {
+    _createRegister = function() {
 
         // init the register
-        vm.updateRegister();
+        _updateRegister();
         // get the register to see if anything already exists
-        vm.retrieveRegister();
-        if ( vm.registerCache.length > 0 ) {
+        _retrieveRegister();
+        if ( _registerCache.length > 0 ) {
             return;
         }
 
         // prepopulate with dummy values
-        vm.guestname = 'Tyler Durden';
-        vm.txdate = new Date();
-        vm.status = vm.statusMap.Arrived;
-        vm.loc = 'Boston';
-        vm.createRecord();
+        _guestname = 'Tyler Durden';
+        _txdate = new Date();
+        _status = _statusMap.Arrived;
+        _loc = 'Boston';
+        _createRecord();
 
-        vm.guestname = 'Robert Paulson';
-        vm.txdate = new Date();
-        vm.status = vm.statusMap.Arrived;
-        vm.loc = 'Chicago';
-        vm.createRecord();
+        _guestname = 'Robert Paulson';
+        _txdate = new Date();
+        _status = _statusMap.Arrived;
+        _loc = 'Chicago';
+        _createRecord();
 
     };
 
@@ -217,12 +164,12 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     ARGUMENTS: void
     RETURN: void
     */
-    vm.retrieveRegister = function() {
+    _retrieveRegister = function() {
 
         var str = localStorage.getItem( 'OCSHPN' );
         // extract the array of records
         var json = JSON.parse( str );
-        vm.registerCache = json.register;
+        _registerCache = json.register;
     };
 
     /*
@@ -230,11 +177,11 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     ARGUMENTS: array of JSON objects
     RETURN: void
     */
-    vm.updateRegister = function() {
+    _updateRegister = function() {
 
         // wrap the array of records in a JSON object
         var json = {};
-        json.register = vm.registerCache;
+        json.register = _registerCache;
         var str = JSON.stringify( json );
         localStorage.setItem( 'OCSHPN' , str );
         // log output per project spec
@@ -250,7 +197,7 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     RETURN: void
     */
 
-    vm._newRecord = function ( guestname, txdate, status, loc ) {
+    __newRecord = function ( guestname, txdate, status, loc ) {
         // create a uuid; not computationally cheap but needed here as the project's
         // data points aren't granular enough with the speed of testing
         // citation: http://jsfiddle.net/briguy37/2mvfd/
@@ -279,13 +226,13 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     ARGUMENTS: void
     RETURN: void
     */
-    vm._clearRecordCache = function () {
+    __clearRecordCache = function () {
 
-        vm.guestname = '';
-        vm.txdate = '';
-        vm.status = '';
-        vm.loc = '';
-        vm._recordCache = '';
+        _guestname = '';
+        _txdate = '';
+        _status = '';
+        _loc = '';
+        __recordCache = '';
 
     };
 
@@ -294,11 +241,11 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     ARGUMENTS: target register, target id
     RETURN: integer or null if no value
     */
-    vm._getIndexByID = function ( id ) {
+    __getIndexByID = function ( id ) {
 
-        var ubound = vm.registerCache.length;
+        var ubound = _registerCache.length;
         for (var i = 0; i < ubound; i++) {
-            var record = vm.registerCache[i];
+            var record = _registerCache[i];
             if ( record.id === id ) {
                 return i;
             }
@@ -321,16 +268,16 @@ app.controller('FormController', ['RegisterFactory', 'GuestFactory',  function( 
     */
 
     // init the register
-    vm.createRegister();
+    _createRegister();
 
 }]);
 
 app.controller('TabController', [function(){
     var vm = this;
 
-    vm.formTab = 1;
-    vm.guestsTab = 2;
+    _formTab = 1;
+    _guestsTab = 2;
 
-    vm.currentTab = vm.formTab;
+    _currentTab = _formTab;
 
 }]);
