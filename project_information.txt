@@ -221,6 +221,7 @@ Change History:
     15_10_31_10_09_000: Updated to include updateRecord functions
     15_10_31_10_09_000: Updated to pass remaining update tests
     15_10_31_10_10_000: Updated to include deleteRecord functions and pass delete tests
-    15_10_31_10_10_000: Fixed bug causing status to be lost
+    15_10_31_10_10_001: Fixed bug causing status to be lost
+    15_10_31_10_10_002: Fixed bug causing form to not be cleared after creating the record
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed bug causing status to be lost"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed bug causing form to not be cleared after creating the record"; git push origin master; git status

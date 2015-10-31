@@ -305,7 +305,15 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
     vm.createRecord = function () {
 
         vm.registerCache = RegisterFactory.createRecord( vm.guestname,  vm.txdate, vm.status, vm.loc );
-        // TODO: switch to guests tab
+        vm._clearRecordCache();
+    };
+
+    vm._clearRecordCache = function () {
+        vm._recordCache = {};
+        vm.guestname = '';
+        vm.txdate = ''
+        vm.loc = '';
+        vm.status = '';
     };
 
     /*
