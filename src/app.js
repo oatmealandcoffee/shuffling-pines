@@ -27,9 +27,9 @@ app.factory('RegisterFactory', [function(){
 
     // used to ensure that status updates go in the correct order
     var _statusMap = {
-        'Pick-up': 'Arrived',
-        'Drop-off': 'Arrived',
-        'Arrived': 'Pick-up'
+        'Pickup': 'Arrived',
+        'Dropoff': 'Arrived',
+        'Arrived': 'Pickup'
     };
 
     /*
@@ -94,17 +94,9 @@ app.factory('RegisterFactory', [function(){
         }
 
         // prepopulate with dummy values
-        _guestname = 'Tyler Durden';
-        _txdate = new Date();
-        _status = _statusMap.Arrived;
-        _loc = 'Boston';
-        _createRecord();
+        _registerCache = _createRecord( 'Tyler Durden', new Date(), _statusMap.Dropoff, 'Boston' );
+        _registerCache = _createRecord( 'Robert Paulson', new Date(), _statusMap.Dropoff, 'Chicago');
 
-        _guestname = 'Robert Paulson';
-        _txdate = new Date();
-        _status = _statusMap.Arrived;
-        _loc = 'Chicago';
-        _createRecord();
         return _registerCache;
     };
 

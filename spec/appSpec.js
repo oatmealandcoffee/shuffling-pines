@@ -62,11 +62,9 @@ describe("Shuffling Pines CRUD", function() {
         });
     });
 
-    xdescribe("Retrieve Suite", function() {
-        it('should be true', function() {
-            expect(true).toBe(true);
-        });
-        xit('should retrieve a person by index', function () {
+    describe("Retrieve Suite", function() {
+
+        it('should retrieve a person by index', function () {
             expect( FormController.registerCache[0] ).not.toBeNull();
         });
 
