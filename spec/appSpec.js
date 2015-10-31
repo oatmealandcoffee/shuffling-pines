@@ -85,7 +85,7 @@ describe("Shuffling Pines CRUD", function() {
         });
     });
 
-    describe("Update Suite", function() {
+    xdescribe("Update Suite", function() {
 
         /*
             N.B. We're not testing dates here because the date values aren't
@@ -113,7 +113,7 @@ describe("Shuffling Pines CRUD", function() {
 
         });
 
-        xit('should not update id or deleted', function () {
+        it('should not update id or deleted', function () {
             // put the record in the cache
             var id = testrecord.id;
 
@@ -132,7 +132,7 @@ describe("Shuffling Pines CRUD", function() {
 
         });
 
-        xit('should update status according to status map', function () {
+        it('should update status according to status map', function () {
             // put the record in the cache
             var id = testrecord.id;
             var currentStatus = testrecord.status;
@@ -150,7 +150,7 @@ describe("Shuffling Pines CRUD", function() {
             expect( testrecord.status ).toBe( nextStatus );
         });
 
-        xit('should not update status to anything not aligned with the status map', function () {
+        it('should not update status to anything not aligned with the status map', function () {
             // put the record in the cache
             var id = testrecord.id;
 

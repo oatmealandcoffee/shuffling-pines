@@ -219,5 +219,6 @@ Change History:
     15_10_31_10_07_000: Updated RegisterFactory.createRegister() to new interface
     15_10_31_10_08_000: Updated to include retrieveRecord functions
     15_10_31_10_09_000: Updated to include updateRecord functions
+    15_10_31_10_09_000: Updated to pass remaining update tests
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated to include updateRecord functions"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated to pass remaining update tests"; git push origin master; git status

@@ -263,6 +263,12 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
     vm.status = '';
     vm.registerCache = [];
 
+    vm.statusMap = {
+        'Pickup': 'Arrived',
+        'Dropoff': 'Arrived',
+        'Arrived': 'Pickup'
+    };
+
     /*
         RECORD CRUD STACK
 
