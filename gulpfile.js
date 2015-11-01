@@ -12,9 +12,11 @@ var connect = require('gulp-connect');
 
 gulp.task('buildApp', function(){
 
-  return gulp.src('src/**/*.js')
-    .pipe(gulp.dest('dist'))
-    .pipe(connect.reload());
+    return gulp.src('src/**/*.js')
+        .pipe(concat('app.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist'))
+        .pipe(connect.reload());
 
 });
 
@@ -79,7 +81,7 @@ gulp.task('connect', function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch('src/**/*.js', ['build']);
+  gulp.watch('src/**/*.js', ['buildApp']);
   gulp.watch('src/**/*.css', ['buildCSS']);
   gulp.watch('src/**/*.html', ['moveHTML']);
 });

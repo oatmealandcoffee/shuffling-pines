@@ -1,38 +1,19 @@
-`bower install`
-`open src/index.html`
-
-Philip Regan
+# Philip Regan
 philipregan@fas.harvard.edu
 CSCI E-32
 
-About
+# About
 
-How to Build
+shuffling-pines is a guest administration application.
 
-Install the npm Modules
+# Installation
 
-Everything should install with the following:
+`$ npm install`
+`$ bower install`
+`$ bower install angular-mocks`
 
-    $ npm install
+For Karma, use
+`$ karma start`
 
-If not, then install Jasmine, Karma, and Gulp
-
-Install Jasmine
-
-    $ npm install --save-dev jasmine jasmine-core
-
-Install Karma
-
-    $ npm install --save-dev karma karma-jasmine karma phantomjs karma-phantomjs-launcher
-
-N.B.: One component needs to be installed globally
-
-    $ sudo npm install -g --save-dev karma-cli
-
-Install the Bower components
-
-Everything should install with the following:
-
-    $ bower install
-
-If not, then install Jquery, Bootstrap, and Angular
+For Gulp, use
+`$ gulp`

@@ -280,12 +280,6 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
     vm.status = '';
     vm.registerCache = [];
 
-    vm.statusMap = {
-        'Pickup': 'Arrived',
-        'Dropoff': 'Arrived',
-        'Arrived': 'Pickup'
-    };
-
     /*
         RECORD CRUD STACK
 
@@ -349,9 +343,9 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
     RETURN: void
     */
     vm.deleteRecord = function ( id ) {
-
-        vm.registerCache = RegisterFactory.deleteRecord( id );
-
+        if (window.confirm("Do you really want to delete this guest record?")) {
+            vm.registerCache = RegisterFactory.deleteRecord( id );
+        }
     };
 
     /*

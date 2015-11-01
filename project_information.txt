@@ -53,7 +53,7 @@ X Align controller to view
         X Add button
         X Add confirmation
     X Link form to FormController fields
-* Jasmine-Karma
+X Jasmine-Karma
     // All controllers and services need a test
     // All controller tests should mock the DOM elements and services
     // All CRUD operations need a test
@@ -80,7 +80,7 @@ X Align controller to view
     X Delete
         X should delete as a 'soft' delete with flag
         X should return only active (deleted:false) records
-> View
+X View
     X Tab 1: Record
         X Create
         X Retrieve (display)
@@ -90,70 +90,58 @@ X Align controller to view
                 X ng-model -> person cache
             X Display updates as updates are made
                     X Add {{}} hooks to each form element
-    > Tab 2: Register
+    X Tab 2: Register
         X List Display
             X ng-repeat used to run through the data
             X update status inline per status map
                 X "pick up" to "arrived"
                 X "drop off" to "arrived"
                 X "arrived" to "pick up"
-        > Delete
-            > confirmation dialog
-                * Window.confirm() // https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
-                * BootBox.js // http://bootboxjs.com
+        X Delete
+            X confirmation dialog
+                X Window.confirm() // https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
+                - BootBox.js // http://bootboxjs.com
         X Extra credit (10 pts): soft delete with flag as mark
+X Convert Controllers to Services
+X Prep for submission
+    X Check install instructions
+        X npm install
+        X bower install
+        X gulp
+X Spec
+    X README.md contents
+        X Name + description
+        X build instructions
+            X everything someone needs to know to get it running from scratch
+    X Requirements and Restrictions
+        X All localStorage and data methods should be done in a service.``
+        X Do not use $scope or $rootScope to pass variables; only invoke native Angular methods
+X update Gulp for JS prep
 * Add explicit tests for status map values
-* Convert Controllers to Services
-    * RegisterFactory
-        * public
-            * createRecord()
-            * updateRecord() // accepts Record
-            * deleteRecord()
-            * guests() // returns all non-soft-deleted Records
-        * private
-            * retrieveRecord()
-            * createRegister()
-            * retrieveRegister()
-            * updateRegister()
-    * FormController
-        * public
-            * createRecord()
-            * updateRecord()
-            * deleteRecord()
-            * guests()
+    * Drop off to arrive method (with test)
+    * Pick up to arrive method (with test)
+    * Arrive to pick up method (with test)
+* After Submit, the user's tab will change to a list of all guests.
 * Extra credit (20 pts): Inline editing on guests
-* Prep for submission
-    * Check install instructions
-        * npm install
-        * bower install
-        * gulp
-* Spec
-    * README.md contents
-        * Name + description
-        * build instructions
-            * everything someone needs to know to get it running from scratch
-    * Requirements and Restrictions
-        * All localStorage and data methods should be done in a service.``
-        * Do not use $scope or $rootScope to pass variables; only invoke native Angular methods
-* Rubric
-    * Application Functions
-        * Any use of $scope will be deducted from this. 5pts per use.
-    * Readme.md
-        * build instructions
+> Rubric
+    X Application Functions
+        X Any use of $scope will be deducted from this. 5pts per use.
+    X Readme.md
+        X build instructions
         // everything someone needs to know to get it running from scratch
-    * Form
+    X Form
         X all fields submit and add to a json object
         X test submit method
-    * List Display
+    X List Display
         X ng-repeat used to run through the data
-        * data comes from a service
-    * Change Status
+        X data comes from a service
+    X Change Status
         * Drop off to arrive method (with test)
         * Pick up to arrive method (with test)
         * Arrive to pick up method (with test)
         X updates in display
-    * Build
-        * using the instructions in the README, the application builds and runs
+    X Build
+        X using the instructions in the README, the application builds and runs
         X no node_modules directory in repository
         X no bower_components directory in repository
     * Extra credit
@@ -223,5 +211,6 @@ Change History:
     15_10_31_10_10_000: Updated to include deleteRecord functions and pass delete tests
     15_10_31_10_10_001: Fixed bug causing status to be lost
     15_10_31_10_10_002: Fixed bug causing form to not be cleared after creating the record
+    15_10_31_10_11_000: Updated gulp file to meet project specs
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Fixed bug causing form to not be cleared after creating the record"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated gulp file to meet project specs"; git push origin master; git status
