@@ -117,10 +117,10 @@ X Spec
         X All localStorage and data methods should be done in a service.``
         X Do not use $scope or $rootScope to pass variables; only invoke native Angular methods
 X update Gulp for JS prep
-* Add explicit tests for status map values
-    * Drop off to arrive method (with test)
-    * Pick up to arrive method (with test)
-    * Arrive to pick up method (with test)
+> Add explicit tests for status map values
+    X /* Dropoff -> Arrived */
+    > /* Pickup  -> Arrived */
+    * /* Arrived -> Pickup */
 * After Submit, the user's tab will change to a list of all guests.
 * Extra credit (20 pts): Inline editing on guests
 > Rubric
@@ -212,5 +212,6 @@ Change History:
     15_10_31_10_10_001: Fixed bug causing status to be lost
     15_10_31_10_10_002: Fixed bug causing form to not be cleared after creating the record
     15_10_31_10_11_000: Updated gulp file to meet project specs
+    15_10_31_10_12_000: Updated spec to explicitely test a status pair
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated gulp file to meet project specs"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated spec to explicitely test a status pair"; git push origin master; git status

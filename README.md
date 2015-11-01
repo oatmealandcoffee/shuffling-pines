@@ -10,10 +10,8 @@ shuffling-pines is a guest administration application.
 
 `$ npm install`
 `$ bower install`
-`$ bower install angular-mocks`
+`$ gulp`
+ Then, in your favorite browser go to `http://localhost:8080/`
 
 For Karma, use
 `$ karma start`
-
-For Gulp, use
-`$ gulp`

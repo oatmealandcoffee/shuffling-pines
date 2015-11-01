@@ -27,6 +27,10 @@ describe("Shuffling Pines CRUD", function() {
             'Arrived': 'Pickup'
         };
 
+    var dropoffStatus = 'Dropoff';
+    var arrivedStatus = 'Arrived';
+    var pickUpStatus = 'Pickup';
+
     var testrecord;
 
 
@@ -44,7 +48,6 @@ describe("Shuffling Pines CRUD", function() {
     afterEach(function() {
         localStorage.clear();
     });
-
 
     describe("Create Suite", function() {
 
@@ -101,7 +104,7 @@ describe("Shuffling Pines CRUD", function() {
         */
         it('should update guestname, loc', function () {
 
-            // put the record in the cache
+            // capture the id of the last record
             var id = testrecord.id;
 
             // update the values
@@ -121,7 +124,7 @@ describe("Shuffling Pines CRUD", function() {
         });
 
         it('should not update id or deleted', function () {
-            // put the record in the cache
+            // capture the id of the last record
             var id = testrecord.id;
 
             // update the values
@@ -139,14 +142,21 @@ describe("Shuffling Pines CRUD", function() {
 
         });
 
-        it('should update status according to status map', function () {
-            // put the record in the cache
+        /*
+            STATUS TESTS (per project spec)
+            Status is enforced within the updateRecord function per the status map.
+        */
+
+        it('should update status according to status map (general)', function () {
+            // In this test, we are using whatever is status in the test Record.
+
+            // capture the id of the last record
             var id = testrecord.id;
             var currentStatus = testrecord.status;
             var nextStatus = statusMap[currentStatus];
 
-            // update the values
-            FormController.updateRecord( id , 'status', nextStatus );
+            // value is ignored for status updates
+            FormController.updateRecord( id , 'status', null );
 
             // get the record again once saved
             var len = FormController.registerCache.length;
@@ -157,21 +167,48 @@ describe("Shuffling Pines CRUD", function() {
             expect( testrecord.status ).toBe( nextStatus );
         });
 
-        it('should not update status to anything not aligned with the status map', function () {
-            // put the record in the cache
+        /* Dropoff -> Arrived */
+
+        it('should update Dropoff status to Arrived', function () {
+
+            // Cycle through all three of the expected values
+            var dropoffStatus = 'Dropoff';
+            var arrivedStatus = 'Arrived';
+            var pickUpStatus = 'Pickup';
+
+            // create new record
+            FormController.guestname = '__DROPOFF_TEST__';
+            FormController.txdate = new Date();
+            FormController.loc = '__DROPOFF_TEST__';
+            FormController.status = dropoffStatus;
+            FormController.createRecord();
+
+            // capture the id of the last record
+            var len = FormController.registerCache.length;
+            var idx = len - 1;
+            testrecord = FormController.registerCache[idx];
             var id = testrecord.id;
+            var currentStatus = testrecord.status;
+            var nextStatus = statusMap[currentStatus];
 
-            // update the values
-            FormController.updateRecord( id , 'status', badValue );
+            // update to the next status; value is ignored for status updates
+            FormController.updateRecord( id , 'status', null );
 
-            // get the record again once saved
+            // capture the last record
             var len = FormController.registerCache.length;
             var idx = len - 1;
             testrecord = FormController.registerCache[idx];
 
             // test the update
-            expect( testrecord.status ).not.toBe( badValue );
+            expect( testrecord.status ).toBe( arrivedStatus );
+
+
         });
+
+        /* Pickup  -> Arrived */
+
+        /* Arrived -> Pickup */
+
 
     });
 

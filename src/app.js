@@ -92,7 +92,11 @@ app.factory('RegisterFactory', [function(){
         if ( key === 'id' || key === 'deleted' ) {
             return _registerCache;
         } else if ( key === 'status' ) {
-            // check to be sure that the passed value aligns with the map
+            /*
+            Status is updated per the statusMap. The current status is grabbed,
+            and then the current status is used to capture the next expected
+            status. The value is ignored.
+            */
             var currentStatus = _recordCache[key];
             _recordCache[key] = _statusMap[currentStatus];
         } else {
