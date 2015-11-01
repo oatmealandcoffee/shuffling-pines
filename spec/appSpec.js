@@ -97,12 +97,14 @@ describe("Shuffling Pines CRUD", function() {
 
     describe("Update Suite", function() {
 
-        /*
-            N.B. We're not testing dates here because the date values aren't
-            granular enough to be of use here, and hard-coded delays always smell
-            bad
-        */
+
         it('should update guestname, loc', function () {
+
+            /*
+                N.B. We're not testing dates here because the date values aren't
+                granular enough to be of use here, and hard-coded delays always
+                smell bad
+            */
 
             // capture the id of the last record
             var id = testrecord.id;
@@ -112,14 +114,12 @@ describe("Shuffling Pines CRUD", function() {
             FormController.updateRecord( id , 'loc', testloc );
 
             // get the record again once saved
-            var len = FormController.registerCache.length;
-            var idx = len - 1;
-            testrecord = FormController.registerCache[idx];
+            FormController.retrieveRecord( id );
+            testrecord = FormController._recordCache;
 
             // test the update
             expect( testrecord.guestname ).toBe( testguestname );
             expect( testrecord.loc ).toBe( testloc );
-
 
         });
 
@@ -132,9 +132,8 @@ describe("Shuffling Pines CRUD", function() {
             FormController.updateRecord( id , 'deleted', badValue );
 
             // get the record again once saved
-            var len = FormController.registerCache.length;
-            var idx = len - 1;
-            testrecord = FormController.registerCache[idx];
+            FormController.retrieveRecord( id );
+            testrecord = FormController._recordCache;
 
             // test the update
             expect( testrecord.id ).not.toBe( badValue );
@@ -148,7 +147,9 @@ describe("Shuffling Pines CRUD", function() {
         */
 
         it('should update status according to status map (general)', function () {
-            // In this test, we are using whatever is status in the test Record.
+            /*
+                In this test, we are using whatever is status in the test Record.
+            */
 
             // capture the id of the last record
             var id = testrecord.id;
@@ -159,22 +160,17 @@ describe("Shuffling Pines CRUD", function() {
             FormController.updateRecord( id , 'status', null );
 
             // get the record again once saved
-            var len = FormController.registerCache.length;
-            var idx = len - 1;
-            testrecord = FormController.registerCache[idx];
+            FormController.retrieveRecord( id );
+            testrecord = FormController._recordCache;
 
             // test the update
             expect( testrecord.status ).toBe( nextStatus );
         });
 
-        /* Dropoff -> Arrived */
 
-        it('should update Dropoff status to Arrived', function () {
+        it('should update Dropoff status to Arrived Status', function () {
 
-            // Cycle through all three of the expected values
-            var dropoffStatus = 'Dropoff';
-            var arrivedStatus = 'Arrived';
-            var pickUpStatus = 'Pickup';
+            /* Dropoff -> Arrived */
 
             // create new record
             FormController.guestname = '__DROPOFF_TEST__';
@@ -183,32 +179,87 @@ describe("Shuffling Pines CRUD", function() {
             FormController.status = dropoffStatus;
             FormController.createRecord();
 
-            // capture the id of the last record
+            // capture the latest record created and its id
             var len = FormController.registerCache.length;
             var idx = len - 1;
             testrecord = FormController.registerCache[idx];
             var id = testrecord.id;
+
+            // capture current and expected statuses
             var currentStatus = testrecord.status;
             var nextStatus = statusMap[currentStatus];
 
             // update to the next status; value is ignored for status updates
             FormController.updateRecord( id , 'status', null );
-
-            // capture the last record
-            var len = FormController.registerCache.length;
-            var idx = len - 1;
-            testrecord = FormController.registerCache[idx];
+            FormController.retrieveRecord( id );
+            testrecord = FormController._recordCache;
 
             // test the update
             expect( testrecord.status ).toBe( arrivedStatus );
 
+        });
+
+        it('should update Pickup status to Arrived status', function () {
+
+            /* Pickup  -> Arrived */
+
+            // create new record
+            FormController.guestname = '__DROPOFF_TEST__';
+            FormController.txdate = new Date();
+            FormController.loc = '__DROPOFF_TEST__';
+            FormController.status = pickUpStatus;
+            FormController.createRecord();
+
+            // capture the latest record created and its id
+            var len = FormController.registerCache.length;
+            var idx = len - 1;
+            testrecord = FormController.registerCache[idx];
+            var id = testrecord.id;
+
+            // capture current and expected statuses
+            var currentStatus = testrecord.status;
+            var nextStatus = statusMap[currentStatus];
+
+            // update to the next status; value is ignored for status updates
+            FormController.updateRecord( id , 'status', null );
+            FormController.retrieveRecord( id );
+            testrecord = FormController._recordCache;
+
+            // test the update
+            expect( testrecord.status ).toBe( arrivedStatus );
 
         });
 
-        /* Pickup  -> Arrived */
+        it('should update Arrived status to Pickup status', function () {
 
-        /* Arrived -> Pickup */
+            /* Arrived -> Pickup */
 
+            // create new record
+            FormController.guestname = '__DROPOFF_TEST__';
+            FormController.txdate = new Date();
+            FormController.loc = '__DROPOFF_TEST__';
+            FormController.status = arrivedStatus;
+            FormController.createRecord();
+
+            // capture the latest record created and its id
+            var len = FormController.registerCache.length;
+            var idx = len - 1;
+            testrecord = FormController.registerCache[idx];
+            var id = testrecord.id;
+
+            // capture current and expected statuses
+            var currentStatus = testrecord.status;
+            var nextStatus = statusMap[currentStatus];
+
+            // update to the next status; value is ignored for status updates
+            FormController.updateRecord( id , 'status', null );
+            FormController.retrieveRecord( id );
+            testrecord = FormController._recordCache;
+
+            // test the update
+            expect( testrecord.status ).toBe( pickUpStatus );
+
+        });
 
     });
 
@@ -226,9 +277,8 @@ describe("Shuffling Pines CRUD", function() {
             FormController.deleteRecord( id );
 
             // replace test record with the updated record retrived from the module
-            var len = FormController.registerCache.length;
-            var idx = len - 1;
-            testrecord = FormController.registerCache[idx];
+            FormController.retrieveRecord( id );
+            testrecord = FormController._recordCache;
 
             // check the record
             expect( testrecord.deleted ).toBe( true );

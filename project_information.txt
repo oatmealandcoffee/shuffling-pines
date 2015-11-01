@@ -119,8 +119,9 @@ X Spec
 X update Gulp for JS prep
 > Add explicit tests for status map values
     X /* Dropoff -> Arrived */
-    > /* Pickup  -> Arrived */
-    * /* Arrived -> Pickup */
+    X /* Pickup  -> Arrived */
+    X /* Arrived -> Pickup */
+* Update tests to use retriveRecord and not go by index
 * After Submit, the user's tab will change to a list of all guests.
 * Extra credit (20 pts): Inline editing on guests
 > Rubric
@@ -213,5 +214,6 @@ Change History:
     15_10_31_10_10_002: Fixed bug causing form to not be cleared after creating the record
     15_10_31_10_11_000: Updated gulp file to meet project specs
     15_10_31_10_12_000: Updated spec to explicitely test a status pair
+    15_10_31_10_13_000: Updated spec with all status tests; Updated all capturing of last record to use retrieveRecord function
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated spec to explicitely test a status pair"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated spec with all status tests; Updated all capturing of last record to use retrieveRecord function"; git push origin master; git status
