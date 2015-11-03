@@ -4,14 +4,19 @@ describe("Shuffling Pines CRUD", function() {
 
     /* INIT ANGULAR */
     var FormController;
+    var TabController;
     var RegisterFactory;
     beforeEach(angular.mock.module('shuffling'));
     beforeEach(angular.mock.inject( function( $controller ) {
         FormController = $controller('FormController');
     } ));
+    beforeEach(angular.mock.inject( function( $controller ) {
+        TabController = $controller('TabController');
+    } ));
     beforeEach(angular.mock.inject( function( $injector ) {
         RegisterFactory = $injector.get('RegisterFactory');
     } ));
+
 
     /* INIT COMMON VALUES */
 
@@ -267,7 +272,8 @@ describe("Shuffling Pines CRUD", function() {
         /*
             Skipping this one because of the use of window.confirm around the
             call to the RegisterFactory. The RegisterFactory cannot be called
-            directly from here, but the test passed when viewed in the console
+            directly from here, but the test passed when confirm is commented
+            out and in the console when un-commented back into code
         */
         it('should soft-delete records', function () {
             var id = testrecord.id;
@@ -283,6 +289,22 @@ describe("Shuffling Pines CRUD", function() {
             // check the record
             expect( testrecord.deleted ).toBe( true );
 
+        });
+
+    });
+
+    describe("TabController Suite", function () {
+
+        it('should set to the Form Tab', function () {
+            TabController.setTab( TabController.formTab );
+            expect( TabController.tabSet( TabController.formTab ) ).toBe( true );
+            expect( TabController.tabSet( TabController.guestsTab ) ).toBe( false );
+        });
+
+        it('should set to the Guests Tab', function () {
+            TabController.setTab( TabController.guestsTab );
+            expect( TabController.tabSet( TabController.guestsTab ) ).toBe( true );
+            expect( TabController.tabSet( TabController.formTab ) ).toBe( false );
         });
 
     });

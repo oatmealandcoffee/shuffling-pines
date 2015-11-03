@@ -304,6 +304,7 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
 
         vm.registerCache = RegisterFactory.createRecord( vm.guestname,  vm.txdate, vm.status, vm.loc );
         vm._clearRecordCache();
+        vm.currentTab = vm.guestsTab;
     };
 
     vm._clearRecordCache = function () {
@@ -370,16 +371,29 @@ app.controller('FormController', ['RegisterFactory', function( RegisterFactory )
 
     };
 
+
+    /***********
+        INIT
+    ************/
     vm.createRegister();
 
 }]);
 
 app.controller('TabController', [function(){
+
     var vm = this;
 
+    // a couple of "constants" to ensure context
     vm.formTab = 1;
     vm.guestsTab = 2;
-
+    // tab pivot
     vm.currentTab = vm.formTab;
+
+    vm.setTab = function ( tab ) {
+        vm.currentTab = tab;
+    }
+    vm.tabSet = function ( tab ) {
+        return vm.currentTab == tab;
+    }
 
 }]);

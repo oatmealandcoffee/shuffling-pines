@@ -20,8 +20,9 @@
 
   <body ng-app="shuffling" ng-cloak>
     <h1>Shuffling Pines</h1>
-    <div class="row">
-      <div class="col-md-12" ng-controller="TabController as tc">
+    <div class="row" ng-controller="TabController as tc">
+
+      <div class="col-md-12" ng-controller="FormController as fc">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active"><a href="#form" aria-controls="form" role="tab" data-toggle="tab">Form</a></li>
@@ -29,7 +30,7 @@
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content" ng-controller="FormController as fc">
+        <div class="tab-content">
           <!-- Tab pane 1 -->
           <div role="tabpanel" class="tab-pane active" id="form">
             <div>
@@ -63,7 +64,7 @@
                   <textarea class="form-control" id="location" ng-model="fc.loc" required></textarea>
                 </div>
                 <br/>{{ fc.loc }}<br/>
-                <button type="submit" class="btn" >Submit</button>
+                <button type="submit" class="btn">Submit</button>
               </form>
 
               <!-- bound display -->

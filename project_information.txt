@@ -100,7 +100,7 @@ X View
         X Delete
             X confirmation dialog
                 X Window.confirm() // https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
-                - BootBox.js // http://bootboxjs.com
+                X BootBox.js // http://bootboxjs.com
         X Extra credit (10 pts): soft delete with flag as mark
 X Convert Controllers to Services
 X Prep for submission
@@ -117,14 +117,14 @@ X Spec
         X All localStorage and data methods should be done in a service.``
         X Do not use $scope or $rootScope to pass variables; only invoke native Angular methods
 X update Gulp for JS prep
-> Add explicit tests for status map values
+X Add explicit tests for status map values
     X /* Dropoff -> Arrived */
     X /* Pickup  -> Arrived */
     X /* Arrived -> Pickup */
-* Update tests to use retriveRecord and not go by index
+X Update tests to use retriveRecord and not go by index
 * After Submit, the user's tab will change to a list of all guests.
 * Extra credit (20 pts): Inline editing on guests
-> Rubric
+// Rubric
     X Application Functions
         X Any use of $scope will be deducted from this. 5pts per use.
     X Readme.md
@@ -137,16 +137,17 @@ X update Gulp for JS prep
         X ng-repeat used to run through the data
         X data comes from a service
     X Change Status
-        * Drop off to arrive method (with test)
-        * Pick up to arrive method (with test)
-        * Arrive to pick up method (with test)
+        X Drop off to arrive method (with test)
+        X Pick up to arrive method (with test)
+        X Arrive to pick up method (with test)
         X updates in display
     X Build
         X using the instructions in the README, the application builds and runs
         X no node_modules directory in repository
         X no bower_components directory in repository
-    * Extra credit
-        * inline editable (20pts)
+    > Extra credit
+        > inline editable (20pts)
+            * http://vitalets.github.io/angular-xeditable/
         X soft delete (10pts)
 
 Change History:
@@ -213,7 +214,8 @@ Change History:
     15_10_31_10_10_001: Fixed bug causing status to be lost
     15_10_31_10_10_002: Fixed bug causing form to not be cleared after creating the record
     15_10_31_10_11_000: Updated gulp file to meet project specs
-    15_10_31_10_12_000: Updated spec to explicitely test a status pair
+    15_10_31_10_12_000: Updated spec to explicitly test a status pair
     15_10_31_10_13_000: Updated spec with all status tests; Updated all capturing of last record to use retrieveRecord function
+    15_11_03_10_14_000: Added TabController functionality and tests
 
-    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Updated spec with all status tests; Updated all capturing of last record to use retrieveRecord function"; git push origin master; git status
+    cd ~/cscie32/shuffling-pines; git status; git commit -a -m "Added TabController functionality and tests"; git push origin master; git status
